@@ -2,172 +2,665 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Manohar Golleru - Resume & Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts for a clean, modern look -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manohar Golleru - Researcher in Human Factors & Ergonomics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#1e40af',
+            accent: '#3b82f6',
+            dark: '#1f2937',
+            light: '#f9fafb',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .gradient-text {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(90deg, #2563eb, #3b82f6);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #3b82f6;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background-color: #e5e7eb;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -2.25rem;
+      top: 0.25rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: #3b82f6;
+      border: 3px solid #e5e7eb;
+    }
+  </style>
 </head>
-<body>
+<body class="font-sans bg-gray-50 text-gray-800">
   <!-- Header & Navigation -->
-  <header>
-    <nav class="navbar">
-      <div class="container">
-        <h1 class="logo">Manohar Golleru</h1>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+  <header class="sticky top-0 z-50 bg-white shadow-sm">
+    <nav class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="#" class="text-2xl font-bold">
+          <span class="gradient-text">Manohar Golleru</span>
+        </a>
+        
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-gray-600 hover:text-primary focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="nav-link font-medium text-gray-600 hover:text-primary">About</a>
+          <a href="#education" class="nav-link font-medium text-gray-600 hover:text-primary">Education</a>
+          <a href="#experience" class="nav-link font-medium text-gray-600 hover:text-primary">Experience</a>
+          <a href="#projects" class="nav-link font-medium text-gray-600 hover:text-primary">Projects</a>
+          <a href="#publications" class="nav-link font-medium text-gray-600 hover:text-primary">Publications</a>
+          <a href="#skills" class="nav-link font-medium text-gray-600 hover:text-primary">Skills</a>
+          <a href="#contact" class="nav-link font-medium text-gray-600 hover:text-primary">Contact</a>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+        <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
+        <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Education</a>
+        <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Experience</a>
+        <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Projects</a>
+        <a href="#publications" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Publications</a>
+        <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Skills</a>
+        <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Contact</a>
       </div>
     </nav>
   </header>
 
   <!-- Main Content -->
   <main>
-    <!-- About Section -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About Me</h2>
-        <p>I am Manohar Golleru, a researcher specializing in Industrial Engineering with a focus on Human Factors & Ergonomics. My work spans AI-driven assistive communication, user-centered design, and the development of innovative human-machine interaction solutions.</p>
+    <!-- Hero Section -->
+    <section id="about" class="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+              Hi, I'm <span class="gradient-text">Manohar Golleru</span>
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-700">
+              Researcher in Human Factors & Ergonomics
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+              I specialize in AI-driven assistive communication, user-centered design, and innovative human-machine interaction solutions. My work focuses on creating technologies that enhance human capabilities and improve quality of life.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#contact" class="px-6 py-3 bg-primary hover:bg-secondary text-white font-medium rounded-lg transition duration-300">
+                Contact Me
+              </a>
+              <a href="#publications" class="px-6 py-3 border border-primary text-primary hover:bg-blue-50 font-medium rounded-lg transition duration-300">
+                View Publications
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2 flex justify-center">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+              <!-- Placeholder for profile image -->
+              <div class="w-full h-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+                <i class="fas fa-user text-white text-8xl"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="section">
-      <div class="container">
-        <h2>Education</h2>
-        <div class="education-item">
-          <h3>Doctor of Philosophy, Industrial Engineering<br><span class="subtext">(Human Factors & Ergonomics)</span></h3>
-          <p>University at Buffalo, New York | Aug 2024 – Present</p>
-          <p>GPA: 3.933</p>
+    <section id="education" class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Education</h2>
+          <div class="w-20 h-1 bg-primary mx-auto"></div>
         </div>
-        <div class="education-item">
-          <h3>Master of Science, Industrial Engineering<br><span class="subtext">(Human Factors & Ergonomics)</span></h3>
-          <p>University at Buffalo, New York | May 2024</p>
-          <p>GPA: 3.914</p>
-        </div>
-        <div class="education-item">
-          <h3>Bachelor of Technology, Mechanical Engineering</h3>
-          <p>Amrita Vishwa Vidyapeetham, India | Aug 2021</p>
+        
+        <div class="max-w-3xl mx-auto space-y-8 relative">
+          <!-- Timeline item 1 -->
+          <div class="relative pl-12 timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">
+                  Doctor of Philosophy, Industrial Engineering
+                  <span class="block text-base font-normal text-gray-600">(Human Factors & Ergonomics)</span>
+                </h3>
+                <span class="inline-block mt-2 md:mt-0 px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">
+                  Aug 2024 – Present
+                </span>
+              </div>
+              <p class="text-gray-700 font-medium mb-2">
+                University at Buffalo, New York
+              </p>
+              <p class="text-gray-600">
+                GPA: 3.933
+              </p>
+            </div>
+          </div>
+          
+          <!-- Timeline item 2 -->
+          <div class="relative pl-12 timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">
+                  Master of Science, Industrial Engineering
+                  <span class="block text-base font-normal text-gray-600">(Human Factors & Ergonomics)</span>
+                </h3>
+                <span class="inline-block mt-2 md:mt-0 px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">
+                  May 2024
+                </span>
+              </div>
+              <p class="text-gray-700 font-medium mb-2">
+                University at Buffalo, New York
+              </p>
+              <p class="text-gray-600">
+                GPA: 3.914
+              </p>
+            </div>
+          </div>
+          
+          <!-- Timeline item 3 -->
+          <div class="relative pl-12 timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">
+                  Bachelor of Technology, Mechanical Engineering
+                </h3>
+                <span class="inline-block mt-2 md:mt-0 px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">
+                  Aug 2021
+                </span>
+              </div>
+              <p class="text-gray-700 font-medium">
+                Amrita Vishwa Vidyapeetham, India
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="section">
-      <div class="container">
-        <h2>Research & Professional Experience</h2>
-        <div class="experience-item">
-          <h3>Research Assistant, Communication and Assistive Device Lab (CADL)</h3>
-          <p>University at Buffalo | Jan 2023 – Present</p>
-          <ul>
-            <li>Developed AI-driven assistive communication tools using large language models (LLMs) with retrieval-augmented generation.</li>
-            <li>Led the creation of DEAN (Dynamic, Expressive, Augmented Narrator) to enhance AAC users’ response formulation.</li>
-            <li>Engineered end-to-end conversational systems integrating low-latency ASR and emotional text-to-speech technologies.</li>
-            <li>Conducted user engagement research and statistical analyses to optimize device usability.</li>
-          </ul>
+    <section id="experience" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Research & Professional Experience</h2>
+          <div class="w-20 h-1 bg-primary mx-auto"></div>
         </div>
-        <div class="experience-item">
-          <h3>Research Assistant, SurgE Surgery Ergonomics and Human Factors Lab</h3>
-          <p>University at Buffalo | Apr 2024 – Present</p>
-          <ul>
-            <li>Built ML pipelines using time-series biomarker data to detect impairment with ~80% accuracy.</li>
-            <li>Performed statistical analyses and data visualization to inform model improvements.</li>
-            <li>Developed a custom web app for real-time eye-tracking data analysis in surgical settings.</li>
-            <li>Designed pilot studies for refining AI-driven surgical systems.</li>
-          </ul>
+        
+        <div class="max-w-4xl mx-auto space-y-8">
+          <!-- Experience 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+              <h3 class="text-xl font-bold text-gray-800">
+                Research Assistant, Communication and Assistive Device Lab (CADL)
+              </h3>
+              <span class="inline-block mt-2 md:mt-0 px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">
+                Jan 2023 – Present
+              </span>
+            </div>
+            <p class="text-gray-700 font-medium mb-4">
+              University at Buffalo
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Developed AI-driven assistive communication tools using large language models (LLMs) with retrieval-augmented generation.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Led the creation of DEAN (Dynamic, Expressive, Augmented Narrator) to enhance AAC users' response formulation.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Engineered end-to-end conversational systems integrating low-latency ASR and emotional text-to-speech technologies.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Conducted user engagement research and statistical analyses to optimize device usability.</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Experience 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+              <h3 class="text-xl font-bold text-gray-800">
+                Research Assistant, SurgE Surgery Ergonomics and Human Factors Lab
+              </h3>
+              <span class="inline-block mt-2 md:mt-0 px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">
+                Apr 2024 – Present
+              </span>
+            </div>
+            <p class="text-gray-700 font-medium mb-4">
+              University at Buffalo
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Built ML pipelines using time-series biomarker data to detect impairment with ~80% accuracy.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Performed statistical analyses and data visualization to inform model improvements.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Developed a custom web app for real-time eye-tracking data analysis in surgical settings.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                <span>Designed pilot studies for refining AI-driven surgical systems.</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section">
-      <div class="container">
-        <h2>Projects</h2>
-        <div class="project-item">
-          <h3>UI Design for mHealth App</h3>
-          <p>Created low- and high-fidelity prototypes using Figma, conducted user testing, and refined the interface to secure a 3rd-place finish at a business pitch competition.</p>
+    <section id="projects" class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Projects</h2>
+          <div class="w-20 h-1 bg-primary mx-auto"></div>
         </div>
-        <div class="project-item">
-          <h3>Workplace Ergonomic Analysis</h3>
-          <p>Performed ergonomic assessments (RULA, ACGIH-TLV) to identify musculoskeletal risks and implemented solutions to improve workplace safety and efficiency.</p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Project 1 -->
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-center mb-4">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-mobile-screen text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800">UI Design for mHealth App</h3>
+            </div>
+            <p class="text-gray-600">
+              Created low- and high-fidelity prototypes using Figma, conducted user testing, and refined the interface to secure a 3rd-place finish at a business pitch competition.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-xs font-medium">Figma</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-xs font-medium">UI/UX</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-xs font-medium">User Testing</span>
+            </div>
+          </div>
+          
+          <!-- Project 2 -->
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-center mb-4">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-user-tie text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800">Workplace Ergonomic Analysis</h3>
+            </div>
+            <p class="text-gray-600">
+              Performed ergonomic assessments (RULA, ACGIH-TLV) to identify musculoskeletal risks and implemented solutions to improve workplace safety and efficiency.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-xs font-medium">RULA</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-xs font-medium">ACGIH-TLV</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-xs font-medium">Ergonomics</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Publications Section -->
-    <section id="publications" class="section">
-      <div class="container">
-        <h2>Research Publications & Presentations</h2>
-        <div class="publication-item">
-          <p><strong>Golleru, M.</strong> (2024). Enhancing engagement and interaction in augmentative and alternative communication (AAC): A comparative study. <em>ProQuest Dissertations & Theses</em>.</p>
+    <section id="publications" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Research Publications & Presentations</h2>
+          <div class="w-20 h-1 bg-primary mx-auto"></div>
         </div>
-        <div class="publication-item">
-          <p><strong>Higginbotham, J., Golleru, M., et al.</strong> (in press). Developing artificial intelligence applications for human conversation. <em>Assistive Technology Outcomes and Benefits</em>.</p>
-        </div>
-        <div class="publication-item">
-          <p><strong>Conference Presentation:</strong> Enhancing engagement in AAC through front-facing partner display. ASPIRE HFES 68th International Annual Meeting, Phoenix, AZ, 2024.</p>
-        </div>
-        <div class="publication-item">
-          <p><strong>Conference Presentation:</strong> Conversational AI: Promises and current realities. Assistive Technology Industry Association Conference, Orlando, FL, 2024.</p>
+        
+        <div class="max-w-4xl mx-auto space-y-6">
+          <!-- Publication 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                <i class="fas fa-book text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-700">
+                  <strong class="text-gray-800">Golleru, M.</strong> (2024). Enhancing engagement and interaction in augmentative and alternative communication (AAC): A comparative study. <em class="text-gray-600">ProQuest Dissertations & Theses</em>.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Publication 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                <i class="fas fa-book text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-700">
+                  <strong class="text-gray-800">Higginbotham, J., Golleru, M., et al.</strong> (in press). Developing artificial intelligence applications for human conversation. <em class="text-gray-600">Assistive Technology Outcomes and Benefits</em>.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Presentation 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                <i class="fas fa-chalkboard-user text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-700">
+                  <strong class="text-gray-800">Conference Presentation:</strong> Enhancing engagement in AAC through front-facing partner display. ASPIRE HFES 68th International Annual Meeting, Phoenix, AZ, 2024.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Presentation 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                <i class="fas fa-chalkboard-user text-primary"></i>
+              </div>
+              <div>
+                <p class="text-gray-700">
+                  <strong class="text-gray-800">Conference Presentation:</strong> Conversational AI: Promises and current realities. Assistive Technology Industry Association Conference, Orlando, FL, 2024.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
-      <div class="container">
-        <h2>Skills & Certifications</h2>
-        <div class="skills-group">
-          <h3>Qualitative</h3>
-          <p>User-centered design, usability testing, interdisciplinary collaboration, open-source development.</p>
+    <section id="skills" class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Skills & Certifications</h2>
+          <div class="w-20 h-1 bg-primary mx-auto"></div>
         </div>
-        <div class="skills-group">
-          <h3>Quantitative</h3>
-          <p>Statistical analysis (R, Python, SAS), time-series modeling, data visualization, ergonomic assessments.</p>
-        </div>
-        <div class="skills-group">
-          <h3>Technical</h3>
-          <p>Languages: Python, R, SAS, Matlab, Node.js; ML Frameworks: PyTorch, TensorFlow; Cloud: Docker, GCP; Front-end: Figma; Communication: WebSockets; Monitoring: Prometheus, Grafana.</p>
-        </div>
-        <div class="skills-group">
-          <h3>Certifications</h3>
-          <p>CITI Program (Conflict of Interest, Social & Behavioral Research, Responsible Conduct of Research), OSHA (501, 511, 7500, 7505).</p>
+        
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+          <!-- Qualitative Skills -->
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-center mb-4">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-users text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800">Qualitative</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">User-centered design</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Usability testing</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Interdisciplinary collaboration</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Open-source development</span>
+            </div>
+          </div>
+          
+          <!-- Quantitative Skills -->
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-center mb-4">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-chart-line text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800">Quantitative</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Statistical analysis (R, Python, SAS)</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Time-series modeling</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Data visualization</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Ergonomic assessments</span>
+            </div>
+          </div>
+          
+          <!-- Technical Skills -->
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-center mb-4">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-code text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800">Technical</h3>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <h4 class="font-medium text-gray-700 mb-1">Languages:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Python</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">R</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">SAS</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Matlab</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Node.js</span>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-700 mb-1">ML Frameworks:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">PyTorch</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">TensorFlow</span>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-700 mb-1">Other:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Docker</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">GCP</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Figma</span>
+                  <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">WebSockets</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Certifications -->
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+            <div class="flex items-center mb-4">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fas fa-certificate text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800">Certifications</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">CITI Program (Conflict of Interest)</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Social & Behavioral Research</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">Responsible Conduct of Research</span>
+              <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm font-medium">OSHA (501, 511, 7500, 7505)</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
-      <div class="container">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:manohargolleru@outlook.com">manohargolleru@outlook.com</a></p>
-        <p>Phone: +1 716-398-6185</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/manohar-golleru" target="_blank">linkedin.com/in/manohar-golleru</a></p>
+    <section id="contact" class="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Get In Touch</h2>
+          <div class="w-20 h-1 bg-primary mx-auto"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto mt-4">
+            I'm always open to discussing new projects, research opportunities, or potential collaborations.
+          </p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-8 card-hover">
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-bold text-gray-800 mb-6">Contact Information</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
+                    <i class="fas fa-envelope text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-600">Email</h4>
+                    <a href="mailto:manohargolleru@outlook.com" class="text-primary hover:underline">manohargolleru@outlook.com</a>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
+                    <i class="fas fa-phone text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-600">Phone</h4>
+                    <a href="tel:+17163986185" class="text-gray-700">+1 716-398-6185</a>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
+                    <i class="fab fa-linkedin text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-600">LinkedIn</h4>
+                    <a href="https://www.linkedin.com/in/manohar-golleru" target="_blank" class="text-primary hover:underline">linkedin.com/in/manohar-golleru</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-bold text-gray-800 mb-6">Send Me a Message</h3>
+              <form class="space-y-4">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+                </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                  <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"></textarea>
+                </div>
+                <button type="submit" class="w-full px-6 py-3 bg-primary hover:bg-secondary text-white font-medium rounded-lg transition duration-300">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Manohar Golleru. All rights reserved.</p>
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <a href="#" class="text-2xl font-bold">
+            <span class="gradient-text">Manohar Golleru</span>
+          </a>
+          <p class="text-gray-400 mt-2">Researcher in Human Factors & Ergonomics</p>
+        </div>
+        <div class="flex space-x-6">
+          <a href="mailto:manohargolleru@outlook.com" class="text-gray-400 hover:text-white transition">
+            <i class="fas fa-envelope text-xl"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/manohar-golleru" target="_blank" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a href="tel:+17163986185" class="text-gray-400 hover:text-white transition">
+            <i class="fas fa-phone text-xl"></i>
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 Manohar Golleru. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Smooth scrolling for internal links -->
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
   <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
       });
     });
   </script>
