@@ -11,6 +11,9 @@
   
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Tailwind CSS -->
@@ -81,7 +84,7 @@
     
     .card-hover:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px var(--shadow);
+      box-shadow: 0 10px 15px -3px var(--shadow), 0 4px 6px -4px var(--shadow);
     }
     
     /* Navigation link underline */
@@ -107,32 +110,16 @@
     }
     
     /* Timeline */
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -1.5rem;
-      top: 0;
-      height: 100%;
-      width: 2px;
-      background-color: var(--border-color);
-    }
+    /* REMOVED: Timeline-specific styles are no longer needed */
     
-    .timeline-dot {
-      position: absolute;
-      left: -2.25rem;
-      top: 0.25rem;
-      width: 1rem;
-      height: 1rem;
-      border-radius: 50%;
-      background-color: var(--primary);
-      border: 3px solid var(--bg-secondary);
-      transition: transform 0.3s ease;
+    /* ADDED THIS: Fix for "In Press" badge theme */
+    [data-theme="dark"] .badge-light {
+      display: none;
     }
-    
-    .timeline-item:hover .timeline-dot {
-      transform: scale(1.2);
+    [data-theme="light"] .badge-dark {
+      display: none;
     }
-    
+
     /* Theme toggle switch */
     .theme-toggle {
       position: relative;
@@ -160,6 +147,70 @@
       transform: translateX(1.5rem);
     }
     
+    /* --- NEW THEME TESTER STYLES --- */
+    .theme-tester {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background-color: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 15px -3px var(--shadow), 0 4px 6px -4px var(--shadow);
+      z-index: 100;
+      transition: transform 0.3s ease;
+      transform: translateX(0);
+    }
+    
+    .theme-tester.hidden {
+      transform: translateX(-120%);
+    }
+
+    .theme-tester-btn {
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+      background-color: var(--bg-primary);
+      color: var(--text-secondary);
+    }
+
+    .theme-tester-btn:hover {
+      background-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .theme-tester-btn.active-theme-btn {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: var(--bg-secondary);
+    }
+    
+    .color-swatch {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      border: 2px solid var(--bg-secondary);
+      display: inline-block;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    
+    .theme-tester-toggle {
+      position: absolute;
+      top: -1px;
+      right: -2rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-left: 0;
+      padding: 0.5rem 0.4rem;
+      border-radius: 0 0.25rem 0.25rem 0;
+      cursor: pointer;
+    }
+    /* --- END THEME TESTER STYLES --- */
+
     /* Scroll progress bar */
     .scroll-progress {
       position: fixed;
@@ -173,29 +224,21 @@
       z-index: 60;
       transition: transform 0.1s linear;
     }
-    
-    /* Skeleton loading */
-    .skeleton {
-      background: linear-gradient(90deg, var(--border-color) 25%, var(--bg-secondary) 50%, var(--border-color) 75%);
-      background-size: 200% 100%;
-      animation: loading 1.5s ease-in-out infinite;
-    }
-    
-    @keyframes loading {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    
+
     /* Print styles */
     @media print {
       .no-print { display: none !important; }
+      body {
+        --text-primary: #000 !important;
+        --text-secondary: #333 !important;
+        --bg-primary: #fff !important;
+        --bg-secondary: #fff !important;
+        --border-color: #ccc !important;
+      }
       .print-bg-white { background: white !important; }
-    }
-    
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .card-hover {
-        transition: none;
+      section {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
       }
     }
   </style>
@@ -218,6 +261,15 @@
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
           },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0, transform: 'translateY(10px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            }
+          }
         }
       }
     }
@@ -231,10 +283,10 @@
   </a>
 
   <!-- Scroll progress indicator -->
-  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="scroll-progress no-print" aria-hidden="true"></div>
 
   <!-- Header & Navigation -->
-  <header class="sticky top-0 z-40 bg-bg-secondary border-b border-border-color transition-colors duration-300">
+  <header class="sticky top-0 z-40 bg-bg-secondary/80 backdrop-blur-sm border-b border-border-color transition-colors duration-300 no-print">
     <nav class="container mx-auto px-6 py-4" role="navigation" aria-label="Main navigation">
       <div class="flex items-center justify-between">
         <a href="#" class="text-2xl font-bold focus-visible:outline-none" aria-label="Home - Manohar Golleru">
@@ -251,6 +303,7 @@
             aria-pressed="false"
           >
             <span class="sr-only">Toggle theme</span>
+            <!-- Icons for light/dark mode, visually hidden but present for toggle logic -->
             <i class="fas fa-sun absolute left-1.5 top-1 text-xs text-yellow-500" aria-hidden="true"></i>
             <i class="fas fa-moon absolute right-1.5 top-1 text-xs text-gray-700" aria-hidden="true"></i>
           </button>
@@ -300,9 +353,9 @@
   <!-- Main Content -->
   <main id="main-content">
     <!-- Hero Section -->
-    <section id="about" class="py-20 bg-gradient-to-r from-bg-primary to-bg-secondary transition-colors duration-300">
+    <section id="about" class="py-20 md:py-28 bg-bg-primary transition-colors duration-300">
       <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="flex flex-col md:flex-row items-center gap-12">
           <div class="md:w-3/5">
             <div class="animate-fade-in">
               <h1 class="text-4xl md:text-5xl font-bold mb-6 text-text-primary">
@@ -312,10 +365,10 @@
                 Researcher in Human Factors & Ergonomics
               </h2>
               <p class="text-lg text-text-secondary mb-8 leading-relaxed max-w-2xl">
-                I specialize in Human-machine interaction, AI-driven assistive communication, and user-centered design. My work focuses on creating technologies that enhance human capabilities and improve quality of life.
+                I specialize in Human-Machine Interaction, AI-driven assistive communication, and user-centered design. My work focuses on creating technologies that enhance human capabilities and improve quality of life.
               </p>
               <div class="flex flex-wrap gap-4">
-                <a href="#contact" class="px-6 py-3 bg-primary hover:bg-secondary text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary">
+                <a href="#contact" class="px-6 py-3 bg-primary hover:bg-primary-hover text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary">
                   Contact Me
                   <i class="fas fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
                 </a>
@@ -327,13 +380,14 @@
           </div>
           
           <div class="md:w-2/5 flex justify-center">
-            <div class="relative group">
-              <div class="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300" aria-hidden="true"></div>
+            <div class="relative group animate-fade-in" style="animation-delay: 200ms;">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-all duration-500" aria-hidden="true"></div>
               <img 
                 src="https://raw.githubusercontent.com/ManoharGolleru/Profile/9e080e6a3459ae9e48a686d4e2657fe02e5b06eb/assets/pic.jpeg" 
                 alt="Manohar Golleru - Profile photo" 
                 class="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-bg-secondary shadow-xl transition-transform duration-300 group-hover:scale-105"
                 loading="eager"
+                onerror="this.onerror=null; this.src='https://placehold.co/320x320/2563eb/ffffff?text=Manohar'; this.classList.add('border-border-color');"
               >
             </div>
           </div>
@@ -349,67 +403,59 @@
           <div class="w-20 h-1 bg-primary mx-auto" aria-hidden="true"></div>
         </header>
         
-        <div class="max-w-3xl mx-auto space-y-8 relative">
-          <!-- Timeline item 1 -->
-          <article class="relative pl-12 timeline-item animate-fade-in" style="animation-delay: 100ms;">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color">
-              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                <h3 class="text-xl font-bold text-text-primary">
-                  Doctor of Philosophy, Industrial Engineering
-                  <span class="block text-base font-normal text-text-secondary">(Human Factors & Ergonomics)</span>
-                </h3>
-                <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium" datetime="2024-08">
-                  Aug 2024 – Present
-                </time>
-              </div>
-              <p class="text-text-primary font-medium mb-2">
-                University at Buffalo, New York
-              </p>
-              <p class="text-text-secondary">
-                GPA: 3.933
-              </p>
+        <!-- NEW Education Layout -->
+        <div class="max-w-3xl mx-auto space-y-8">
+          <!-- PhD Card -->
+          <article class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color animate-fade-in" style="animation-delay: 100ms;">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+              <h3 class="text-xl font-bold text-text-primary">
+                Doctor of Philosophy, Industrial Engineering
+                <span class="block text-base font-normal text-text-secondary">(Human Factors & Ergonomics)</span>
+              </h3>
+              <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium whitespace-nowrap">
+                Expected May 2027
+              </time>
             </div>
+            <p class="text-text-primary font-medium mb-1">
+              University at Buffalo, New York
+            </p>
+            <p class="text-text-secondary text-sm">
+              GPA: 3.94
+            </p>
           </article>
           
-          <!-- Timeline item 2 -->
-          <article class="relative pl-12 timeline-item animate-fade-in" style="animation-delay: 200ms;">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color">
-              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                <h3 class="text-xl font-bold text-text-primary">
-                  Master of Science, Industrial Engineering
-                  <span class="block text-base font-normal text-text-secondary">(Human Factors & Ergonomics)</span>
-                </h3>
-                <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium" datetime="2024-05">
-                  May 2024
-                </time>
-              </div>
-              <p class="text-text-primary font-medium mb-2">
-                University at Buffalo, New York
-              </p>
-              <p class="text-text-secondary">
-                GPA: 3.914
-              </p>
+          <!-- MS Card -->
+          <article class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color animate-fade-in" style="animation-delay: 200ms;">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+              <h3 class="text-xl font-bold text-text-primary">
+                Master of Science, Industrial Engineering
+                <span class="block text-base font-normal text-text-secondary">(Human Factors & Ergonomics)</span>
+              </h3>
+              <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium whitespace-nowrap">
+                May 2024
+              </time>
             </div>
+            <p class="text-text-primary font-medium mb-1">
+              University at Buffalo, New York
+            </p>
+            <p class="text-text-secondary text-sm">
+              GPA: 3.91
+            </p>
           </article>
           
-          <!-- Timeline item 3 -->
-          <article class="relative pl-12 timeline-item animate-fade-in" style="animation-delay: 300ms;">
-            <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color">
-              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                <h3 class="text-xl font-bold text-text-primary">
-                  Bachelor of Technology, Mechanical Engineering
-                </h3>
-                <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium" datetime="2021-08">
-                  Aug 2021
-                </time>
-              </div>
-              <p class="text-text-primary font-medium">
-                Amrita Vishwa Vidyapeetham, India
-              </p>
+          <!-- B.Tech Card -->
+          <article class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color animate-fade-in" style="animation-delay: 300ms;">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+              <h3 class="text-xl font-bold text-text-primary">
+                Bachelor of Technology, Mechanical Engineering
+              </h3>
+              <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium whitespace-nowrap">
+                Aug 2021
+              </time>
             </div>
+            <p class="text-text-primary font-medium">
+              Amrita Vishwa Vidyapeetham, India
+            </p>
           </article>
         </div>
       </div>
@@ -419,7 +465,7 @@
     <section id="experience" class="py-16 bg-bg-primary transition-colors duration-300">
       <div class="container mx-auto px-6">
         <header class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-text-primary mb-4">Research & Professional Experience</h2>
+          <h2 class="text-3xl font-bold text-text-primary mb-4">Research & Analytical Experience</h2>
           <div class="w-20 h-1 bg-primary mx-auto" aria-hidden="true"></div>
         </header>
         
@@ -430,30 +476,18 @@
               <h3 class="text-xl font-bold text-text-primary">
                 Research Assistant, Communication and Assistive Device Lab (CADL)
               </h3>
-              <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2023-01">
+              <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2023-01">
                 Jan 2023 – Present
               </time>
             </div>
             <p class="text-text-primary font-medium mb-4">
               University at Buffalo
             </p>
-            <ul class="space-y-3" role="list">
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Developed AI-driven assistive communication tools using large language models (LLMs) with retrieval-augmented generation.</span>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Led the creation of DEAN (Dynamic, Expressive, Augmented Narrator) to enhance AAC users' response formulation.</span>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Engineered end-to-end conversational systems integrating low-latency ASR and emotional text-to-speech technologies.</span>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Conducted user engagement research and statistical analyses to optimize device usability.</span>
-              </li>
+            <ul class="space-y-3 list-inside list-disc text-text-secondary pl-5" role="list">
+              <li>Developed AI-driven assistive communication tools using LLMs with RAG for AAC users.</li>
+              <li>Led development of DEAN (Dynamic, Expressive, Augmented Narrator) to enhance response formulation.</li>
+              <li>Engineered end-to-end conversational systems (ASR, TTS) and deployed on GCP/institutional servers.</li>
+              <li>Conducted user engagement research and statistical analyses (ELAN, R) to optimize device usability.</li>
             </ul>
           </article>
           
@@ -461,32 +495,20 @@
           <article class="bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color" role="listitem" tabindex="0">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
               <h3 class="text-xl font-bold text-text-primary">
-                Research Assistant, SurgE Surgery Ergonomics and Human Factors Lab
+                Research Assistant, Surgery Ergonomics and Human Factors Lab (SurgE)
               </h3>
-              <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2024-04">
+              <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2024-04">
                 Apr 2024 – Present
               </time>
             </div>
             <p class="text-text-primary font-medium mb-4">
               University at Buffalo
             </p>
-            <ul class="space-y-3" role="list">
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Built ML pipelines using time-series biomarker data to detect impairment with ~80% accuracy.</span>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Performed statistical analyses and data visualization to inform model improvements.</span>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Developed a custom web app for real-time eye-tracking data analysis in surgical settings.</span>
-              </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle text-primary mt-1 mr-3 flex-shrink-0" aria-hidden="true"></i>
-                <span>Designed pilot studies for refining AI-driven surgical systems.</span>
-              </li>
+            <ul class="space-y-3 list-inside list-disc text-text-secondary pl-5" role="list">
+              <li>Built ML pipelines (SVM, tree-based) using time-series biomarker data to detect impairment (~80% accuracy).</li>
+              <li>Performed statistical analyses (ANOVA, t-tests) and data visualization to inform model improvements.</li>
+              <li>Developed a custom web app for real-time surgeon eye-tracking data analysis.</li>
+              <li>Designed pilot studies for refining AI-driven surgical systems.</li>
             </ul>
           </article>
         </div>
@@ -502,47 +524,67 @@
         </header>
         
         <!-- Project filter buttons -->
-        <div class="flex flex-wrap justify-center gap-3 mb-8" role="group" aria-label="Filter projects by category">
+        <div class="flex flex-wrap justify-center gap-3 mb-8 no-print" role="group" aria-label="Filter projects by category">
           <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-primary text-white transition-colors" data-filter="all">All Projects</button>
           <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-bg-primary text-text-secondary hover:bg-primary hover:text-white transition-colors" data-filter="ai">AI/ML</button>
           <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-bg-primary text-text-secondary hover:bg-primary hover:text-white transition-colors" data-filter="ux">UX Design</button>
           <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-bg-primary text-text-secondary hover:bg-primary hover:text-white transition-colors" data-filter="ergonomics">Ergonomics</button>
         </div>
         
-        <div class="grid md:grid-cols-2 gap-8" id="projects-grid" role="list">
-          <!-- Project 1 -->
-          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color" role="listitem" tabindex="0" data-category="ux">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid" role="list">
+          
+          <!-- Project 1 (NEW) -->
+          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col" role="listitem" tabindex="0" data-category="ai">
             <div class="flex items-center mb-4">
-              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
+                <i class="fas fa-robot text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-text-primary">Drone Show Simulation</h3>
+            </div>
+            <p class="text-text-secondary mb-4 flex-grow">
+              Developed and tested drone simulation environments in Gazebo to evaluate collision avoidance, sensor fusion, and navigation algorithms for robust flight control.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2" role="list">
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">PX4</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">Gazebo</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">ROS</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">MAVSDK</span>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col" role="listitem" tabindex="0" data-category="ux">
+            <div class="flex items-center mb-4">
+              <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-mobile-screen text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">UI Design for mHealth App</h3>
             </div>
-            <p class="text-text-secondary mb-4">
+            <p class="text-text-secondary mb-4 flex-grow">
               Created low- and high-fidelity prototypes using Figma, conducted user testing, and refined the interface to secure a 3rd-place finish at a business pitch competition.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-xs font-medium">Figma</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-xs font-medium">UI/UX</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-xs font-medium">User Testing</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">Figma</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">UI/UX</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">User Testing</span>
             </div>
           </article>
           
-          <!-- Project 2 -->
-          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color" role="listitem" tabindex="0" data-category="ergonomics">
+          <!-- Project 3 -->
+          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col" role="listitem" tabindex="0" data-category="ergonomics">
             <div class="flex items-center mb-4">
-              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-user-tie text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Workplace Ergonomic Analysis</h3>
             </div>
-            <p class="text-text-secondary mb-4">
+            <p class="text-text-secondary mb-4 flex-grow">
               Performed ergonomic assessments (RULA, ACGIH-TLV) to identify musculoskeletal risks and implemented solutions to improve workplace safety and efficiency.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-xs font-medium">RULA</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-xs font-medium">ACGIH-TLV</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-xs font-medium">Ergonomics</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">RULA</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">ACGIH-TLV</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">Ergonomics</span>
             </div>
           </article>
         </div>
@@ -558,14 +600,14 @@
         </header>
         
         <!-- Search functionality -->
-        <div class="max-w-4xl mx-auto mb-8">
+        <div class="max-w-4xl mx-auto mb-8 no-print">
           <label for="publication-search" class="sr-only">Search publications</label>
           <div class="relative">
-            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary" aria-hidden="true"></i>
+            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary" aria-hidden="true"></i>
             <input 
               type="search" 
               id="publication-search" 
-              class="w-full pl-10 pr-4 py-3 rounded-lg border border-border-color bg-bg-secondary text-text-primary placeholder-text-secondary focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
+              class="w-full pl-12 pr-4 py-3 rounded-lg border border-border-color bg-bg-secondary text-text-primary placeholder-text-secondary focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
               placeholder="Search publications..."
               aria-label="Search publications and presentations"
             >
@@ -575,59 +617,53 @@
         <div class="max-w-4xl mx-auto space-y-6" id="publications-list" role="list">
           <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors" role="listitem" tabindex="0">
             <div class="flex items-start">
-              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
-                <i class="fas fa-book text-primary"></i>
+              <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
+                <i class="fas fa-book text-primary text-base"></i>
               </div>
               <div>
                 <p class="text-text-primary">
-                  <strong class="text-text-primary">Golleru, M.</strong> (2024). Enhancing engagement and interaction in augmentative and alternative communication (AAC): A comparative study. <em class="text-text-secondary">ProQuest Dissertations & Theses</em>.
+                  <strong class="text-text-primary">Golleru, M.</strong> (2024). <em class="text-text-secondary">Enhancing engagement and interaction in augmentative and alternative communication (AAC): A comparative study on the impact of front-facing partner display in SGD-mediated conversations</em>. ProQuest Dissertations & Theses.
                 </p>
-                <div class="mt-3 flex gap-3">
-                  <a href="#" class="text-primary hover:underline text-sm font-medium" aria-label="Read full text of Golleru 2024 dissertation">Full Text →</a>
-                  <a href="#" class="text-primary hover:underline text-sm font-medium" aria-label="Cite Golleru 2024 dissertation">Cite →</a>
-                </div>
               </div>
             </div>
           </article>
           
           <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors" role="listitem" tabindex="0">
             <div class="flex items-start">
-              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
-                <i class="fas fa-book text-primary"></i>
+              <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
+                <i class="fas fa-book text-primary text-base"></i>
               </div>
               <div>
                 <p class="text-text-primary">
-                  <strong class="text-text-primary">Higginbotham, J., Golleru, M., et al.</strong> (in press). Developing artificial intelligence applications for human conversation. <em class="text-text-secondary">Assistive Technology Outcomes and Benefits</em>.
+                  <strong class="text-text-primary">Higginbotham, J., Golleru, M., Pal, S., et al.</strong> (in press). <em class="text-text-secondary">Developing artificial intelligence applications for human conversation: Perspectives, tools, exploratory analyses</em>. Assistive Technology Outcomes and Benefits (ATOB).
                 </p>
-                <span class="inline-block mt-3 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">In Press</span>
+                <span class="badge-dark inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium" style="background-color: #4a3a1f; color: #fef08a;">In Press</span>
+                <span class="badge-light inline-block mt-3 px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">In Press</span>
               </div>
             </div>
           </article>
           
           <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors" role="listitem" tabindex="0">
             <div class="flex items-start">
-              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
-                <i class="fas fa-chalkboard-user text-primary"></i>
+              <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
+                <i class="fas fa-chalkboard-user text-primary text-base"></i>
               </div>
               <div>
                 <p class="text-text-primary">
-                  <strong class="text-text-primary">Conference Presentation:</strong> Enhancing engagement in AAC through front-facing partner display. ASPIRE HFES 68th International Annual Meeting, Phoenix, AZ, 2024.
+                  <strong class="text-text-primary">Conference Presentation:</strong> <em class="text-text-secondary">Enhancing engagement and interaction in augmentative and alternative communication (AAC)...</em> ASPIRE HFES 68th International Annual Meeting, Phoenix, AZ, 2024.
                 </p>
-                <button class="mt-3 text-primary hover:underline text-sm font-medium" aria-label="View presentation slides (opens modal)">
-                  View Slides →
-                </button>
               </div>
             </div>
           </article>
           
           <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors" role="listitem" tabindex="0">
             <div class="flex items-start">
-              <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
-                <i class="fas fa-chalkboard-user text-primary"></i>
+              <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
+                <i class="fas fa-chalkboard-user text-primary text-base"></i>
               </div>
               <div>
                 <p class="text-text-primary">
-                  <strong class="text-text-primary">Conference Presentation:</strong> Conversational AI: Promises and current realities. Assistive Technology Industry Association Conference, Orlando, FL, 2024.
+                  <strong class="text-text-primary">Conference Presentation:</strong> <em class="text-text-secondary">Conversational artificial intelligence: Promises and current realities.</em> Assistive Technology Industry Association Conference, Orlando, FL, 2024.
                 </p>
               </div>
             </div>
@@ -644,91 +680,108 @@
           <div class="w-20 h-1 bg-primary mx-auto" aria-hidden="true"></div>
         </header>
         
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           
           <!-- Qualitative Skills -->
           <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color">
             <div class="flex items-center mb-4">
-              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-users text-primary text-xl"></i>
               </div>
-              <h3 class="text-xl font-bold text-text-primary">Qualitative</h3>
+              <h3 class="text-xl font-bold text-text-primary">Qualitative Skills</h3>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">User-centered design</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Usability testing</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Interdisciplinary collaboration</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Open-source development</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">User-centered design</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Usability testing</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Survey/Interview methods</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Interdisciplinary collaboration</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Open-source development</span>
             </div>
           </section>
           
           <!-- Quantitative Skills -->
           <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color">
             <div class="flex items-center mb-4">
-              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-chart-line text-primary text-xl"></i>
               </div>
-              <h3 class="text-xl font-bold text-text-primary">Quantitative</h3>
+              <h3 class="text-xl font-bold text-text-primary">Quantitative Skills</h3>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Statistical analysis (R, Python, SAS)</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Time-series modeling</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Data visualization</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Ergonomic assessments</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Statistical analysis (R, Python, SAS)</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Time-series modeling</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Data visualization</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Ergonomic assessments (RULA, REBA)</span>
             </div>
           </section>
           
-          <!-- Technical Skills -->
-          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color">
+          <!-- Technical Skills (UPDATED & EXPANDED) -->
+          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color md:col-span-2">
             <div class="flex items-center mb-4">
-              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-code text-primary text-xl"></i>
               </div>
-              <h3 class="text-xl font-bold text-text-primary">Technical</h3>
+              <h3 class="text-xl font-bold text-text-primary">Technical Skills</h3>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-4">
               <div>
-                <h4 class="font-medium text-text-primary mb-1">Languages:</h4>
+                <h4 class="font-medium text-text-primary mb-2">Languages & Tools:</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Python</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">R</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">SAS</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Matlab</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Node.js</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Python</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">R</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">SAS</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Matlab</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Minitab</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Node.js</span>
                 </div>
               </div>
               <div>
-                <h4 class="font-medium text-text-primary mb-1">ML Frameworks:</h4>
+                <h4 class="font-medium text-text-primary mb-2">ML/CV & Pose Estimation:</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">PyTorch</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">TensorFlow</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">PyTorch</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">TensorFlow</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OpenCV</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">YOLO</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OpenPose</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">MediaPipe</span>
                 </div>
               </div>
               <div>
-                <h4 class="font-medium text-text-primary mb-1">Other:</h4>
+                <h4 class="font-medium text-text-primary mb-2">Deployment & Ops:</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Docker</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">GCP</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Figma</span>
-                  <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">WebSockets</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Docker</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">GCP</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">WebSockets</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Prometheus</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Grafana</span>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-medium text-text-primary mb-2">Prototyping & Analysis:</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Figma</span>
+                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">ELAN (Video Annotation)</span>
                 </div>
               </div>
             </div>
           </section>
           
           <!-- Certifications -->
-          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color">
+          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color md:col-span-2">
             <div class="flex items-center mb-4">
-              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-certificate text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Certifications</h3>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">CITI Program (Conflict of Interest)</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Social & Behavioral Research</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">Responsible Conduct of Research</span>
-              <span class="px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-full text-sm font-medium">OSHA (501, 511, 7500, 7505)</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">CITI: Conflict of Interest</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">CITI: Social & Behavioral Research</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">CITI: Responsible Conduct of Research</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 501</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 511</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 7500</span>
+              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 7505</span>
             </div>
           </section>
           
@@ -737,7 +790,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gradient-to-r from-bg-primary to-bg-secondary transition-colors duration-300">
+    <section id="contact" class="py-16 bg-bg-primary transition-colors duration-300">
       <div class="container mx-auto px-6">
         <header class="text-center mb-12">
           <h2 class="text-3xl font-bold text-text-primary mb-4">Get In Touch</h2>
@@ -747,16 +800,16 @@
           </p>
         </header>
         
-        <div class="max-w-4xl mx-auto bg-bg-secondary rounded-xl shadow-sm p-6 md:p-8 card-hover border border-border-color">
+        <div class="max-w-4xl mx-auto bg-bg-secondary rounded-xl shadow-lg p-6 md:p-8 border border-border-color">
           <div class="grid md:grid-cols-2 gap-8">
             
             <!-- Contact Information -->
             <section aria-labelledby="contact-info">
               <h3 id="contact-info" class="text-xl font-bold text-text-primary mb-6">Contact Information</h3>
-              <div class="space-y-4">
+              <div class="space-y-6">
                 <div class="flex items-start">
-                  <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
-                    <i class="fas fa-envelope text-primary"></i>
+                  <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
+                    <i class="fas fa-envelope text-primary text-base"></i>
                   </div>
                   <div>
                     <h4 class="font-medium text-text-secondary">Email</h4>
@@ -767,8 +820,8 @@
                 </div>
                 
                 <div class="flex items-start">
-                  <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
-                    <i class="fab fa-linkedin text-primary"></i>
+                  <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
+                    <i class="fab fa-linkedin text-primary text-base"></i>
                   </div>
                   <div>
                     <h4 class="font-medium text-text-secondary">LinkedIn</h4>
@@ -780,8 +833,8 @@
                 </div>
                 
                 <div class="flex items-start">
-                  <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
-                    <i class="fab fa-github text-primary"></i>
+                  <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
+                    <i class="fab fa-github text-primary text-base"></i>
                   </div>
                   <div>
                     <h4 class="font-medium text-text-secondary">GitHub</h4>
@@ -794,9 +847,9 @@
               </div>
             </section>
             
-            <!-- Contact Form -->
-            <section aria-labelledby="contact-form">
-              <h3 id="contact-form" class="text-xl font-bold text-text-primary mb-6">Send Me a Message</h3>
+            <!-- Contact Form (no-print) -->
+            <section aria-labelledby="contact-form" class="no-print">
+              <h3 id="contact-form-label" class="text-xl font-bold text-text-primary mb-6">Send Me a Message</h3>
               <form id="contact-form-element" class="space-y-4" novalidate>
                 <div>
                   <label for="name" class="block text-sm font-medium text-text-secondary mb-1">Name <span class="sr-only">required</span></label>
@@ -852,7 +905,7 @@
                 
                 <button 
                   type="submit" 
-                  class="w-full px-6 py-3 bg-primary hover:bg-secondary text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="w-full px-6 py-3 bg-primary hover:bg-primary-hover text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
                   aria-label="Send message"
                 >
                   <span class="flex items-center justify-center">
@@ -873,7 +926,7 @@
   <footer class="bg-bg-secondary border-t border-border-color py-8" role="contentinfo">
     <div class="container mx-auto px-6">
       <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-4 md:mb-0">
+        <div class="mb-4 md:mb-0 text-center md:text-left">
           <a href="#" class="text-2xl font-bold focus-visible:outline-none" aria-label="Home - Manohar Golleru">
             <span class="gradient-text">Manohar Golleru</span>
           </a>
@@ -898,7 +951,6 @@
       
       <div class="border-t border-border-color mt-8 pt-8 text-center text-text-secondary">
         <p>&copy; 2025 Manohar Golleru. All rights reserved.</p>
-        <p class="text-sm mt-2">Last updated: <time datetime="2025-01-17">January 2025</time></p>
       </div>
     </div>
   </footer>
@@ -915,13 +967,56 @@
   <!-- Toast notification container -->
   <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2" aria-live="polite" aria-atomic="true"></div>
 
+  <!-- --- NEW THEME TESTER HTML --- -->
+  <div id="theme-tester" class="theme-tester no-print">
+    <button id="theme-tester-toggle" class="theme-tester-toggle" aria-label="Toggle theme tester panel">
+      <i class="fas fa-palette text-text-secondary"></i>
+    </button>
+    <div id="theme-tester-content">
+      <h4 class="text-sm font-bold text-text-primary mb-3">Theme Tester</h4>
+      
+      <div class="mb-4">
+        <label class="block text-xs font-medium text-text-secondary mb-2">Color Palette</label>
+        <div class="flex flex-wrap gap-2" id="color-palette-buttons">
+          <button class="theme-tester-btn active-theme-btn" data-theme="blue">
+            <span class="color-swatch" style="background-color: #2563eb;"></span>Blue
+          </button>
+          <button class="theme-tester-btn" data-theme="green">
+            <span class="color-swatch" style="background-color: #059669;"></span>Green
+          </button>
+          <button class="theme-tester-btn" data-theme="purple">
+            <span class="color-swatch" style="background-color: #7c3aed;"></span>Purple
+          </button>
+          <button class="theme-tester-btn" data-theme="orange">
+            <span class="color-swatch" style="background-color: #ea580c;"></span>Orange
+          </button>
+        </div>
+      </div>
+      
+      <div>
+        <label class="block text-xs font-medium text-text-secondary mb-2">Font Family</label>
+        <div class="flex flex-wrap gap-2" id="font-family-buttons">
+          <button class="theme-tester-btn active-theme-btn" data-font="'Inter', system-ui, sans-serif">Inter</button>
+          <button class="theme-tester-btn" data-font="'Roboto', system-ui, sans-serif">Roboto</button>
+          <button class="theme-tester-btn" data-font="'Lato', system-ui, sans-serif">Lato</button>
+          <button class="theme-tester-btn" data-font="'Noto Sans', system-ui, sans-serif">Noto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- --- END THEME TESTER HTML --- -->
+
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
     
-    // Check for saved theme preference or default to 'light'
-    const currentTheme = localStorage.getItem('theme') || 'light';
+    // Check for saved theme preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
     htmlElement.setAttribute('data-theme', currentTheme);
     themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
     
@@ -930,6 +1025,15 @@
       htmlElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('theme')) { // Only apply if user hasn't set a preference
+            const newTheme = e.matches ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+            themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+        }
     });
     
     // Mobile menu toggle
@@ -986,7 +1090,7 @@
     
     const observerOptions = {
       root: null,
-      rootMargin: '-50% 0px -50% 0px',
+      rootMargin: '-50% 0px -50% 0px', // Trigger at the vertical center of the viewport
       threshold: 0
     };
     
@@ -1015,16 +1119,18 @@
         const filter = button.getAttribute('data-filter');
         
         // Update active button
-        filterButtons.forEach(btn => btn.classList.remove('active', 'bg-primary', 'text-white'));
-        filterButtons.forEach(btn => btn.classList.add('bg-bg-primary', 'text-text-secondary'));
-        button.classList.remove('bg-bg-primary', 'text-text-secondary');
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active', 'bg-primary', 'text-white');
+            btn.classList.add('bg-bg-primary', 'text-text-secondary');
+        });
         button.classList.add('active', 'bg-primary', 'text-white');
-        
+        button.classList.remove('bg-bg-primary', 'text-text-secondary');
+
         // Filter projects
         projectCards.forEach(card => {
           const category = card.getAttribute('data-category');
           if (filter === 'all' || category === filter) {
-            card.style.display = 'block';
+            card.style.display = 'flex'; // Use flex to maintain layout
             card.style.animation = 'fadeIn 0.3s ease';
           } else {
             card.style.display = 'none';
@@ -1052,68 +1158,79 @@
     
     // Contact form validation and submission
     const contactForm = document.getElementById('contact-form-element');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    const nameError = document.getElementById('name-error');
-    const emailError = document.getElementById('email-error');
-    const messageError = document.getElementById('message-error');
     
-    function validateForm() {
-      let isValid = true;
+    // Check if form exists before adding listeners
+    if (contactForm) {
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const messageInput = document.getElementById('message');
+      const nameError = document.getElementById('name-error');
+      const emailError = document.getElementById('email-error');
+      const messageError = document.getElementById('message-error');
       
-      // Reset errors
-      [nameError, emailError, messageError].forEach(error => {
-        error.textContent = '';
-        error.classList.add('hidden');
-      });
-      
-      // Validate name
-      if (nameInput.value.trim().length < 2) {
-        nameError.textContent = 'Please enter your name';
-        nameError.classList.remove('hidden');
-        isValid = false;
-      }
-      
-      // Validate email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailInput.value)) {
-        emailError.textContent = 'Please enter a valid email address';
-        emailError.classList.remove('hidden');
-        isValid = false;
-      }
-      
-      // Validate message
-      if (messageInput.value.trim().length < 10) {
-        messageError.textContent = 'Please enter a message (at least 10 characters)';
-        messageError.classList.remove('hidden');
-        isValid = false;
-      }
-      
-      return isValid;
-    }
-    
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      if (validateForm()) {
-        // Show loading state
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.innerHTML;
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+      function validateForm() {
+        let isValid = true;
         
-        // Simulate form submission (replace with actual form handling)
-        setTimeout(() => {
-          showToast('Thank you! Your message has been sent.', 'success');
-          contactForm.reset();
-          submitButton.disabled = false;
-          submitButton.innerHTML = originalText;
-        }, 1500);
-      } else {
-        showToast('Please fix the errors and try again.', 'error');
+        // Reset errors
+        [nameError, emailError, messageError].forEach(error => {
+          error.textContent = '';
+          error.classList.add('hidden');
+        });
+        [nameInput, emailInput, messageInput].forEach(input => {
+            input.removeAttribute('aria-invalid');
+        });
+        
+        // Validate name
+        if (nameInput.value.trim().length < 2) {
+          nameError.textContent = 'Please enter your name';
+          nameError.classList.remove('hidden');
+          nameInput.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        }
+        
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+          emailError.textContent = 'Please enter a valid email address';
+          emailError.classList.remove('hidden');
+          emailInput.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        }
+        
+        // Validate message
+        if (messageInput.value.trim().length < 10) {
+          messageError.textContent = 'Please enter a message (at least 10 characters)';
+          messageError.classList.remove('hidden');
+          messageInput.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        }
+        
+        return isValid; // <-- Restored missing return
       }
-    });
+      
+      // --- Restored Event Listener ---
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        if (validateForm()) {
+          // Show loading state
+          const submitButton = contactForm.querySelector('button[type="submit"]');
+          const originalText = submitButton.innerHTML;
+          submitButton.disabled = true;
+          submitButton.innerHTML = '<span class="flex items-center justify-center"><i class="fas fa-spinner fa-spin mr-2"></i>Sending...</span>';
+          
+          // Simulate form submission
+          setTimeout(() => {
+            showToast('Thank you! Your message has been sent.', 'success');
+            contactForm.reset();
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalText;
+          }, 1500);
+        } else {
+          showToast('Please fix the errors and try again.', 'error');
+        }
+      });
+    }
     
     // Toast notification system
     function showToast(message, type = 'info') {
@@ -1132,7 +1249,8 @@
         info: 'bg-blue-500'
       };
       
-      toast.className = `${bgColors[type]} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-x-full`;
+      toast.className = `${bgColors[type]} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-x-full opacity-0`;
+      toast.setAttribute('role', 'alert');
       toast.innerHTML = `
         <i class="fas ${icons[type]}" aria-hidden="true"></i>
         <span>${message}</span>
@@ -1142,42 +1260,153 @@
       
       // Animate in
       setTimeout(() => {
-        toast.classList.remove('translate-x-full');
+        toast.classList.remove('translate-x-full', 'opacity-0');
       }, 100);
       
       // Remove after 5 seconds
       setTimeout(() => {
-        toast.classList.add('translate-x-full');
+        toast.classList.add('translate-x-full', 'opacity-0');
         setTimeout(() => toast.remove(), 300);
       }, 5000);
     }
     
-    // Add keyboard navigation for cards
-    document.querySelectorAll('.card-hover').forEach(card => {
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && card.getAttribute('tabindex') === '0') {
-          card.click();
+    // --- NEW THEME TESTER SCRIPT ---
+    // document.addEventListener('DOMContentLoaded', () => { // No longer needed, wrapped above
+      const root = document.documentElement;
+      
+      // --- PALETTE DEFINITIONS ---
+      // Define your color palettes here. 
+      // To make a new one, copy a block and change the hex codes.
+      const palettes = {
+        blue: {
+          light: {
+            '--primary': '#2563eb',
+            '--primary-hover': '#1d4ed8',
+            '--secondary': '#1e40af',
+            '--accent': '#3b82f6',
+          },
+          dark: {
+            '--primary': '#60a5fa',
+            '--primary-hover': '#93c5fd',
+            '--secondary': '#3b82f6',
+            '--accent': '#93c5fd',
+          }
+        },
+        green: {
+          light: {
+            '--primary': '#059669',
+            '--primary-hover': '#047857',
+            '--secondary': '#065f46',
+            '--accent': '#10b981',
+          },
+          dark: {
+            '--primary': '#34d399',
+            '--primary-hover': '#6ee7b7',
+            '--secondary': '#10b981',
+            '--accent': '#6ee7b7',
+          }
+        },
+        purple: {
+          light: {
+            '--primary': '#7c3aed',
+            '--primary-hover': '#6d28d9',
+            '--secondary': '#5b21b6',
+            '--accent': '#a78bfa',
+          },
+          dark: {
+            '--primary': '#a78bfa',
+            '--primary-hover': '#c4b5fd',
+            '--secondary': '#8b5cf6',
+            '--accent': '#c4b5fd',
+          }
+        },
+        orange: {
+          light: {
+            '--primary': '#ea580c',
+            '--primary-hover': '#c2410c',
+            '--secondary': '#9a3412',
+            '--accent': '#f97316',
+          },
+          dark: {
+            '--primary': '#f97316',
+            '--primary-hover': '#fb923c',
+            '--secondary': '#ea580c',
+            '--accent': '#fb923c',
+          }
+        }
+      };
+      
+      const colorButtons = document.querySelectorAll('#color-palette-buttons .theme-tester-btn');
+      const fontButtons = document.querySelectorAll('#font-family-buttons .theme-tester-btn');
+      const themeTesterPanel = document.getElementById('theme-tester');
+      const themeTesterToggle = document.getElementById('theme-tester-toggle');
+
+      // Function to apply a color palette
+      function applyPalette(paletteName) {
+        const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+        const palette = palettes[paletteName][currentTheme];
+        
+        for (const [key, value] of Object.entries(palette)) {
+          root.style.setProperty(key, value);
+        }
+        
+        // Update active button state
+        colorButtons.forEach(btn => {
+          btn.classList.toggle('active-theme-btn', btn.dataset.theme === paletteName);
+        });
+      }
+      
+      // Function to apply a font
+      function applyFont(fontFamily) {
+        document.body.style.fontFamily = fontFamily;
+        
+        // Update active button state
+        fontButtons.forEach(btn => {
+          btn.classList.toggle('active-theme-btn', btn.dataset.font === fontFamily);
+        });
+      }
+
+      // Add click listeners for color palettes
+      colorButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          applyPalette(button.dataset.theme);
+        });
+      });
+      
+      // Add click listeners for fonts
+      fontButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          applyFont(button.dataset.font);
+        });
+      });
+
+      // Re-apply palette when light/dark mode is toggled
+      themeToggle.addEventListener('click', () => {
+        // We need a slight delay for the `data-theme` attribute to update
+        setTimeout(() => {
+          const activePaletteBtn = document.querySelector('#color-palette-buttons .active-theme-btn');
+          if (activePaletteBtn) {
+            applyPalette(activePaletteBtn.dataset.theme);
+          }
+        }, 50); // 50ms delay
+      });
+      
+      // Toggle panel visibility
+      themeTesterToggle.addEventListener('click', () => {
+        const isHidden = themeTesterPanel.classList.toggle('hidden');
+        themeTesterToggle.setAttribute('aria-expanded', !isHidden);
+        if (isHidden) {
+          themeTesterToggle.innerHTML = '<i class="fas fa-palette text-text-secondary"></i>';
+          themeTesterToggle.setAttribute('aria-label', 'Show theme tester panel');
+        } else {
+          themeTesterToggle.innerHTML = '<i class="fas fa-times text-text-secondary"></i>';
+          themeTesterToggle.setAttribute('aria-label', 'Hide theme tester panel');
         }
       });
-    });
-    
-    // Prefetch critical resources
-    if ('connection' in navigator && navigator.connection.saveData === false) {
-      const prefetchLinks = document.querySelectorAll('a[href^="http"]');
-      prefetchLinks.forEach(link => {
-        const prefetchLink = document.createElement('link');
-        prefetchLink.rel = 'prefetch';
-        prefetchLink.href = link.href;
-        document.head.appendChild(prefetchLink);
-      });
-    }
-    
-    // Add loading state for images
-    document.querySelectorAll('img').forEach(img => {
-      img.addEventListener('load', () => {
-        img.classList.add('loaded');
-      });
-    });
+    // }); // No longer needed, wrapped above
+    // --- END THEME TESTER SCRIPT ---
+
+    }); // <-- CLOSING BRACKET FOR THE NEW DOMCONTENTLOADED WRAPPER
   </script>
 </body>
 </html>
