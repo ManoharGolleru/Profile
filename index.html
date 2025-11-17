@@ -37,16 +37,16 @@
     }
     
     [data-theme="dark"] {
-      --primary: #60a5fa;       /* Using blue as default, tester will override */
+      --primary: #60a5fa;
       --primary-hover: #93c5fd;
       --secondary: #3b82f6;
       --accent: #93c5fd;
       --text-primary: #f9fafb;
       --text-secondary: #d1d5db;
-      --bg-primary: #000000;   /* Pure Black */
-      --bg-secondary: #111111; /* Off-Black for cards */
-      --border-color: #222222;
-      --shadow: rgba(0, 0, 0, 0.4);
+      --bg-primary: #000000;
+      --bg-secondary: #111111;
+      --border-color: #374151;
+      --shadow: rgba(255, 255, 255, 0.1);
     }
     
     /* Smooth scrolling and motion preferences */
@@ -111,81 +111,6 @@
       width: 100%;
     }
     
-    /* REMOVED: Timeline-specific styles are no longer needed */
-    
-    /* ADDED THIS: Fix for "In Press" badge theme */
-    [data-theme="dark"] .badge-light {
-      display: none;
-    }
-    [data-theme="light"] .badge-dark {
-      display: none;
-    }
-
-    /* --- NEW: Academic Path Styles --- */
-    .academic-path-item {
-      position: relative;
-      padding-left: 2.5rem; /* Space for icon and line */
-      padding-bottom: 2rem;
-    }
-    .academic-path-line {
-      position: absolute;
-      left: 0.7rem; /* Aligns with center of icon */
-      top: 1.75rem; /* Starts below the icon */
-      width: 2px;
-      height: 100%;
-      background-color: var(--border-color);
-    }
-    .academic-path-item:last-child .academic-path-line {
-      display: none; /* No line after the last item */
-    }
-    .academic-path-icon {
-      position: absolute;
-      left: 0;
-      top: 0.25rem;
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 9999px;
-      background-color: var(--bg-secondary);
-      border: 2px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    /* --- END: Academic Path Styles --- */
-
-    /* --- NEW: Tab & Scroll Animation Styles --- */
-    .tab-btn {
-      padding: 0.5rem 1rem;
-      font-weight: 500;
-      border-radius: 0.375rem;
-      border-bottom: 3px solid transparent;
-      transition: all 0.3s ease;
-      color: var(--text-secondary);
-    }
-    .tab-btn:hover {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-    }
-    .tab-btn.active-tab {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-    }
-    .tab-panel.hidden {
-      display: none;
-    }
-
-    .scroll-animate {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-      transition-delay: 0.1s;
-    }
-    .scroll-animate.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* --- END: New Styles --- */
-
     /* Theme toggle switch */
     .theme-toggle {
       position: relative;
@@ -306,6 +231,38 @@
         padding-top: 2rem !important;
         padding-bottom: 2rem !important;
       }
+    }
+    
+    /* Scroll-reveal animations */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Experience Tab styles */
+    .experience-tab {
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .experience-tab.active-tab {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    
+    .experience-tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .experience-tab-content.active-content {
+      display: block;
     }
   </style>
   
@@ -469,70 +426,51 @@
           <div class="w-20 h-1 bg-primary mx-auto" aria-hidden="true"></div>
         </header>
         
-        <!-- === NEW EDUCATION LAYOUT === -->
-        <div class="max-w-5xl mx-auto grid md:grid-cols-5 gap-12 items-start">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          <!-- Col 1: The "At-a-Glance" Summary -->
-          <div class="md:col-span-3">
-            <article class="bg-bg-primary p-6 md:p-8 rounded-lg shadow-sm card-hover border border-border-color animate-fade-in scroll-animate">
-              <h3 class="text-2xl font-bold text-text-primary mb-2">
+          <!-- Main Card: PhD & Research Focus -->
+          <div class="md:col-span-2 bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color reveal-on-scroll">
+            <div classs="flex flex-col h-full">
+              <h3 class="text-2xl font-bold text-text-primary mb-4">
                 PhD Candidate, Human Factors & Ergonomics
               </h3>
-              <p class="text-lg font-medium text-primary mb-4">
-                University at Buffalo, New York
+              <p class="text-primary font-medium mb-4">
+                University at Buffalo (Expected 2027)
               </p>
               
-              <div class="border-t border-border-color pt-4 mt-4">
-                <h4 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-2">Key Research Focus</h4>
-                <p class="text-text-secondary italic leading-relaxed">
-                  "I explore how humans interact with robots, with a special interest in social norms, behavior modeling, and the dynamics of trust and communication. My work looks at how these interactions can be simulated and studied in VR/XR environments to better understand real-world human-robot relationships and design more intuitive, socially aware robotic systems."
+              <div class="mt-6 pt-6 border-t border-border-color">
+                <h4 class="text-lg font-semibold text-text-primary mb-3">Key Research Focus</h4>
+                <p class="text-text-secondary leading-relaxed">
+                  I explore how humans interact with robots, with a special interest in social norms, behavior modeling, and the dynamics of trust and communication. My work looks at how these interactions can be simulated and studied in VR/XR environments to better understand real-world human-robot relationships and design more intuitive, socially aware robotic systems.
                 </p>
               </div>
-            </article>
-          </div>
-
-          <!-- Col 2: The "Academic Path" -->
-          <div class="md:col-span-2">
-            <h3 class="text-xl font-bold text-text-primary mb-6 scroll-animate">Academic Path</h3>
-            <div class="relative scroll-animate">
-              
-              <!-- Path Item 1: PhD -->
-              <div class="academic-path-item">
-                <div class="academic-path-line" aria-hidden="true"></div>
-                <div class="academic-path-icon" aria-hidden="true">
-                  <i class="fas fa-circle-dot text-primary text-xs"></i>
-                </div>
-                <h4 class="font-bold text-text-primary">Doctor of Philosophy</h4>
-                <p class="text-text-secondary text-sm">Human Factors & Ergonomics</p>
-                <time class="text-text-secondary text-sm font-medium">2024 – 2027 (Expected)</time>
-              </div>
-
-              <!-- Path Item 2: MS -->
-              <div class="academic-path-item">
-                <div class="academic-path-line" aria-hidden="true"></div>
-                <div class="academic-path-icon" aria-hidden="true">
-                  <i class="fas fa-check text-primary text-xs"></i>
-                </div>
-                <h4 class="font-bold text-text-primary">Master of Science</h4>
-                <p class="text-text-secondary text-sm">Human Factors & Ergonomics</Ssm>
-                <time class="text-text-secondary text-sm font-medium">2022 – 2024</time>
-              </div>
-
-              <!-- Path Item 3: B.Tech -->
-              <div class="academic-path-item">
-                <!-- No line on the last item -->
-                <div class="academic-path-icon" aria-hidden="true">
-                  <i class="fas fa-check text-primary text-xs"></i>
-                </div>
-                <h4 class="font-bold text-text-primary">Bachelor of Technology</h4>
-                <p class="text-text-secondary text-sm">Mechanical Engineering</p>
-                <time class="text-text-secondary text-sm font-medium">2017 – 2021</time>
-              </div>
-
             </div>
           </div>
+          
+          <!-- Side Stack: Academic Foundation -->
+          <div class="space-y-8 md:col-span-1">
+            <div class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color reveal-on-scroll" style="transition-delay: 100ms;">
+              <h3 class="text-xl font-bold text-text-primary mb-2">
+                Master of Science
+                <span class="block text-base font-normal text-text-secondary">Industrial Engineering</span>
+              </h3>
+              <p class="text-text-secondary font-medium">
+                University at Buffalo (2024)
+              </p>
+            </div>
+            
+            <div class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color reveal-on-scroll" style="transition-delay: 200ms;">
+              <h3 class="text-xl font-bold text-text-primary mb-2">
+                Bachelor of Technology
+                <span class="block text-base font-normal text-text-secondary">Mechanical Engineering</span>
+              </h3>
+              <p class="text-text-secondary font-medium">
+                Amrita Vishwa Vidyapeetham (2021)
+              </p>
+            </div>
+          </div>
+          
         </div>
-        <!-- === END NEW EDUCATION LAYOUT === -->
       </div>
     </section>
 
@@ -544,68 +482,62 @@
           <div class="w-20 h-1 bg-primary mx-auto" aria-hidden="true"></div>
         </header>
         
-        <!-- === NEW TABBED LAYOUT === -->
         <div class="max-w-4xl mx-auto">
-          <!-- Tab Buttons -->
-          <div class="flex justify-center space-x-2 md:space-x-4 mb-6 border-b border-border-color" role="tablist" aria-label="Research Experience">
-            <button role="tab" aria-selected="true" aria-controls="cadl-panel" id="cadl-tab" class="tab-btn active-tab" data-tab="cadl">
+          <!-- Tabbed Interface -->
+          <div class="flex justify-center border-b border-border-color mb-8 space-x-4" role="tablist" aria-label="Research Experience">
+            <button role="tab" aria-selected="true" aria-controls="tab-cadl" id="btn-cadl" class="experience-tab active-tab px-4 py-3 text-lg font-medium text-text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               CADL
             </button>
-            <button role="tab" aria-selected="false" aria-controls="surge-panel" id="surge-tab" class="tab-btn" data-tab="surge">
-              SurgE Lab
+            <button role="tab" aria-selected="false" aria-controls="tab-surge" id="btn-surge" class="experience-tab px-4 py-3 text-lg font-medium text-text-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+              SurgE
             </button>
           </div>
-
-          <!-- Tab Panels -->
-          <div>
-            <!-- Panel 1: CADL -->
-            <div id="cadl-panel" class="tab-panel scroll-animate" role="tabpanel" tabindex="0" aria-labelledby="cadl-tab">
-              <article class="bg-bg-secondary p-6 rounded-lg shadow-sm border border-border-color" role="listitem">
-                <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                  <h3 class="text-xl font-bold text-text-primary">
-                    Research Assistant, Communication and Assistive Device Lab (CADL)
-                  </h3>
-                  <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2023-01">
-                    Jan 2023 – Present
-                  </time>
-                </div>
-                <p class="text-text-primary font-medium mb-4">
-                  University at Buffalo
-                </p>
-                <ul class="space-y-3 list-inside list-disc text-text-secondary pl-5" role="list">
-                  <li>Developed AI-driven assistive communication tools using LLMs with RAG for AAC users.</li>
-                  <li>Led development of DEAN (Dynamic, Expressive, Augmented Narrator) to enhance response formulation.</li>
-                  <li>Engineered end-to-end conversational systems (ASR, TTS) and deployed on GCP/institutional servers.</li>
-                  <li>Conducted user engagement research and statistical analyses (ELAN, R) to optimize device usability.</li>
-                </ul>
-              </article>
-            </div>
-
-            <!-- Panel 2: SurgE -->
-            <div id="surge-panel" class="tab-panel hidden scroll-animate" role="tabpanel" tabindex="0" aria-labelledby="surge-tab">
-              <article class="bg-bg-secondary p-6 rounded-lg shadow-sm border border-border-color" role="listitem">
-                <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                  <h3 class="text-xl font-bold text-text-primary">
-                    Research Assistant, Surgery Ergonomics and Human Factors Lab (SurgE)
-                  </h3>
-                  <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2024-04">
-                    Apr 2024 – Present
-                  </time>
-                </div>
-                <p class="text-text-primary font-medium mb-4">
-                  University at Buffalo
-                </p>
-                <ul class="space-y-3 list-inside list-disc text-text-secondary pl-5" role="list">
-                  <li>Built ML pipelines (SVM, tree-based) using time-series biomarker data to detect impairment (~80% accuracy).</li>
-                  <li>Performed statistical analyses (ANOVA, t-tests) and data visualization to inform model improvements.</li>
-                  <li>Developed a custom web app for real-time surgeon eye-tracking data analysis.</li>
-                  <li>Designed pilot studies for refining AI-driven surgical systems.</li>
-                </ul>
-              </article>
-            </div>
+          
+          <!-- Tab Content -->
+          <div class="reveal-on-scroll">
+            <!-- CADL Content -->
+            <article id="tab-cadl" role="tabpanel" aria-labelledby="btn-cadl" class="experience-tab-content active-content bg-bg-secondary p-6 rounded-lg shadow-sm border border-border-color">
+              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                <h3 class="text-xl font-bold text-text-primary">
+                  Research Assistant, Communication and Assistive Device Lab (CADL)
+                </h3>
+                <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2023-01">
+                  Jan 2023 – Present
+                </time>
+              </div>
+              <p class="text-text-primary font-medium mb-4">
+                University at Buffalo
+              </p>
+              <ul class="space-y-3 list-outside list-disc pl-5 text-text-secondary" role="list">
+                <li>Developed AI-driven assistive communication tools using LLMs with RAG for AAC users.</li>
+                <li>Led development of DEAN (Dynamic, Expressive, Augmented Narrator) to enhance response formulation.</li>
+                <li>Engineered end-to-end conversational systems (ASR, TTS) and deployed on GCP/institutional servers.</li>
+                <li>Conducted user engagement research and statistical analyses (ELAN, R) to optimize device usability.</li>
+              </ul>
+            </article>
+            
+            <!-- SurgE Content -->
+            <article id="tab-surge" role="tabpanel" aria-labelledby="btn-surge" class="experience-tab-content bg-bg-secondary p-6 rounded-lg shadow-sm border border-border-color">
+              <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                <h3 class="text-xl font-bold text-text-primary">
+                  Research Assistant, Surgery Ergonomics and Human Factors Lab (SurgE)
+                </h3>
+                <time class="inline-block mt-2 md:mt-0 px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium whitespace-nowrap" datetime="2024-04">
+                  Apr 2024 – Present
+                </time>
+              </div>
+              <p class="text-text-primary font-medium mb-4">
+                University at Buffalo
+              </p>
+              <ul class="space-y-3 list-outside list-disc pl-5 text-text-secondary" role="list">
+                <li>Built ML pipelines (SVM, tree-based) using time-series biomarker data to detect impairment (~80% accuracy).</li>
+                <li>Performed statistical analyses (ANOVA, t-tests) and data visualization to inform model improvements.</li>
+                <li>Developed a custom web app for real-time surgeon eye-tracking data analysis.</li>
+                <li>Designed pilot studies for refining AI-driven surgical systems.</li>
+              </ul>
+            </article>
           </div>
         </div>
-        <!-- === END TABBED LAYOUT === -->
       </div>
     </section>
 
@@ -628,9 +560,9 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid" role="list">
           
           <!-- Project 1 (NEW) -->
-          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col scroll-animate" role="listitem" tabindex="0" data-category="ai">
+          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col reveal-on-scroll" role="listitem" tabindex="0" data-category="ai">
             <div class="flex items-center mb-4">
-              <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
+              <div class="bg-bg-secondary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-robot text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Drone Show Simulation</h3>
@@ -639,17 +571,17 @@
               Developed and tested drone simulation environments in Gazebo to evaluate collision avoidance, sensor fusion, and navigation algorithms for robust flight control.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">PX4</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">Gazebo</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">ROS</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">MAVSDK</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">PX4</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">Gazebo</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">ROS</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">MAVSDK</span>
             </div>
           </article>
 
           <!-- Project 2 -->
-          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col scroll-animate" role="listitem" tabindex="0" data-category="ux">
+          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col reveal-on-scroll" role="listitem" tabindex="0" data-category="ux" style="transition-delay: 100ms;">
             <div class="flex items-center mb-4">
-              <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
+              <div class="bg-bg-secondary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-mobile-screen text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">UI Design for mHealth App</h3>
@@ -658,16 +590,16 @@
               Created low- and high-fidelity prototypes using Figma, conducted user testing, and refined the interface to secure a 3rd-place finish at a business pitch competition.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">Figma</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">UI/UX</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">User Testing</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">Figma</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">UI/UX</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">User Testing</span>
             </div>
           </article>
           
           <!-- Project 3 -->
-          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col scroll-animate" role="listitem" tabindex="0" data-category="ergonomics">
+          <article class="project-card bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color flex flex-col reveal-on-scroll" role="listitem" tabindex="0" data-category="ergonomics" style="transition-delay: 200ms;">
             <div class="flex items-center mb-4">
-              <div class="bg-bg-primary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
+              <div class="bg-bg-secondary p-3 rounded-full mr-4 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-user-tie text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Workplace Ergonomic Analysis</h3>
@@ -676,9 +608,9 @@
               Performed ergonomic assessments (RULA, ACGIH-TLV) to identify musculoskeletal risks and implemented solutions to improve workplace safety and efficiency.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">RULA</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">ACGIH-TLV</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-xs font-medium">Ergonomics</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">RULA</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">ACGIH-TLV</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-xs font-medium">Ergonomics</span>
             </div>
           </article>
         </div>
@@ -709,7 +641,7 @@
         </div>
         
         <div class="max-w-4xl mx-auto space-y-6" id="publications-list" role="list">
-          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors scroll-animate" role="listitem" tabindex="0">
+          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors reveal-on-scroll" role="listitem" tabindex="0">
             <div class="flex items-start">
               <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-book text-primary text-base"></i>
@@ -722,7 +654,7 @@
             </div>
           </article>
           
-          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors scroll-animate" role="listitem" tabindex="0">
+          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors reveal-on-scroll" role="listitem" tabindex="0">
             <div class="flex items-start">
               <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-book text-primary text-base"></i>
@@ -731,13 +663,12 @@
                 <p class="text-text-primary">
                   <strong class="text-text-primary">Higginbotham, J., Golleru, M., Pal, S., et al.</strong> (in press). <em class="text-text-secondary">Developing artificial intelligence applications for human conversation: Perspectives, tools, exploratory analyses</em>. Assistive Technology Outcomes and Benefits (ATOB).
                 </p>
-                <span class="badge-dark inline-block mt-3 px-3 py-1 rounded-full text-xs font-medium" style="background-color: #4a3a1f; color: #fef08a;">In Press</span>
-                <span class="badge-light inline-block mt-3 px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">In Press</span>
+                <span class="inline-block mt-3 px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium dark:bg-yellow-900 dark:text-yellow-200">In Press</span>
               </div>
             </div>
           </article>
           
-          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors scroll-animate" role="listitem" tabindex="0">
+          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors reveal-on-scroll" role="listitem" tabindex="0">
             <div class="flex items-start">
               <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-chalkboard-user text-primary text-base"></i>
@@ -750,7 +681,7 @@
             </div>
           </article>
           
-          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors scroll-animate" role="listitem" tabindex="0">
+          <article class="publication-item bg-bg-secondary p-6 rounded-lg shadow-sm card-hover border border-border-color transition-colors reveal-on-scroll" role="listitem" tabindex="0">
             <div class="flex items-start">
               <div class="bg-bg-primary p-3 rounded-full mr-4 mt-1 flex-shrink-0" aria-hidden="true">
                 <i class="fas fa-chalkboard-user text-primary text-base"></i>
@@ -777,42 +708,42 @@
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           
           <!-- Qualitative Skills -->
-          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color scroll-animate">
+          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color reveal-on-scroll">
             <div class="flex items-center mb-4">
-              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-secondary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-users text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Qualitative Skills</h3>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">User-centered design</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Usability testing</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Survey/Interview methods</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Interdisciplinary collaboration</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Open-source development</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">User-centered design</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Usability testing</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Survey/Interview methods</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Interdisciplinary collaboration</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Open-source development</span>
             </div>
           </section>
           
           <!-- Quantitative Skills -->
-          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color scroll-animate">
+          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color reveal-on-scroll" style="transition-delay: 100ms;">
             <div class="flex items-center mb-4">
-              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-secondary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-chart-line text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Quantitative Skills</h3>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Statistical analysis (R, Python, SAS)</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Time-series modeling</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Data visualization</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Ergonomic assessments (RULA, REBA)</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Statistical analysis (R, Python, SAS)</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Time-series modeling</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Data visualization</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Ergonomic assessments (RULA, REBA)</span>
             </div>
           </section>
           
           <!-- Technical Skills (UPDATED & EXPANDED) -->
-          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color md:col-span-2 scroll-animate">
+          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color md:col-span-2 reveal-on-scroll">
             <div class="flex items-center mb-4">
-              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-secondary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-code text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Technical Skills</h3>
@@ -821,61 +752,61 @@
               <div>
                 <h4 class="font-medium text-text-primary mb-2">Languages & Tools:</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Python</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">R</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">SAS</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Matlab</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Minitab</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Node.js</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Python</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">R</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">SAS</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Matlab</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Minitab</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Node.js</span>
                 </div>
               </div>
               <div>
                 <h4 class="font-medium text-text-primary mb-2">ML/CV & Pose Estimation:</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">PyTorch</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">TensorFlow</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OpenCV</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">YOLO</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OpenPose</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">MediaPipe</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">PyTorch</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">TensorFlow</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">OpenCV</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">YOLO</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">OpenPose</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">MediaPipe</span>
                 </div>
               </div>
               <div>
                 <h4 class="font-medium text-text-primary mb-2">Deployment & Ops:</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Docker</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">GCP</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">WebSockets</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Prometheus</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Grafana</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Docker</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">GCP</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">WebSockets</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Prometheus</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Grafana</span>
                 </div>
               </div>
               <div>
                 <h4 class="font-medium text-text-primary mb-2">Prototyping & Analysis:</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">Figma</span>
-                  <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">ELAN (Video Annotation)</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">Figma</span>
+                  <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">ELAN (Video Annotation)</span>
                 </div>
               </div>
             </div>
           </section>
           
           <!-- Certifications -->
-          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color md:col-span-2 scroll-animate">
+          <section class="bg-bg-primary p-6 rounded-lg shadow-sm card-hover border border-border-color md:col-span-2 reveal-on-scroll">
             <div class="flex items-center mb-4">
-              <div class="bg-bg-primary p-3 rounded-full mr-4" aria-hidden="true">
+              <div class="bg-bg-secondary p-3 rounded-full mr-4" aria-hidden="true">
                 <i class="fas fa-certificate text-primary text-xl"></i>
               </div>
               <h3 class="text-xl font-bold text-text-primary">Certifications</h3>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">CITI: Conflict of Interest</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">CITI: Social & Behavioral Research</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">CITI: Responsible Conduct of Research</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 501</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 511</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 7500</span>
-              <span class="px-3 py-1 bg-bg-primary text-primary rounded-full text-sm font-medium">OSHA 7505</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">CITI: Conflict of Interest</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">CITI: Social & Behavioral Research</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">CITI: Responsible Conduct of Research</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">OSHA 501</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">OSHA 511</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">OSHA 7500</span>
+              <span class="px-3 py-1 bg-bg-secondary text-primary rounded-full text-sm font-medium">OSHA 7505</span>
             </div>
           </section>
           
@@ -894,7 +825,7 @@
           </p>
         </header>
         
-        <div class="max-w-4xl mx-auto bg-bg-secondary rounded-xl shadow-lg p-6 md:p-8 border border-border-color">
+        <div class="max-w-4xl mx-auto bg-bg-secondary rounded-xl shadow-lg p-6 md:p-8 border border-border-color reveal-on-scroll">
           <div class="grid md:grid-cols-2 gap-8">
             
             <!-- Contact Information -->
@@ -1110,259 +1041,333 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    
-    // Check for saved theme preference or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light'); // Default dark is 'dark'
-    htmlElement.setAttribute('data-theme', currentTheme);
-    themeToggle.setAttribute('aria-pressed', currentTheme !== 'light'); // True for dark mode
-    
-    themeToggle.addEventListener('click', () => {
-      const current = htmlElement.getAttribute('data-theme');
-      let newTheme;
+      // --- Theme Toggle Functionality ---
+      const themeToggle = document.getElementById('theme-toggle');
+      const htmlElement = document.documentElement;
       
-      if (current === 'light') {
-        newTheme = 'dark';
-      } else { // 'dark'
-        newTheme = 'light';
+      // Check for saved theme preference or system preference
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      let currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+      htmlElement.setAttribute('data-theme', currentTheme);
+      themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
+      
+      themeToggle.addEventListener('click', () => {
+        const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+        // Re-apply palette for the new theme
+        reapplyActivePalette(newTheme);
+      });
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+          if (!localStorage.getItem('theme')) { // Only apply if user hasn't set a preference
+              const newTheme = e.matches ? 'dark' : 'light';
+              htmlElement.setAttribute('data-theme', newTheme);
+              themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+              reapplyActivePalette(newTheme);
+          }
+      });
+      
+      // --- Mobile Menu Toggle ---
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+          mobileMenu.classList.toggle('hidden');
+        });
       }
       
-      htmlElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      themeToggle.setAttribute('aria-pressed', newTheme !== 'light');
-    });
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (!localStorage.getItem('theme')) { // Only apply if user hasn't set a preference
-            const newTheme = e.matches ? 'dark' : 'light'; // Default dark is 'dark'
-            htmlElement.setAttribute('data-theme', newTheme);
-            themeToggle.setAttribute('aria-pressed', newTheme !== 'light');
-        }
-    });
-    
-    // --- NEW: Scroll Animation Observer ---
-    const scrollElements = document.querySelectorAll('.scroll-animate');
-    
-    const scrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          scrollObserver.unobserve(entry.target); // Stop observing once it's visible
-        }
-      });
-    }, {
-      threshold: 0.1 // Trigger when 10% of the element is visible
-    });
-    
-    scrollElements.forEach(el => {
-      scrollObserver.observe(el);
-    });
-    // --- END: Scroll Animation Observer ---
-
-    // --- NEW: Tab Logic for Experience Section ---
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const targetTab = button.dataset.tab;
-        
-        // Update button active states
-        tabButtons.forEach(btn => {
-          if (btn === button) {
-            btn.classList.add('active-tab');
-            btn.setAttribute('aria-selected', 'true');
-          } else {
-            btn.classList.remove('active-tab');
-            btn.setAttribute('aria-selected', 'false');
-          }
-        });
-        
-        // Show/hide panels
-        tabPanels.forEach(panel => {
-          if (panel.id === `${targetTab}-panel`) {
-            panel.classList.remove('hidden');
-          } else {
-            panel.classList.add('hidden');
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (menuToggle) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenu.classList.add('hidden');
           }
         });
       });
-    });
-    // --- END: Tab Logic ---
-
-    // Project filtering
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filter = button.getAttribute('data-filter');
-        
-        // Update active button
-        filterButtons.forEach(btn => {
-            btn.classList.remove('active', 'bg-primary', 'text-white');
-            btn.classList.add('bg-bg-primary', 'text-text-secondary');
-        });
-        button.classList.add('active', 'bg-primary', 'text-white');
-        button.classList.remove('bg-bg-primary', 'text-text-secondary');
-
-        // Filter projects
-        projectCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
-            card.style.display = 'flex'; // Use flex to maintain layout
-            card.style.animation = 'fadeIn 0.3s ease';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-    
-    // Publication search
-    const searchInput = document.getElementById('publication-search');
-    const publicationItems = document.querySelectorAll('.publication-item');
-    
-    searchInput.addEventListener('input', (e) => {
-      const searchTerm = e.target.value.toLowerCase();
       
-      publicationItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-    
-    // Contact form validation and submission
-    const contactForm = document.getElementById('contact-form-element');
-    
-    // Check if form exists before adding listeners
-    if (contactForm) {
-      const nameInput = document.getElementById('name');
-      const emailInput = document.getElementById('email');
-      const messageInput = document.getElementById('message');
-      const nameError = document.getElementById('name-error');
-      const emailError = document.getElementById('email-error');
-      const messageError = document.getElementById('message-error');
-      
-      function validateForm() {
-        let isValid = true;
-        
-        // Reset errors
-        [nameError, emailError, messageError].forEach(error => {
-          error.textContent = '';
-          error.classList.add('hidden');
-        });
-        [nameInput, emailInput, messageInput].forEach(input => {
-            input.removeAttribute('aria-invalid');
+      // --- Back to Top Button ---
+      const backToTopButton = document.getElementById('back-to-top');
+      if (backToTopButton) {
+        window.addEventListener('scroll', () => {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove('opacity-0', 'invisible');
+            backToTopButton.classList.add('opacity-100', 'visible');
+          } else {
+            backToTopButton.classList.remove('opacity-100', 'visible');
+            backToTopButton.classList.add('opacity-0', 'invisible');
+          }
         });
         
-        // Validate name
-        if (nameInput.value.trim().length < 2) {
-          nameError.textContent = 'Please enter your name';
-          nameError.classList.remove('hidden');
-          nameInput.setAttribute('aria-invalid', 'true');
-          isValid = false;
-        }
-        
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailInput.value)) {
-          emailError.textContent = 'Please enter a valid email address';
-          emailError.classList.remove('hidden');
-          emailInput.setAttribute('aria-invalid', 'true');
-          isValid = false;
-        }
-        
-        // Validate message
-        if (messageInput.value.trim().length < 10) {
-          messageError.textContent = 'Please enter a message (at least 10 characters)';
-          messageError.classList.remove('hidden');
-          messageInput.setAttribute('aria-invalid', 'true');
-          isValid = false;
-        }
-        
-        return isValid; // <-- Restored missing return
+        backToTopButton.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
       }
       
-      // --- Restored Event Listener ---
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+      // --- Scroll Progress Indicator ---
+      const scrollProgress = document.querySelector('.scroll-progress');
+      if (scrollProgress) {
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.pageYOffset;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = (docHeight > 0) ? (scrollTop / docHeight) : 0;
+          scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+        });
+      }
+      
+      // --- Active Navigation Highlighting ---
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      if (sections.length > 0 && navLinks.length > 0) {
+        const observerOptions = {
+          root: null,
+          rootMargin: '-50% 0px -50% 0px', // Trigger at the vertical center of the viewport
+          threshold: 0
+        };
         
-        if (validateForm()) {
-          // Show loading state
-          const submitButton = contactForm.querySelector('button[type="submit"]');
-          const originalText = submitButton.innerHTML;
-          submitButton.disabled = true;
-          submitButton.innerHTML = '<span class="flex items-center justify-center"><i class="fas fa-spinner fa-spin mr-2"></i>Sending...</span>';
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                  link.classList.add('active');
+                }
+              });
+            }
+          });
+        }, observerOptions);
+        
+        sections.forEach(section => observer.observe(section));
+      }
+      
+      // --- Project Filtering ---
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+      
+      if (filterButtons.length > 0 && projectCards.length > 0) {
+        filterButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            
+            // Update active button
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active', 'bg-primary', 'text-white');
+                btn.classList.add('bg-bg-primary', 'text-text-secondary');
+            });
+            button.classList.add('active', 'bg-primary', 'text-white');
+            button.classList.remove('bg-bg-primary', 'text-text-secondary');
+
+            // Filter projects
+            projectCards.forEach(card => {
+              const category = card.getAttribute('data-category');
+              if (filter === 'all' || category === filter) {
+                card.style.display = 'flex'; // Use flex to maintain layout
+                card.style.animation = 'fadeIn 0.3s ease';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+      
+      // --- Publication Search ---
+      const searchInput = document.getElementById('publication-search');
+      const publicationItems = document.querySelectorAll('.publication-item');
+      
+      if (searchInput && publicationItems.length > 0) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
           
-          // Simulate form submission
-          setTimeout(() => {
-            showToast('Thank you! Your message has been sent.', 'success');
-            contactForm.reset();
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
-          }, 1500);
-        } else {
-          showToast('Please fix the errors and try again.', 'error');
-        }
-      });
-    }
-    
-    // Toast notification system
-    function showToast(message, type = 'info') {
+          publicationItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // --- Toast Notification System ---
       const toastContainer = document.getElementById('toast-container');
-      const toast = document.createElement('div');
+      function showToast(message, type = 'info') {
+        if (!toastContainer) return;
+        
+        const toast = document.createElement('div');
+        
+        const icons = {
+          success: 'fa-check-circle',
+          error: 'fa-exclamation-circle',
+          info: 'fa-info-circle'
+        };
+        
+        const bgColors = {
+          success: 'bg-green-500',
+          error: 'bg-red-500',
+          info: 'bg-blue-500'
+        };
+        
+        toast.className = `${bgColors[type]} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-x-full opacity-0`;
+        toast.setAttribute('role', 'alert');
+        toast.innerHTML = `
+          <i class="fas ${icons[type]}" aria-hidden="true"></i>
+          <span>${message}</span>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Animate in
+        setTimeout(() => {
+          toast.classList.remove('translate-x-full', 'opacity-0');
+        }, 100);
+        
+        // Remove after 5 seconds
+        setTimeout(() => {
+          toast.classList.add('translate-x-full', 'opacity-0');
+          setTimeout(() => toast.remove(), 300);
+        }, 5000);
+      }
       
-      const icons = {
-        success: 'fa-check-circle',
-        error: 'fa-exclamation-circle',
-        info: 'fa-info-circle'
-      };
+      // --- Contact Form Validation and Submission ---
+      const contactForm = document.getElementById('contact-form-element');
       
-      const bgColors = {
-        success: 'bg-green-500',
-        error: 'bg-red-500',
-        info: 'bg-blue-500'
-      };
+      if (contactForm) {
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const messageError = document.getElementById('message-error');
+        
+        function validateForm() {
+          let isValid = true;
+          
+          // Reset errors
+          [nameError, emailError, messageError].forEach(error => {
+            if(error) {
+                error.textContent = '';
+                error.classList.add('hidden');
+            }
+          });
+          [nameInput, emailInput, messageInput].forEach(input => {
+              if(input) input.removeAttribute('aria-invalid');
+          });
+          
+          // Validate name
+          if (nameInput && nameInput.value.trim().length < 2) {
+            nameError.textContent = 'Please enter your name';
+            nameError.classList.remove('hidden');
+            nameInput.setAttribute('aria-invalid', 'true');
+            isValid = false;
+          }
+          
+          // Validate email
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (emailInput && !emailRegex.test(emailInput.value)) {
+            emailError.textContent = 'Please enter a valid email address';
+            emailError.classList.remove('hidden');
+            emailInput.setAttribute('aria-invalid', 'true');
+            isValid = false;
+          }
+          
+          // Validate message
+          if (messageInput && messageInput.value.trim().length < 10) {
+            messageError.textContent = 'Please enter a message (at least 10 characters)';
+            messageError.classList.remove('hidden');
+            messageInput.setAttribute('aria-invalid', 'true');
+            isValid = false;
+          }
+          
+          return isValid;
+        }
+        
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          if (validateForm()) {
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="flex items-center justify-center"><i class="fas fa-spinner fa-spin mr-2"></i>Sending...</span>';
+            
+            // Simulate form submission
+            setTimeout(() => {
+              showToast('Thank you! Your message has been sent.', 'success');
+              contactForm.reset();
+              submitButton.disabled = false;
+              submitButton.innerHTML = originalText;
+            }, 1500);
+          } else {
+            showToast('Please fix the errors and try again.', 'error');
+          }
+        });
+      }
       
-      toast.className = `${bgColors[type]} text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 transform transition-all duration-300 translate-x-full opacity-0`;
-      toast.setAttribute('role', 'alert');
-      toast.innerHTML = `
-        <i class="fas ${icons[type]}" aria-hidden="true"></i>
-        <span>${message}</span>
-      `;
+      // --- Scroll-Reveal Animations ---
+      const scrollElements = document.querySelectorAll('.reveal-on-scroll');
       
-      toastContainer.appendChild(toast);
+      if (scrollElements.length > 0) {
+        const scrollObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              // No need to unobserve, let it animate every time
+            } else {
+              // Optional: remove class to re-animate on scroll up
+              // entry.target.classList.remove('is-visible');
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        scrollElements.forEach(el => scrollObserver.observe(el));
+      }
+
+      // --- Experience Tabs ---
+      const tabButtons = document.querySelectorAll('.experience-tab');
+      const tabContents = document.querySelectorAll('.experience-tab-content');
+
+      if(tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            // Deactivate all
+            tabButtons.forEach(btn => {
+              btn.classList.remove('active-tab');
+              btn.setAttribute('aria-selected', 'false');
+            });
+            tabContents.forEach(content => content.classList.remove('active-content'));
+            
+            // Activate clicked
+            button.classList.add('active-tab');
+            button.setAttribute('aria-selected', 'true');
+            const targetContentId = button.getAttribute('aria-controls');
+            const targetContent = document.getElementById(targetContentId);
+            if(targetContent) {
+                targetContent.classList.add('active-content');
+            }
+          });
+        });
+      }
       
-      // Animate in
-      setTimeout(() => {
-        toast.classList.remove('translate-x-full', 'opacity-0');
-      }, 100);
-      
-      // Remove after 5 seconds
-      setTimeout(() => {
-        toast.classList.add('translate-x-full', 'opacity-0');
-        setTimeout(() => toast.remove(), 300);
-      }, 5000);
-    }
-    
-    // --- NEW THEME TESTER SCRIPT ---
-    // document.addEventListener('DOMContentLoaded', () => { // No longer needed, wrapped above
+      // --- NEW THEME TESTER SCRIPT ---
       const root = document.documentElement;
       
       // --- PALETTE DEFINITIONS ---
-      // Define your color palettes here. 
-      // To make a new one, copy a block and change the hex codes.
       const palettes = {
         blue: {
           light: {
@@ -1456,16 +1461,8 @@
       const themeTesterToggle = document.getElementById('theme-tester-toggle');
 
       // Function to apply a color palette
-      function applyPalette(paletteName) {
-        const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-        let palette;
-
-        if (currentTheme === 'light') {
-          palette = palettes[paletteName]['light'];
-        } else {
-          // Apply 'dark' palette variant to 'dark' theme
-          palette = palettes[paletteName]['dark'];
-        }
+      function applyPalette(paletteName, theme) {
+        const palette = palettes[paletteName][theme];
         
         for (const [key, value] of Object.entries(palette)) {
           root.style.setProperty(key, value);
@@ -1487,10 +1484,19 @@
         });
       }
 
+      // Helper function to re-apply palette on theme change
+      function reapplyActivePalette(newTheme) {
+        const activePaletteBtn = document.querySelector('#color-palette-buttons .active-theme-btn');
+        if (activePaletteBtn) {
+          applyPalette(activePaletteBtn.dataset.theme, newTheme);
+        }
+      }
+
       // Add click listeners for color palettes
       colorButtons.forEach(button => {
         button.addEventListener('click', () => {
-          applyPalette(button.dataset.theme);
+          const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+          applyPalette(button.dataset.theme, currentTheme);
         });
       });
       
@@ -1500,34 +1506,26 @@
           applyFont(button.dataset.font);
         });
       });
-
-      // Re-apply palette when light/dark mode is toggled
-      themeToggle.addEventListener('click', () => {
-        // We need a slight delay for the `data-theme` attribute to update
-        setTimeout(() => {
-          const activePaletteBtn = document.querySelector('#color-palette-buttons .active-theme-btn');
-          if (activePaletteBtn) {
-            applyPalette(activePaletteBtn.dataset.theme);
-          }
-        }, 50); // 50ms delay
-      });
       
       // Toggle panel visibility
-      themeTesterToggle.addEventListener('click', () => {
-        const isHidden = themeTesterPanel.classList.toggle('hidden');
-        themeTesterToggle.setAttribute('aria-expanded', !isHidden);
-        if (isHidden) {
-          themeTesterToggle.innerHTML = '<i class="fas fa-palette text-text-secondary"></i>';
-          themeTesterToggle.setAttribute('aria-label', 'Show theme tester panel');
-        } else {
-          themeTesterToggle.innerHTML = '<i class="fas fa-times text-text-secondary"></i>';
-          themeTesterToggle.setAttribute('aria-label', 'Hide theme tester panel');
-        }
-      });
-    // }); // No longer needed, wrapped above
-    // --- END THEME TESTER SCRIPT ---
+      if(themeTesterToggle) {
+        themeTesterToggle.addEventListener('click', () => {
+          const isHidden = themeTesterPanel.classList.toggle('hidden');
+          themeTesterToggle.setAttribute('aria-expanded', !isHidden);
+          if (isHidden) {
+            themeTesterToggle.innerHTML = '<i class="fas fa-palette text-text-secondary"></i>';
+            themeTesterToggle.setAttribute('aria-label', 'Show theme tester panel');
+          } else {
+            themeTesterToggle.innerHTML = '<i class="fas fa-times text-text-secondary"></i>';
+            themeTesterToggle.setAttribute('aria-label', 'Hide theme tester panel');
+          }
+        });
+      }
+      
+      // Initialize palette on load
+      reapplyActivePalette(currentTheme);
 
-    }); // <-- CLOSING BRACKET FOR THE NEW DOMCONTENTLOADED WRAPPER
+    });
   </script>
 </body>
 </html>
