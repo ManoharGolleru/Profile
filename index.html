@@ -265,6 +265,11 @@
       display: block;
     }
     
+    /* --- NEW: Colored Bullets --- */
+    .colored-bullets li::marker {
+      color: var(--primary);
+    }
+    
     /* --- PROJECT MODAL STYLES --- */
     .project-modal-backdrop {
       position: fixed;
@@ -474,7 +479,7 @@
               <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-text-secondary">
                 Researcher in Human Factors & Ergonomics
               </h2>
-              <p class="text-lg text-text-secondary mb-8 leading-relaxed max-w-2xl">
+              <p class="text-lg text-text-primary mb-8 leading-relaxed max-w-2xl">
                 I specialize in Human-Machine Interaction, AI-driven assistive communication, and user-centered design. My work focuses on creating technologies that enhance human capabilities and improve quality of life.
               </p>
               <div class="flex flex-wrap gap-4">
@@ -595,7 +600,7 @@
               <p class="text-text-primary font-medium mb-4">
                 University at Buffalo
               </p>
-              <ul class="space-y-3 list-outside list-disc pl-5 text-text-secondary" role="list">
+              <ul class="space-y-3 list-outside list-disc pl-5 text-text-primary colored-bullets" role="list">
                 <li>Developed AI-driven assistive communication tools using LLMs with RAG for AAC users.</li>
                 <li>Led development of DEAN (Dynamic, Expressive, Augmented Narrator) to enhance response formulation.</li>
                 <li>Engineered end-to-end conversational systems (ASR, TTS) and deployed on GCP/institutional servers.</li>
@@ -616,7 +621,7 @@
               <p class="text-text-primary font-medium mb-4">
                 University at Buffalo
               </p>
-              <ul class="space-y-3 list-outside list-disc pl-5 text-text-secondary" role="list">
+              <ul class="space-y-3 list-outside list-disc pl-5 text-text-primary colored-bullets" role="list">
                 <li>Built ML pipelines (SVM, tree-based) using time-series biomarker data to detect impairment (~80% accuracy).</li>
                 <li>Performed statistical analyses (ANOVA, t-tests) and data visualization to inform model improvements.</li>
                 <li>Developed a custom web app for real-time surgeon eye-tracking data analysis.</li>
@@ -654,7 +659,7 @@
               </div>
               <h3 class="text-xl font-bold text-text-primary">Drone Show Simulation</h3>
             </div>
-            <p class="text-text-secondary mb-4 flex-grow">
+            <p class="text-text-primary mb-4 flex-grow">
               Developed and tested drone simulation environments in Gazebo to evaluate collision avoidance, sensor fusion, and navigation algorithms for robust flight control.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
@@ -679,7 +684,7 @@
               </div>
               <h3 class="text-xl font-bold text-text-primary">UI Design for mHealth App</h3>
             </div>
-            <p class="text-text-secondary mb-4 flex-grow">
+            <p class="text-text-primary mb-4 flex-grow">
               Created low- and high-fidelity prototypes using Figma, conducted user testing, and refined the interface to secure a 3rd-place finish at a business pitch competition.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
@@ -697,7 +702,7 @@
               </div>
               <h3 class="text-xl font-bold text-text-primary">Workplace Ergonomic Analysis</h3>
             </div>
-            <p class="text-text-secondary mb-4 flex-grow">
+            <p class="text-text-primary mb-4 flex-grow">
               Performed ergonomic assessments (RULA, ACGIH-TLV) to identify musculoskeletal risks and implemented solutions to improve workplace safety and efficiency.
             </p>
             <div class="mt-4 flex flex-wrap gap-2" role="list">
