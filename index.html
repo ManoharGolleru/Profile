@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,28 +16,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* --- VARIABLES --- */
+    /* --- VARIABLES (Dark Theme Forced) --- */
     :root {
-      --primary: #ea580c; /* Orange-600 */
-      --primary-hover: #c2410c;
-      --surface: #ffffff;
-      --background: #f3f4f6; /* Light Gray */
-      --sidebar-bg: #ffffff;
-      --text-main: #1f2937; /* Gray-800 */
-      --text-muted: #4b5563; /* Gray-600 */
-      --border: #e5e7eb;
-      --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    }
-    
-    [data-theme="dark"] {
       --primary: #f97316; /* Orange-500 */
       --primary-hover: #fb923c;
-      --surface: #1f2937; /* Gray-800 */
-      --background: #111827; /* Gray-900 */
-      --sidebar-bg: #171717; /* Neutral-900 */
-      --text-main: #f9fafb; /* Gray-50 */
-      --text-muted: #9ca3af; /* Gray-400 */
-      --border: #374151;
+      --surface: #1e293b; /* Slate-800 */
+      --surface-highlight: #334155; /* Slate-700 */
+      --background: #0f172a; /* Slate-900 */
+      --sidebar-bg: #0f172a; 
+      --text-main: #f8fafc; /* Slate-50 */
+      --text-muted: #94a3b8; /* Slate-400 */
+      --border: #334155;
       --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
     }
 
@@ -57,7 +46,7 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      background-image: linear-gradient(90deg, var(--primary), #f59e0b);
+      background-image: linear-gradient(90deg, var(--primary), #fbbf24);
     }
 
     /* Sidebar Styling */
@@ -72,39 +61,35 @@
       border: 1px solid var(--border);
       border-radius: 0.75rem;
       box-shadow: var(--shadow-card);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.2s ease;
     }
     .glass-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       border-color: var(--primary);
+      background: var(--surface-highlight);
     }
 
     /* Navigation Links */
     .nav-item {
-      display: flex; align-items: center; padding: 0.75rem 1rem;
+      display: flex; align-items: center; padding: 0.6rem 1rem;
       margin-bottom: 0.25rem; border-radius: 0.5rem;
       color: var(--text-muted); transition: all 0.2s;
-      font-weight: 500;
+      font-weight: 500; font-size: 0.95rem;
     }
-    .nav-item:hover { background: rgba(234, 88, 12, 0.05); color: var(--primary); }
-    .nav-item.active { background: rgba(234, 88, 12, 0.1); color: var(--primary); font-weight: 600; border-left: 3px solid var(--primary); }
-    [data-theme="dark"] .nav-item:hover { background: rgba(255,255,255,0.05); }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text-main); }
+    .nav-item.active { background: rgba(249, 115, 22, 0.15); color: var(--primary); font-weight: 600; border-left: 3px solid var(--primary); }
 
     /* Experience Tabs */
     .tab-btn {
       position: relative;
       transition: all 0.3s;
       border-bottom: 2px solid transparent;
+      color: var(--text-muted);
     }
+    .tab-btn:hover { color: var(--text-main); }
     .tab-btn.active {
       color: var(--primary);
       border-bottom-color: var(--primary);
-    }
-    .tab-btn.active::after {
-      content: '';
-      position: absolute; bottom: -2px; left: 0; right: 0; height: 2px;
-      background: var(--primary);
     }
     
     /* Bullet points */
@@ -112,13 +97,19 @@
 
     /* Modal Animation */
     .modal-backdrop {
-      background-color: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
     }
     @keyframes modalIn {
       from { opacity: 0; transform: scale(0.95) translate(-50%, -48%); }
       to { opacity: 1; transform: scale(1) translate(-50%, -50%); }
     }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--background); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
   </style>
   
@@ -139,23 +130,22 @@
     }
   </script>
 </head>
-<body class="h-screen overflow-hidden flex transition-colors duration-300">
+<body class="h-screen overflow-hidden flex selection:bg-primary selection:text-white">
 
-  <aside class="hidden md:flex flex-col w-72 h-full sidebar z-20 shadow-xl relative overflow-hidden">
+  <aside class="hidden md:flex flex-col w-64 h-full sidebar z-20 shadow-xl relative overflow-hidden flex-shrink-0">
     
-    <div class="p-8 text-center border-b border-border">
-      <div class="relative w-28 h-28 mx-auto mb-4 group">
+    <div class="p-6 text-center border-b border-border bg-surface/30">
+      <div class="relative w-24 h-24 mx-auto mb-3 group cursor-pointer">
         <div class="absolute inset-0 bg-gradient-to-tr from-primary to-yellow-500 rounded-full blur opacity-40 group-hover:opacity-60 transition duration-500"></div>
         <img 
           src="https://raw.githubusercontent.com/ManoharGolleru/Profile/9e080e6a3459ae9e48a686d4e2657fe02e5b06eb/assets/pic.jpeg" 
-          class="relative w-full h-full rounded-full object-cover border-4 border-surface shadow-lg"
+          class="relative w-full h-full rounded-full object-cover border-2 border-surface shadow-lg"
           alt="Manohar Golleru"
           onerror="this.src='https://placehold.co/128x128/ea580c/ffffff?text=MG'"
         >
       </div>
-      <h1 class="text-xl font-bold text-textMain">Manohar Golleru</h1>
-      <p class="text-sm text-primary font-medium mt-1">PhD Candidate</p>
-      <p class="text-xs text-textMuted">Human Factors & Interaction Design</p>
+      <h1 class="text-lg font-bold text-textMain">Manohar Golleru</h1>
+      <p class="text-xs text-primary font-bold uppercase tracking-wider mt-1">PhD Candidate</p>
       
       <div class="flex justify-center gap-4 mt-4">
         <a href="mailto:manohargolleru@outlook.com" class="text-textMuted hover:text-primary transition"><i class="fas fa-envelope text-lg"></i></a>
@@ -164,20 +154,18 @@
       </div>
     </div>
 
-    <nav class="flex-1 px-4 py-6 overflow-y-auto space-y-1">
-      <a href="#about" class="nav-item active" data-target="about"><i class="fas fa-user w-8 text-center"></i> About</a>
-      <a href="#education" class="nav-item" data-target="education"><i class="fas fa-graduation-cap w-8 text-center"></i> Education</a>
-      <a href="#experience" class="nav-item" data-target="experience"><i class="fas fa-briefcase w-8 text-center"></i> Experience</a>
-      <a href="#projects" class="nav-item" data-target="projects"><i class="fas fa-laptop-code w-8 text-center"></i> Projects</a>
-      <a href="#publications" class="nav-item" data-target="publications"><i class="fas fa-book-open w-8 text-center"></i> Publications</a>
-      <a href="#skills" class="nav-item" data-target="skills"><i class="fas fa-layer-group w-8 text-center"></i> Skills</a>
-      <a href="#contact" class="nav-item" data-target="contact"><i class="fas fa-paper-plane w-8 text-center"></i> Contact</a>
+    <nav class="flex-1 px-3 py-4 overflow-y-auto space-y-1">
+      <a href="#about" class="nav-item active" data-target="about"><i class="fas fa-user w-6 text-center mr-2"></i> About</a>
+      <a href="#education" class="nav-item" data-target="education"><i class="fas fa-graduation-cap w-6 text-center mr-2"></i> Education</a>
+      <a href="#experience" class="nav-item" data-target="experience"><i class="fas fa-briefcase w-6 text-center mr-2"></i> Experience</a>
+      <a href="#projects" class="nav-item" data-target="projects"><i class="fas fa-laptop-code w-6 text-center mr-2"></i> Projects</a>
+      <a href="#publications" class="nav-item" data-target="publications"><i class="fas fa-book-open w-6 text-center mr-2"></i> Research</a>
+      <a href="#skills" class="nav-item" data-target="skills"><i class="fas fa-layer-group w-6 text-center mr-2"></i> Skills</a>
+      <a href="#contact" class="nav-item" data-target="contact"><i class="fas fa-paper-plane w-6 text-center mr-2"></i> Contact</a>
     </nav>
-
-    <div class="p-4 border-t border-border">
-      <button id="theme-toggle" class="w-full py-2 rounded-lg bg-bgMain text-textMuted text-sm font-medium hover:text-primary transition flex items-center justify-center gap-2">
-        <i class="fas fa-adjust"></i> Toggle Theme
-      </button>
+    
+    <div class="p-4 text-xs text-center text-textMuted border-t border-border">
+      &copy; 2025 Manohar Golleru
     </div>
   </aside>
 
@@ -185,92 +173,103 @@
     
     <div id="scroll-progress" class="sticky top-0 w-full z-50"></div>
 
-    <div class="md:hidden sticky top-0 z-30 bg-surface/90 backdrop-blur border-b border-border p-4 flex justify-between items-center">
+    <div class="md:hidden sticky top-0 z-30 bg-bgMain/90 backdrop-blur border-b border-border p-4 flex justify-between items-center">
       <span class="font-bold text-textMain text-lg gradient-text">Manohar Golleru</span>
       <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-textMain p-2"><i class="fas fa-bars text-xl"></i></button>
     </div>
     
     <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 bg-bgMain pt-20 px-6 space-y-4">
-       <button onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="absolute top-4 right-4 text-2xl"><i class="fas fa-times"></i></button>
-       <a href="#about" class="block text-xl font-medium border-b border-border pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
-       <a href="#experience" class="block text-xl font-medium border-b border-border pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Experience</a>
-       <a href="#projects" class="block text-xl font-medium border-b border-border pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Projects</a>
-       <a href="#contact" class="block text-xl font-medium border-b border-border pb-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+       <button onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="absolute top-4 right-4 text-2xl text-textMain"><i class="fas fa-times"></i></button>
+       <a href="#about" class="block text-xl font-medium border-b border-border pb-2 text-textMain" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
+       <a href="#experience" class="block text-xl font-medium border-b border-border pb-2 text-textMain" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Experience</a>
+       <a href="#projects" class="block text-xl font-medium border-b border-border pb-2 text-textMain" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Projects</a>
+       <a href="#contact" class="block text-xl font-medium border-b border-border pb-2 text-textMain" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
     </div>
 
-    <section id="about" class="min-h-[85vh] flex flex-col justify-center px-6 md:px-16 max-w-5xl mx-auto py-12 md:py-20">
+    <section id="about" class="flex flex-col justify-center px-6 md:px-16 max-w-5xl mx-auto py-12 md:py-20">
       <div class="animate-fade-in space-y-6">
+        
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold tracking-wide mb-2 w-fit">
+          <span class="relative flex h-3 w-3 mr-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+          </span>
+          Open for Internships & Research Collaborations
+        </div>
+
         <h1 class="text-4xl md:text-6xl font-bold text-textMain leading-tight">
           Hi, I'm <span class="gradient-text">Manohar Golleru</span>
         </h1>
-        <h2 class="text-2xl md:text-3xl font-semibold text-textMuted">
+        <h2 class="text-xl md:text-2xl text-textMuted font-light">
           Human Factors & Interaction Design Researcher
         </h2>
         
-        <div class="glass-card p-6 md:p-8 bg-surface border-l-4 border-l-primary">
-          <p class="text-lg text-textMain leading-relaxed">
+        <div class="glass-card p-6 md:p-8 border-l-4 border-l-primary">
+          <p class="text-base md:text-lg text-textMain leading-relaxed">
             I study how people interact with machines and intelligent systems, with a focus on human-machine interaction, assistive AI communication, and user-centered design. My work aims to develop technologies that support human abilities, strengthen communication, and meaningfully improve everyday life.
           </p>
         </div>
 
         <div class="flex flex-wrap gap-4 pt-4">
-          <a href="#contact" class="px-8 py-3 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+          <a href="#contact" class="px-6 py-3 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
             Contact Me <i class="fas fa-arrow-right ml-2"></i>
           </a>
-          <a href="#publications" class="px-8 py-3 bg-surface border border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-medium transition-all">
+          <a href="#publications" class="px-6 py-3 bg-surface border border-border text-textMain hover:border-primary hover:text-primary rounded-lg font-medium transition-all">
             View Publications
           </a>
         </div>
       </div>
     </section>
 
-    <section id="education" class="px-6 md:px-16 max-w-6xl mx-auto py-16">
-      <div class="flex items-center mb-10">
-        <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-primary mr-4"><i class="fas fa-graduation-cap text-2xl"></i></div>
-        <h2 class="text-3xl font-bold text-textMain">Education</h2>
+    <section id="education" class="px-6 md:px-16 max-w-6xl mx-auto py-10 md:py-12 border-t border-border/30">
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-bold text-textMain flex items-center">
+          <i class="fas fa-graduation-cap text-primary mr-3"></i> Education
+        </h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="md:col-span-2 glass-card p-8 relative overflow-hidden">
-          <div class="absolute top-0 right-0 p-8 opacity-5"><i class="fas fa-university text-9xl"></i></div>
-          <h3 class="text-2xl font-bold text-textMain">PhD Candidate, Human Factors & Ergonomics</h3>
+        <div class="md:col-span-2 glass-card p-6 md:p-8 relative overflow-hidden">
+          <div class="absolute top-0 right-0 p-6 opacity-5 pointer-events-none"><i class="fas fa-university text-8xl"></i></div>
+          <h3 class="text-xl md:text-2xl font-bold text-textMain">PhD Candidate, Human Factors & Ergonomics</h3>
           <p class="text-primary font-bold text-lg mb-4">University at Buffalo (Expected 2027)</p>
           
           <div class="mt-4 pt-4 border-t border-border">
-            <h4 class="font-bold text-textMain mb-2">Key Research Focus</h4>
-            <p class="text-textMuted leading-relaxed">
-              I explore how humans interact with robots, with a special interest in social norms, behavior modeling, and the dynamics of trust and communication. My work looks at how these interactions can be simulated and studied in VR/XR environments to better understand real-world human-robot relationships and design more intuitive, socially aware robotic systems.
+            <h4 class="font-bold text-textMain mb-2 text-sm uppercase tracking-wide">Key Research Focus</h4>
+            <p class="text-textMuted leading-relaxed text-sm md:text-base">
+              I explore how humans interact with robots, with a special interest in social norms, behavior modeling, and the dynamics of trust and communication. My work looks at how these interactions can be simulated and studied in VR/XR environments.
             </p>
           </div>
         </div>
 
-        <div class="space-y-6">
-          <div class="glass-card p-6">
+        <div class="space-y-4">
+          <div class="glass-card p-5">
             <h3 class="text-lg font-bold text-textMain">Master of Science</h3>
-            <p class="text-sm text-textMuted mb-2">Industrial and Systems Engineering</p>
-            <p class="font-medium text-primary">University at Buffalo (2024)</p>
+            <p class="text-xs text-textMuted mb-2 uppercase">Industrial and Systems Engineering</p>
+            <p class="font-medium text-primary text-sm">University at Buffalo (2024)</p>
           </div>
-          <div class="glass-card p-6">
+          <div class="glass-card p-5">
             <h3 class="text-lg font-bold text-textMain">Bachelor of Technology</h3>
-            <p class="text-sm text-textMuted mb-2">Mechanical Engineering</p>
-            <p class="font-medium text-primary">Amrita Vishwa Vidyapeetham, India</p>
+            <p class="text-xs text-textMuted mb-2 uppercase">Mechanical Engineering</p>
+            <p class="font-medium text-primary text-sm">Amrita Vishwa Vidyapeetham, India</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="px-6 md:px-16 max-w-5xl mx-auto py-16">
-      <div class="flex items-center mb-10">
-        <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-primary mr-4"><i class="fas fa-briefcase text-2xl"></i></div>
-        <h2 class="text-3xl font-bold text-textMain">Research & Analytical Experience</h2>
+    <section id="experience" class="px-6 md:px-16 max-w-5xl mx-auto py-10 md:py-12 border-t border-border/30">
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-bold text-textMain flex items-center">
+          <i class="fas fa-briefcase text-primary mr-3"></i> Experience
+        </h2>
       </div>
 
       <div class="glass-card p-1 overflow-hidden">
-        <div class="flex border-b border-border bg-bgMain/50">
-          <button onclick="switchTab('cadl')" id="btn-cadl" class="tab-btn active flex-1 py-4 font-medium text-textMuted hover:text-primary focus:outline-none transition-colors">
+        <div class="flex border-b border-border bg-surface/50">
+          <button onclick="switchTab('cadl')" id="btn-cadl" class="tab-btn active flex-1 py-4 font-medium hover:text-primary focus:outline-none transition-colors">
             CADL (Assistive AI)
           </button>
-          <button onclick="switchTab('surge')" id="btn-surge" class="tab-btn flex-1 py-4 font-medium text-textMuted hover:text-primary focus:outline-none transition-colors">
+          <button onclick="switchTab('surge')" id="btn-surge" class="tab-btn flex-1 py-4 font-medium hover:text-primary focus:outline-none transition-colors">
             SurgE (Ergonomics)
           </button>
         </div>
@@ -278,28 +277,28 @@
         <div id="tab-cadl" class="p-6 md:p-8 animate-fade-in">
           <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
             <h3 class="text-xl font-bold text-textMain">Research Assistant, Communication and Assistive Device Lab (CADL)</h3>
-            <span class="mt-2 md:mt-0 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-bold">Jan 2023 – Present</span>
+            <span class="mt-2 md:mt-0 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Jan 2023 – Present</span>
           </div>
-          <p class="text-textMain font-medium mb-4">University at Buffalo</p>
-          <ul class="list-disc pl-5 space-y-3 text-textMuted colored-bullets">
+          <p class="text-textMuted font-medium mb-4 text-sm">University at Buffalo</p>
+          <ul class="list-disc pl-5 space-y-2 text-textMuted colored-bullets text-sm md:text-base">
             <li>Built AI-driven assistive communication systems using large language models (LLMs) and RAG frameworks (LightRAG, GraphRAG) for AAC users with ALS and cerebral palsy.</li>
             <li>Created DEAN (Dynamic, Expressive, Augmented Narrator), an LLM-based platform enabling adaptive and expressive message generation.</li>
-            <li>Developed conversational pipelines integrating low-latency ASR (Deepgram Nova 2), neural TTS (Microsoft Neural Speech), and real-time tunneling via Raspberry Pi and Ngrok, with performance monitoring through Prometheus and Grafana.</li>
+            <li>Developed conversational pipelines integrating low-latency ASR (Deepgram Nova 2), neural TTS (Microsoft Neural Speech), and real-time tunneling via Raspberry Pi and Ngrok.</li>
             <li>Ran human-subject studies on AAC-mediated interaction, combining interface design, usability testing, and multimodal analysis using ELAN and R.</li>
-            <li>Contributed to OS-DPI, a Node.js environment supporting AAC interface prototyping, study deployments, and real-time interaction logging.</li>
-            <li>Applied human-centered design methods to improve AAC accessibility while collaborating with interdisciplinary teams across Communication Disorders, Computer Science, and Human Factors.</li>
+            <li>Contributed to OS-DPI, a Node.js environment supporting AAC interface prototyping.</li>
+            <li>Applied human-centered design methods to improve AAC accessibility while collaborating with interdisciplinary teams.</li>
           </ul>
         </div>
 
         <div id="tab-surge" class="p-6 md:p-8 hidden">
           <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
             <h3 class="text-xl font-bold text-textMain">Research Assistant, Surgery Ergonomics and Human Factors Lab (SurgE)</h3>
-            <span class="mt-2 md:mt-0 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-bold">Apr 2024 – Present</span>
+            <span class="mt-2 md:mt-0 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Apr 2024 – Present</span>
           </div>
-          <p class="text-textMain font-medium mb-4">University at Buffalo</p>
-          <ul class="list-disc pl-5 space-y-3 text-textMuted colored-bullets">
+          <p class="text-textMuted font-medium mb-4 text-sm">University at Buffalo</p>
+          <ul class="list-disc pl-5 space-y-2 text-textMuted colored-bullets text-sm md:text-base">
             <li>Built machine learning pipelines (SVM, tree-based models) using time-series biomarker data to detect cannabis and alcohol related impairment with ~80% accuracy.</li>
-            <li>Conducted statistical analyses (ANOVA, t-tests) and created data visualizations to guide model refinement and feature selection.</li>
+            <li>Conducted statistical analyses (ANOVA, t-tests) and created data visualizations to guide model refinement.</li>
             <li>Developed a custom web application for real-time surgeon eye-tracking data processing and analysis.</li>
             <li>Designed pilot studies examining differences in surgeon gaze patterns to inform the development of AI-assisted surgical systems.</li>
           </ul>
@@ -307,195 +306,197 @@
       </div>
     </section>
 
-    <section id="projects" class="px-6 md:px-16 max-w-6xl mx-auto py-16">
-      <div class="flex items-center mb-10">
-        <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-primary mr-4"><i class="fas fa-laptop-code text-2xl"></i></div>
-        <h2 class="text-3xl font-bold text-textMain">Projects</h2>
-      </div>
-      
-      <div class="flex flex-wrap gap-2 mb-8" id="project-filters">
-        <button class="px-4 py-2 rounded-full text-sm font-medium bg-primary text-white transition-colors" onclick="filterProjects('all', this)">All</button>
-        <button class="px-4 py-2 rounded-full text-sm font-medium bg-surface text-textMuted border border-border hover:bg-primary hover:text-white transition-colors" onclick="filterProjects('ai', this)">AI/ML</button>
-        <button class="px-4 py-2 rounded-full text-sm font-medium bg-surface text-textMuted border border-border hover:bg-primary hover:text-white transition-colors" onclick="filterProjects('ux', this)">UX Design</button>
+    <section id="projects" class="px-6 md:px-16 max-w-6xl mx-auto py-10 md:py-12 border-t border-border/30">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-textMain flex items-center">
+          <i class="fas fa-laptop-code text-primary mr-3"></i> Projects
+        </h2>
+        
+        <div class="flex gap-2" id="project-filters">
+          <button class="px-3 py-1 rounded-md text-xs font-medium bg-primary text-white transition-colors" onclick="filterProjects('all', this)">All</button>
+          <button class="px-3 py-1 rounded-md text-xs font-medium bg-surface text-textMuted border border-border hover:text-primary transition-colors" onclick="filterProjects('ai', this)">AI/ML</button>
+          <button class="px-3 py-1 rounded-md text-xs font-medium bg-surface text-textMuted border border-border hover:text-primary transition-colors" onclick="filterProjects('ux', this)">UX</button>
+        </div>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
         
         <article class="glass-card p-6 flex flex-col h-full project-item" data-category="ai">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center">
-              <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4"><i class="fas fa-hands-helping text-xl"></i></div>
-              <h3 class="text-xl font-bold text-textMain">Open-Source AAC</h3>
+              <div class="p-2 rounded-lg bg-blue-900/30 text-blue-400 mr-3"><i class="fas fa-hands-helping"></i></div>
+              <h3 class="text-lg font-bold text-textMain">Open-Source AAC</h3>
             </div>
-            <a href="https://github.com/UNC-Project-Open-AAC/OS-DPI" target="_blank" class="text-textMuted hover:text-primary transition"><i class="fab fa-github text-2xl"></i></a>
+            <a href="https://github.com/UNC-Project-Open-AAC/OS-DPI" target="_blank" class="text-textMuted hover:text-primary transition"><i class="fab fa-github text-xl"></i></a>
           </div>
-          <p class="text-textMuted mb-4 flex-grow">
+          <p class="text-textMuted mb-4 flex-grow text-sm leading-relaxed">
             Contributed to OS-DPI, an open-source AAC research platform, by implementing emotive TTS, in-built ASR, and location-aware LLM responses.
           </p>
           <div class="flex flex-wrap gap-2 mt-auto">
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">Open Source</span>
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">AAC</span>
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">Node.js</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">Open Source</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">Node.js</span>
           </div>
         </article>
 
-        <article class="glass-card p-6 flex flex-col h-full project-item cursor-pointer hover:border-primary" onclick="openModal('drone-modal')" data-category="ai">
+        <article class="glass-card p-6 flex flex-col h-full project-item cursor-pointer group" onclick="toggleModal(true)" data-category="ai">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center">
-              <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4"><i class="fas fa-robot text-xl"></i></div>
-              <h3 class="text-xl font-bold text-textMain">Drone Show Simulation</h3>
+              <div class="p-2 rounded-lg bg-green-900/30 text-green-400 mr-3"><i class="fas fa-robot"></i></div>
+              <h3 class="text-lg font-bold text-textMain group-hover:text-primary transition-colors">Drone Show Simulation</h3>
             </div>
-            <i class="fas fa-expand-alt text-textMuted"></i>
+            <i class="fas fa-expand-alt text-textMuted group-hover:text-primary"></i>
           </div>
-          <p class="text-textMuted mb-4 flex-grow">
+          <p class="text-textMuted mb-4 flex-grow text-sm leading-relaxed">
             Developed and tested drone simulation environments in Gazebo to evaluate collision avoidance, sensor fusion, and navigation algorithms for robust flight control.
           </p>
           <div class="flex flex-wrap gap-2 mt-auto mb-4">
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">PX4</span>
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">Gazebo</span>
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">Python</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">PX4</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">Gazebo</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">Python</span>
           </div>
-          <div class="text-primary font-bold text-sm border-t border-border pt-4">
+          <div class="text-primary font-bold text-xs uppercase tracking-wide border-t border-border pt-3">
             View Case Study <i class="fas fa-arrow-right ml-1"></i>
           </div>
         </article>
 
         <article class="glass-card p-6 flex flex-col h-full project-item" data-category="ux">
           <div class="flex items-center mb-4">
-            <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4"><i class="fas fa-mobile-screen text-xl"></i></div>
-            <h3 class="text-xl font-bold text-textMain">UI Design for mHealth App</h3>
+            <div class="p-2 rounded-lg bg-purple-900/30 text-purple-400 mr-3"><i class="fas fa-mobile-screen"></i></div>
+            <h3 class="text-lg font-bold text-textMain">UI Design for mHealth App</h3>
           </div>
-          <p class="text-textMuted mb-4 flex-grow">
+          <p class="text-textMuted mb-4 flex-grow text-sm leading-relaxed">
             Created low and high fidelity prototypes using Figma, conducted user testing, and refined the interface to secure a 3rd-place finish at a business pitch competition.
           </p>
           <div class="flex flex-wrap gap-2 mt-auto">
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">Figma</span>
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">UI/UX</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">Figma</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">UI/UX</span>
           </div>
         </article>
 
         <article class="glass-card p-6 flex flex-col h-full project-item" data-category="ergonomics">
           <div class="flex items-center mb-4">
-            <div class="p-3 rounded-full bg-red-100 text-red-600 mr-4"><i class="fas fa-user-tie text-xl"></i></div>
-            <h3 class="text-xl font-bold text-textMain">Workplace Ergonomics</h3>
+            <div class="p-2 rounded-lg bg-red-900/30 text-red-400 mr-3"><i class="fas fa-user-tie"></i></div>
+            <h3 class="text-lg font-bold text-textMain">Workplace Ergonomics</h3>
           </div>
-          <p class="text-textMuted mb-4 flex-grow">
+          <p class="text-textMuted mb-4 flex-grow text-sm leading-relaxed">
             Performed ergonomic assessments (RULA, ACGIH-TLV) to identify musculoskeletal risks and implemented solutions to improve workplace safety and efficiency.
           </p>
           <div class="flex flex-wrap gap-2 mt-auto">
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">RULA</span>
-            <span class="px-3 py-1 bg-bgMain rounded-full text-xs font-medium text-textMain">ACGIH-TLV</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">RULA</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-medium text-textMuted">ACGIH-TLV</span>
           </div>
         </article>
 
       </div>
     </section>
 
-    <section id="publications" class="px-6 md:px-16 max-w-6xl mx-auto py-16">
-      <div class="flex items-center mb-10">
-        <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-primary mr-4"><i class="fas fa-book-open text-2xl"></i></div>
-        <h2 class="text-3xl font-bold text-textMain">Publications & Presentations</h2>
+    <section id="publications" class="px-6 md:px-16 max-w-6xl mx-auto py-10 md:py-12 border-t border-border/30">
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-bold text-textMain flex items-center">
+          <i class="fas fa-book-open text-primary mr-3"></i> Publications & Presentations
+        </h2>
       </div>
 
-      <div class="space-y-4">
-        <div class="glass-card p-6 flex items-start">
-           <i class="fas fa-book text-primary mt-1 mr-4"></i>
-           <p class="text-textMain"><strong class="text-textMain">Golleru, M.</strong> (2024). <em class="text-textMuted">Enhancing engagement and interaction in augmentative and alternative communication (AAC): A comparative study on the impact of front-facing partner display in SGD-mediated conversations.</em> ProQuest Dissertations & Theses.</p>
+      <div class="grid gap-4">
+        <div class="glass-card p-5 flex items-start hover:border-l-4 hover:border-l-primary transition-all">
+           <i class="fas fa-book text-primary mt-1 mr-4 text-sm"></i>
+           <p class="text-textMain text-sm"><strong class="text-white">Golleru, M.</strong> (2024). <em class="text-textMuted">Enhancing engagement and interaction in augmentative and alternative communication (AAC): A comparative study on the impact of front-facing partner display in SGD-mediated conversations.</em> ProQuest Dissertations & Theses.</p>
         </div>
-        <div class="glass-card p-6 flex items-start">
-           <i class="fas fa-book text-primary mt-1 mr-4"></i>
-           <p class="text-textMain"><strong class="text-textMain">Higginbotham, J., Golleru, M., Pal, S., et al.</strong> (2025). <em class="text-textMuted">Developing Artificial Intelligence Applications for Human Conversation: Perspectives, Tools, Exploratory Analyses.</em> Assistive Technology Outcomes & Benefits (ATOB), 19.</p>
+        <div class="glass-card p-5 flex items-start hover:border-l-4 hover:border-l-primary transition-all">
+           <i class="fas fa-book text-primary mt-1 mr-4 text-sm"></i>
+           <p class="text-textMain text-sm"><strong class="text-white">Higginbotham, J., Golleru, M., Pal, S., et al.</strong> (2025). <em class="text-textMuted">Developing Artificial Intelligence Applications for Human Conversation: Perspectives, Tools, Exploratory Analyses.</em> Assistive Technology Outcomes & Benefits (ATOB), 19.</p>
         </div>
-        <div class="glass-card p-6 flex items-start">
-           <i class="fas fa-chalkboard-user text-primary mt-1 mr-4"></i>
-           <p class="text-textMain"><strong class="text-textMain">Conference Presentation:</strong> <em class="text-textMuted">Enhancing engagement and interaction in augmentative and alternative communication (AAC)...</em> ASPIRE HFES 68th International Annual Meeting, Phoenix, AZ, 2024.</p>
+        <div class="glass-card p-5 flex items-start hover:border-l-4 hover:border-l-primary transition-all">
+           <i class="fas fa-chalkboard-user text-primary mt-1 mr-4 text-sm"></i>
+           <p class="text-textMain text-sm"><strong class="text-white">Conference Presentation:</strong> <em class="text-textMuted">Enhancing engagement and interaction in augmentative and alternative communication (AAC)...</em> ASPIRE HFES 68th International Annual Meeting, Phoenix, AZ, 2024.</p>
         </div>
-        <div class="glass-card p-6 flex items-start">
-           <i class="fas fa-chalkboard-user text-primary mt-1 mr-4"></i>
-           <p class="text-textMain"><strong class="text-textMain">Conference Presentation:</strong> <em class="text-textMuted">Conversational artificial intelligence: Promises and current realities.</em> Assistive Technology Industry Association Conference, Orlando, FL, 2024.</p>
+        <div class="glass-card p-5 flex items-start hover:border-l-4 hover:border-l-primary transition-all">
+           <i class="fas fa-chalkboard-user text-primary mt-1 mr-4 text-sm"></i>
+           <p class="text-textMain text-sm"><strong class="text-white">Conference Presentation:</strong> <em class="text-textMuted">Conversational artificial intelligence: Promises and current realities.</em> Assistive Technology Industry Association Conference, Orlando, FL, 2024.</p>
         </div>
       </div>
     </section>
 
-    <section id="skills" class="px-6 md:px-16 max-w-6xl mx-auto py-16">
-      <div class="flex items-center mb-10">
-        <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-primary mr-4"><i class="fas fa-tools text-2xl"></i></div>
-        <h2 class="text-3xl font-bold text-textMain">Skills & Certifications</h2>
+    <section id="skills" class="px-6 md:px-16 max-w-6xl mx-auto py-10 md:py-12 border-t border-border/30">
+      <div class="flex items-center mb-8">
+        <h2 class="text-2xl font-bold text-textMain flex items-center">
+          <i class="fas fa-tools text-primary mr-3"></i> Skills & Certifications
+        </h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-6">
         
         <div class="glass-card p-6">
-          <h3 class="font-bold text-textMain mb-4 flex items-center"><i class="fas fa-users text-primary mr-2"></i> Qualitative Skills</h3>
+          <h3 class="font-bold text-textMain mb-4 flex items-center text-sm uppercase tracking-wide"><i class="fas fa-users text-primary mr-2"></i> Qualitative</h3>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">User-centered design</span>
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Usability testing</span>
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Survey/Interview methods</span>
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Interdisciplinary collaboration</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">User-centered design</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Usability testing</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Survey/Interview methods</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Interdisciplinary collaboration</span>
           </div>
         </div>
 
         <div class="glass-card p-6">
-          <h3 class="font-bold text-textMain mb-4 flex items-center"><i class="fas fa-chart-line text-primary mr-2"></i> Quantitative Skills</h3>
+          <h3 class="font-bold text-textMain mb-4 flex items-center text-sm uppercase tracking-wide"><i class="fas fa-chart-line text-primary mr-2"></i> Quantitative</h3>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Statistical analysis (R, Python, SAS)</span>
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Time-series modeling</span>
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Data visualization</span>
-            <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Ergonomic assessments (RULA)</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Statistical analysis (R, Python, SAS)</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Time-series modeling</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Data visualization</span>
+            <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Ergonomic assessments (RULA)</span>
           </div>
         </div>
 
         <div class="glass-card p-6 md:col-span-2">
-          <h3 class="font-bold text-textMain mb-4 flex items-center"><i class="fas fa-code text-primary mr-2"></i> Technical Skills</h3>
+          <h3 class="font-bold text-textMain mb-4 flex items-center text-sm uppercase tracking-wide"><i class="fas fa-code text-primary mr-2"></i> Technical</h3>
           <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 class="text-sm font-semibold text-textMain mb-2">Languages & Tools</h4>
+              <h4 class="text-xs font-semibold text-textMain mb-2 opacity-70">Languages & Tools</h4>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Python</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">R</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">SAS</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Matlab</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">Node.js</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Python</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">R</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">SAS</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Matlab</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">Node.js</span>
               </div>
             </div>
             <div>
-              <h4 class="text-sm font-semibold text-textMain mb-2">ML/CV & Pose Estimation</h4>
+              <h4 class="text-xs font-semibold text-textMain mb-2 opacity-70">ML/CV & Pose Estimation</h4>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">PyTorch</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">TensorFlow</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">OpenCV</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">YOLO</span>
-                <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">MediaPipe</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">PyTorch</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">TensorFlow</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">OpenCV</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">YOLO</span>
+                <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">MediaPipe</span>
               </div>
             </div>
           </div>
         </div>
 
         <div class="glass-card p-6 md:col-span-2">
-          <h3 class="font-bold text-textMain mb-4 flex items-center"><i class="fas fa-certificate text-primary mr-2"></i> Certifications</h3>
+          <h3 class="font-bold text-textMain mb-4 flex items-center text-sm uppercase tracking-wide"><i class="fas fa-certificate text-primary mr-2"></i> Certifications</h3>
           <div class="flex flex-wrap gap-2">
-             <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">CITI: Conflict of Interest</span>
-             <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">CITI: Social & Behavioral Research</span>
-             <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">OSHA 501</span>
-             <span class="px-3 py-1 bg-bgMain rounded-lg text-sm text-textMuted">OSHA 511</span>
+             <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">CITI: Conflict of Interest</span>
+             <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">CITI: Social & Behavioral Research</span>
+             <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">OSHA 501</span>
+             <span class="px-2 py-1 bg-surface border border-border rounded text-xs text-textMuted">OSHA 511</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <section id="contact" class="px-6 md:px-16 max-w-4xl mx-auto py-16 mb-12">
-      <div class="glass-card p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-textMain mb-4 text-center">Get In Touch</h2>
-        <p class="text-textMuted text-center mb-8">I'm always open to discussing new projects, research opportunities, or potential collaborations.</p>
+    <section id="contact" class="px-6 md:px-16 max-w-4xl mx-auto py-10 md:py-12 mb-12 border-t border-border/30">
+      <div class="glass-card p-8 md:p-10">
+        <h2 class="text-2xl font-bold text-textMain mb-2 text-center">Get In Touch</h2>
+        <p class="text-textMuted text-center mb-8 text-sm">Open to discussing new projects, research opportunities, or potential collaborations.</p>
         
         <form action="https://formspree.io/f/xjkjqgjj" method="POST" class="space-y-4">
           <div class="grid md:grid-cols-2 gap-4">
-            <input type="text" name="name" placeholder="Name" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition" required>
-            <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition" required>
+            <input type="text" name="name" placeholder="Name" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition text-sm" required>
+            <input type="email" name="email" placeholder="Email" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition text-sm" required>
           </div>
-          <input type="text" name="subject" placeholder="Subject" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition">
-          <textarea name="message" rows="4" placeholder="Message" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition" required></textarea>
+          <input type="text" name="subject" placeholder="Subject" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition text-sm">
+          <textarea name="message" rows="4" placeholder="Message" class="w-full p-3 rounded-lg bg-bgMain border border-border text-textMain focus:border-primary focus:ring-1 focus:ring-primary outline-none transition text-sm" required></textarea>
           <button type="submit" class="w-full py-3 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-transform hover:scale-[1.01] flex justify-center items-center">
             Send Message <i class="fas fa-paper-plane ml-2"></i>
           </button>
@@ -503,66 +504,52 @@
       </div>
     </section>
 
+    <button id="back-to-top" onclick="document.getElementById('main-scroll').scrollTo(0,0)" class="fixed bottom-6 right-6 p-3 bg-primary text-white rounded-full shadow-lg hover:bg-primary-hover transition-all opacity-0 pointer-events-none z-40">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
   </main>
 
-  <div id="drone-modal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="document.getElementById('drone-modal').classList.add('hidden')"></div>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-3xl bg-surface rounded-xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col modal-content">
+  <div id="drone-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center">
+    <div class="absolute inset-0 modal-backdrop" onclick="toggleModal(false)"></div>
+    <div class="relative w-11/12 max-w-4xl bg-surface rounded-xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col modal-content border border-border">
       <div class="p-4 border-b border-border flex justify-between items-center bg-bgMain">
-        <h3 class="text-xl font-bold text-textMain">Case Study: Drone Show Simulation</h3>
-        <button onclick="document.getElementById('drone-modal').classList.add('hidden')" class="text-textMuted hover:text-primary text-2xl">&times;</button>
+        <h3 class="text-lg font-bold text-textMain">Case Study: Drone Show Simulation</h3>
+        <button onclick="toggleModal(false)" class="text-textMuted hover:text-primary text-2xl px-2">&times;</button>
       </div>
-      <div class="p-8 overflow-y-auto">
-        <h3 class="text-xl font-semibold text-textMain mb-2">Motivation / The "Why"</h3>
-        <p class="text-textMuted mb-6 leading-relaxed">
-          Modern drone research often requires two things that don't mix well: high-level formation planning and low-level manual control. Existing tools usually focus on one or the other. This project bridges that gap, creating a single platform to rapidly test formation algorithms while still letting the researcher manually override or fine-tune individual drones.
+      <div class="p-6 md:p-8 overflow-y-auto">
+        <h3 class="text-lg font-semibold text-textMain mb-2">Motivation</h3>
+        <p class="text-textMuted mb-6 leading-relaxed text-sm">
+          Modern drone research often requires two things that don't mix well: high-level formation planning and low-level manual control. This project bridges that gap, creating a single platform to rapidly test formation algorithms while still letting the researcher manually override or fine-tune individual drones.
         </p>
 
-        <h3 class="text-xl font-semibold text-textMain mb-2">What I Did</h3>
-        <ul class="list-disc list-outside pl-5 text-textMuted space-y-2 mb-6 leading-relaxed">
-           <li><strong class="text-textMain">Web Interface:</strong> I built a Flask-based web UI that serves as the mission control, allowing for both formation-based and manual control.</li>
-           <li><strong class="text-textMain">Image-to-Formation Pipeline:</strong> I developed a computer vision pipeline using OpenCV that lets a user upload a 2D image (e.g., a triangle). My code processes the image, identifies the key contour points, and maps them to a set of 3D GPS waypoints for the drone swarm.</li>
-           <li><strong class="text-textMain">Simulation Backend:</strong> I integrated the PX4 Autopilot SITL (Software-in-the-Loop) with the Gazebo 3D simulation environment to create a realistic physics sandbox.</li>
+        <h3 class="text-lg font-semibold text-textMain mb-2">What I Did</h3>
+        <ul class="list-disc list-outside pl-5 text-textMuted space-y-2 mb-6 leading-relaxed text-sm">
+           <li><strong class="text-textMain">Web Interface:</strong> Built a Flask-based web UI serving as mission control.</li>
+           <li><strong class="text-textMain">CV Pipeline:</strong> Developed OpenCV pipeline to map 2D images (like a triangle) into 3D GPS waypoints.</li>
+           <li><strong class="text-textMain">Simulation Backend:</strong> Integrated PX4 Autopilot SITL with Gazebo 3D simulation for realistic physics.</li>
         </ul>
         
-        <div class="mt-6">
-           <a href="https://www.youtube.com/watch?v=djIwRS4VLt8" target="_blank" class="inline-flex items-center px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-primary-hover transition-colors">
-              Watch the Demo <i class="fas fa-external-link-alt text-xs ml-2"></i>
-           </a>
+        <h3 class="text-lg font-semibold text-textMain mb-4">Demo Video</h3>
+        <div class="aspect-video w-full bg-black rounded-lg overflow-hidden border border-border">
+          <iframe 
+            class="w-full h-full" 
+            src="https://www.youtube.com/embed/djIwRS4VLt8" 
+            title="Drone Simulation Demo"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // --- Theme Logic ---
-    const html = document.documentElement;
-    const themeBtn = document.getElementById('theme-toggle');
-    
-    // Check saved preference
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      html.setAttribute('data-theme', 'dark');
-      html.classList.add('dark');
-    } else {
-      html.setAttribute('data-theme', 'light');
-      html.classList.remove('dark');
-    }
-
-    themeBtn.addEventListener('click', () => {
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      const nextTheme = isDark ? 'light' : 'dark';
-      html.setAttribute('data-theme', nextTheme);
-      if(nextTheme === 'dark') html.classList.add('dark'); else html.classList.remove('dark');
-      localStorage.theme = nextTheme;
-    });
-
     // --- Tab Switcher ---
     window.switchTab = function(tabName) {
-      // Buttons
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`btn-${tabName}`).classList.add('active');
-      
-      // Content
       document.getElementById('tab-cadl').classList.add('hidden');
       document.getElementById('tab-surge').classList.add('hidden');
       document.getElementById(`tab-${tabName}`).classList.remove('hidden');
@@ -570,16 +557,13 @@
 
     // --- Project Filtering ---
     window.filterProjects = function(category, btn) {
-        // Reset buttons
         document.querySelectorAll('#project-filters button').forEach(b => {
             b.classList.remove('bg-primary', 'text-white');
             b.classList.add('bg-surface', 'text-textMuted');
         });
-        // Active button
         btn.classList.remove('bg-surface', 'text-textMuted');
         btn.classList.add('bg-primary', 'text-white');
 
-        // Filter items
         const items = document.querySelectorAll('.project-item');
         items.forEach(item => {
             if(category === 'all' || item.dataset.category === category) {
@@ -591,11 +575,24 @@
         });
     };
 
-    // --- Scroll Spy & Progress ---
+    // --- Modal Logic (Fixes Fullscreen & Trigger) ---
+    window.toggleModal = function(show) {
+      const modal = document.getElementById('drone-modal');
+      if(show) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+      } else {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    };
+
+    // --- Scroll Spy & Progress & Back-to-Top ---
     const mainScroll = document.getElementById('main-scroll');
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-item');
     const progressBar = document.getElementById('scroll-progress');
+    const backToTop = document.getElementById('back-to-top');
 
     mainScroll.addEventListener('scroll', () => {
       // Progress Bar
@@ -604,11 +601,18 @@
       const scrolled = (scrollTop / scrollHeight) * 100;
       progressBar.style.width = scrolled + "%";
 
+      // Back to Top
+      if(scrollTop > 400) {
+        backToTop.classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        backToTop.classList.add('opacity-0', 'pointer-events-none');
+      }
+
       // Scroll Spy
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (scrollTop >= (sectionTop - 150)) {
+        if (scrollTop >= (sectionTop - 100)) { // Adjusted offset for tighter layout
           current = section.getAttribute('id');
         }
       });
@@ -621,9 +625,9 @@
       });
     });
     
-    // Modal Close on Escape
+    // Escape key to close modal
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') document.getElementById('drone-modal').classList.add('hidden');
+        if (e.key === 'Escape') toggleModal(false);
     });
 
   </script>
