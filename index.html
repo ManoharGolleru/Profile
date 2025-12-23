@@ -16,18 +16,24 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* --- VARIABLES (Dark Theme Forced) --- */
+    /* --- VARIABLES (TRUE BLACK / NEUTRAL THEME) --- */
     :root {
       --primary: #f97316; /* Orange-500 */
       --primary-hover: #fb923c;
-      --surface: #1e293b; /* Slate-800 */
-      --surface-highlight: #334155; /* Slate-700 */
-      --background: #0f172a; /* Slate-900 */
-      --sidebar-bg: #0f172a; 
-      --text-main: #f8fafc; /* Slate-50 */
-      --text-muted: #94a3b8; /* Slate-400 */
-      --border: #334155;
-      --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      
+      /* --- COLOR PALETTE (No Blue Undertones) --- */
+      --background: #000000; /* Pure Black */
+      --sidebar-bg: #000000;
+      
+      --surface: #0a0a0a; /* Neutral 950 (Very dark gray) */
+      --surface-highlight: #171717; /* Neutral 900 */
+      
+      --text-main: #ededed; /* Neutral 100 */
+      --text-muted: #a3a3a3; /* Neutral 400 */
+      
+      --border: #262626; /* Neutral 800 */
+      
+      --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.9);
     }
 
     /* --- UTILITIES --- */
@@ -36,9 +42,10 @@
     
     /* Scroll Progress Bar */
     #scroll-progress {
-      position: absolute; top: 0; left: 0; height: 3px; 
+      position: absolute; top: 0; left: 0; height: 2px; 
       background: var(--primary); width: 0%; z-index: 50;
       transition: width 0.1s;
+      box-shadow: 0 0 10px var(--primary); /* Glow effect */
     }
 
     /* Gradient Text */
@@ -76,8 +83,8 @@
       color: var(--text-muted); transition: all 0.2s;
       font-weight: 500; font-size: 0.95rem;
     }
-    .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text-main); }
-    .nav-item.active { background: rgba(249, 115, 22, 0.15); color: var(--primary); font-weight: 600; border-left: 3px solid var(--primary); }
+    .nav-item:hover { background: #171717; color: var(--text-main); }
+    .nav-item.active { background: rgba(249, 115, 22, 0.1); color: var(--primary); font-weight: 600; border-left: 3px solid var(--primary); }
 
     /* Experience Tabs */
     .tab-btn {
@@ -97,7 +104,7 @@
 
     /* Modal Animation */
     .modal-backdrop {
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: rgba(0, 0, 0, 0.9);
       backdrop-filter: blur(5px);
     }
     @keyframes modalIn {
@@ -108,10 +115,10 @@
     /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--background); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-    /* --- SNOW EFFECT CSS --- */
+    /* --- SNOW CSS --- */
     .snowflake {
       position: fixed;
       top: -10px;
@@ -120,7 +127,7 @@
       font-family: Arial, sans-serif;
       text-shadow: 0 0 5px #000;
       user-select: none;
-      pointer-events: none; /* Crucial: Allows clicking through snow */
+      pointer-events: none; /* Allows clicking through snow */
       z-index: 9999;
       animation-name: fall;
       animation-timing-function: linear;
@@ -154,7 +161,7 @@
 
   <aside class="hidden md:flex flex-col w-64 h-full sidebar z-20 shadow-xl relative overflow-hidden flex-shrink-0">
     
-    <div class="p-6 text-center border-b border-border bg-surface/30">
+    <div class="p-6 text-center border-b border-border">
       <div class="relative w-24 h-24 mx-auto mb-3 group cursor-pointer">
         <div class="absolute inset-0 bg-gradient-to-tr from-primary to-yellow-500 rounded-full blur opacity-40 group-hover:opacity-60 transition duration-500"></div>
         <img 
@@ -566,41 +573,38 @@
   </div>
 
   <script>
-    // --- Snow Effect (Subtle & Performance Optimized) ---
+    // --- SNOW SETTINGS ---
+    // Change numbers below to adjust snow
+    const SNOW_SETTINGS = {
+        count: 200,    // Higher = More snow (Max ~300 recommended)
+        speed: 100,    // Lower = Faster generation of flakes (ms)
+        opacity: 0.5,  // 0.1 to 1.0 (How visible they are)
+    };
+
+    // --- Snow Effect Logic ---
     document.addEventListener('DOMContentLoaded', () => {
       const snowContainer = document.body;
       
       function createSnowflake() {
-        // Limit total flakes to prevent lag
-        if (document.getElementsByClassName('snowflake').length > 50) return;
+        if (document.getElementsByClassName('snowflake').length > SNOW_SETTINGS.count) return;
         
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
         snowflake.innerHTML = '•'; 
-        
-        // Random horizontal start
         snowflake.style.left = Math.random() * 100 + 'vw';
-        
-        // Random opacity (very low for subtlety)
-        snowflake.style.opacity = Math.random() * 0.3 + 0.1; 
-        
-        // Random size
+        snowflake.style.opacity = Math.random() * SNOW_SETTINGS.opacity + 0.1; 
         snowflake.style.fontSize = Math.random() * 10 + 8 + 'px';
-        
-        // Random fall duration (slower is more relaxing)
         const duration = Math.random() * 10 + 10; 
         snowflake.style.animationDuration = duration + 's';
         
         snowContainer.appendChild(snowflake);
         
-        // Cleanup
         setTimeout(() => {
           snowflake.remove();
         }, duration * 1000);
       }
 
-      // Create flakes at a moderate interval
-      setInterval(createSnowflake, 300);
+      setInterval(createSnowflake, SNOW_SETTINGS.speed);
     });
 
     // --- Tab Switcher ---
@@ -632,19 +636,19 @@
         });
     };
 
-    // --- Modal Logic (Fixes Fullscreen & Trigger) ---
+    // --- Modal Logic ---
     window.toggleModal = function(show) {
       const modal = document.getElementById('drone-modal');
       if(show) {
         modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
+        document.body.style.overflow = 'hidden'; 
       } else {
         modal.classList.add('hidden');
         document.body.style.overflow = '';
       }
     };
 
-    // --- Scroll Spy & Progress & Back-to-Top ---
+    // --- Scroll Spy & Progress ---
     const mainScroll = document.getElementById('main-scroll');
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-item');
@@ -652,24 +656,21 @@
     const backToTop = document.getElementById('back-to-top');
 
     mainScroll.addEventListener('scroll', () => {
-      // Progress Bar
       const scrollTop = mainScroll.scrollTop;
       const scrollHeight = mainScroll.scrollHeight - mainScroll.clientHeight;
       const scrolled = (scrollTop / scrollHeight) * 100;
       progressBar.style.width = scrolled + "%";
 
-      // Back to Top
       if(scrollTop > 400) {
         backToTop.classList.remove('opacity-0', 'pointer-events-none');
       } else {
         backToTop.classList.add('opacity-0', 'pointer-events-none');
       }
 
-      // Scroll Spy
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (scrollTop >= (sectionTop - 100)) { // Adjusted offset for tighter layout
+        if (scrollTop >= (sectionTop - 100)) { 
           current = section.getAttribute('id');
         }
       });
@@ -682,7 +683,6 @@
       });
     });
     
-    // Escape key to close modal
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') toggleModal(false);
     });
