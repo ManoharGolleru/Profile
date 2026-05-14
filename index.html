@@ -211,57 +211,201 @@
       --shadow-elev: 0 12px 32px -12px rgba(154, 52, 18, 0.15), 0 2px 4px rgba(80,60,30,0.06);
     }
 
+    /* Ivory Sage — light academic with green accent */
+    html[data-theme="sage"] {
+      --primary: #3f6212;
+      --primary-hover: #4d7c0f;
+      --primary-soft: rgba(63, 98, 18, 0.08);
+      --primary-border: rgba(63, 98, 18, 0.28);
+      --accent-amber: #a16207;
+      --background: #f6f3e8;
+      --sidebar-bg: #ece8d8;
+      --surface: #fffdf2;
+      --surface-highlight: #f0ead8;
+      --surface-deep: #e7dfc9;
+      --text-main: #25251d;
+      --text-soft: #454536;
+      --text-muted: #706a58;
+      --text-faint: #9c927a;
+      --border: #ded5bd;
+      --border-strong: #bdb292;
+      --shadow-card: 0 4px 16px -8px rgba(55, 65, 35, 0.12), 0 1px 2px rgba(55, 65, 35, 0.04);
+      --shadow-elev: 0 12px 32px -12px rgba(63, 98, 18, 0.16), 0 2px 4px rgba(55,65,35,0.06);
+    }
+
+    /* Parchment Navy — cream base with serious blue accent */
+    html[data-theme="parchment"] {
+      --primary: #1e3a8a;
+      --primary-hover: #1d4ed8;
+      --primary-soft: rgba(30, 58, 138, 0.08);
+      --primary-border: rgba(30, 58, 138, 0.28);
+      --accent-amber: #92400e;
+      --background: #f4efe4;
+      --sidebar-bg: #e9e1d2;
+      --surface: #fffaf0;
+      --surface-highlight: #efe6d4;
+      --surface-deep: #e3d8c5;
+      --text-main: #20242b;
+      --text-soft: #40454f;
+      --text-muted: #6d695e;
+      --text-faint: #9b927f;
+      --border: #ded2bd;
+      --border-strong: #bcae93;
+      --shadow-card: 0 4px 16px -8px rgba(40, 50, 70, 0.12), 0 1px 2px rgba(40, 50, 70, 0.04);
+      --shadow-elev: 0 12px 32px -12px rgba(30, 58, 138, 0.14), 0 2px 4px rgba(40,50,70,0.06);
+    }
+
+    /* Warm Sand — soft tan with brown accent */
+    html[data-theme="sand"] {
+      --primary: #7c2d12;
+      --primary-hover: #9a3412;
+      --primary-soft: rgba(124, 45, 18, 0.08);
+      --primary-border: rgba(124, 45, 18, 0.3);
+      --accent-amber: #a16207;
+      --background: #f2eadc;
+      --sidebar-bg: #e6dac7;
+      --surface: #fff8ed;
+      --surface-highlight: #eadcc6;
+      --surface-deep: #dfcfb7;
+      --text-main: #2b241c;
+      --text-soft: #4e4032;
+      --text-muted: #786956;
+      --text-faint: #a4937c;
+      --border: #d9cab4;
+      --border-strong: #b9a68b;
+      --shadow-card: 0 4px 16px -8px rgba(90, 65, 35, 0.12), 0 1px 2px rgba(90, 65, 35, 0.04);
+      --shadow-elev: 0 12px 32px -12px rgba(124, 45, 18, 0.14), 0 2px 4px rgba(90,65,35,0.06);
+    }
+
+    /* Oxford Cream — cream base with muted burgundy accent */
+    html[data-theme="oxford"] {
+      --primary: #7f1d1d;
+      --primary-hover: #991b1b;
+      --primary-soft: rgba(127, 29, 29, 0.08);
+      --primary-border: rgba(127, 29, 29, 0.28);
+      --accent-amber: #854d0e;
+      --background: #f6f1e8;
+      --sidebar-bg: #eee5d8;
+      --surface: #fffbf4;
+      --surface-highlight: #f0e6d7;
+      --surface-deep: #e4d8c6;
+      --text-main: #241f1d;
+      --text-soft: #463c37;
+      --text-muted: #75685d;
+      --text-faint: #a49688;
+      --border: #dfd2c0;
+      --border-strong: #bfae98;
+      --shadow-card: 0 4px 16px -8px rgba(80, 45, 35, 0.12), 0 1px 2px rgba(80, 45, 35, 0.04);
+      --shadow-elev: 0 12px 32px -12px rgba(127, 29, 29, 0.14), 0 2px 4px rgba(80,45,35,0.06);
+    }
+
     /* ============================================================
        LIGHT-THEME OVERRIDES — adjust elements that don't auto-adapt
        ============================================================ */
     html[data-theme="paper"] body::before,
-    html[data-theme="cream"] body::before {
+    html[data-theme="cream"] body::before,
+    html[data-theme="sage"] body::before,
+    html[data-theme="parchment"] body::before,
+    html[data-theme="sand"] body::before,
+    html[data-theme="oxford"] body::before {
       mix-blend-mode: multiply;
       opacity: 0.6;
     }
 
     /* Publication type badges — re-tune for light backgrounds */
     html[data-theme="paper"] .pub-type-journal,
-    html[data-theme="cream"] .pub-type-journal {
+    html[data-theme="cream"] .pub-type-journal,
+    html[data-theme="sage"] .pub-type-journal,
+    html[data-theme="parchment"] .pub-type-journal,
+    html[data-theme="sand"] .pub-type-journal,
+    html[data-theme="oxford"] .pub-type-journal {
       color: #1e40af; border-color: rgba(30, 64, 175, 0.4); background: rgba(30, 64, 175, 0.08);
     }
     html[data-theme="paper"] .pub-type-conference,
-    html[data-theme="cream"] .pub-type-conference {
+    html[data-theme="cream"] .pub-type-conference,
+    html[data-theme="sage"] .pub-type-conference,
+    html[data-theme="parchment"] .pub-type-conference,
+    html[data-theme="sand"] .pub-type-conference,
+    html[data-theme="oxford"] .pub-type-conference {
       color: #6d28d9; border-color: rgba(109, 40, 217, 0.4); background: rgba(109, 40, 217, 0.08);
     }
     html[data-theme="paper"] .pub-type-thesis,
-    html[data-theme="cream"] .pub-type-thesis {
+    html[data-theme="cream"] .pub-type-thesis,
+    html[data-theme="sage"] .pub-type-thesis,
+    html[data-theme="parchment"] .pub-type-thesis,
+    html[data-theme="sand"] .pub-type-thesis,
+    html[data-theme="oxford"] .pub-type-thesis {
       color: #c2410c; border-color: rgba(194, 65, 12, 0.4); background: rgba(194, 65, 12, 0.08);
     }
     html[data-theme="paper"] .pub-type-presentation,
-    html[data-theme="cream"] .pub-type-presentation {
+    html[data-theme="cream"] .pub-type-presentation,
+    html[data-theme="sage"] .pub-type-presentation,
+    html[data-theme="parchment"] .pub-type-presentation,
+    html[data-theme="sand"] .pub-type-presentation,
+    html[data-theme="oxford"] .pub-type-presentation {
       color: #047857; border-color: rgba(4, 120, 87, 0.4); background: rgba(4, 120, 87, 0.08);
     }
 
     /* Project icon backgrounds — soften for light themes */
     html[data-theme="paper"] .bg-blue-900\/30,
-    html[data-theme="cream"] .bg-blue-900\/30 { background-color: rgba(30, 64, 175, 0.12) !important; }
+    html[data-theme="cream"] .bg-blue-900\/30,
+    html[data-theme="sage"] .bg-blue-900\/30,
+    html[data-theme="parchment"] .bg-blue-900\/30,
+    html[data-theme="sand"] .bg-blue-900\/30,
+    html[data-theme="oxford"] .bg-blue-900\/30 { background-color: rgba(30, 64, 175, 0.12) !important; }
     html[data-theme="paper"] .text-blue-400,
-    html[data-theme="cream"] .text-blue-400 { color: #1e40af !important; }
+    html[data-theme="cream"] .text-blue-400,
+    html[data-theme="sage"] .text-blue-400,
+    html[data-theme="parchment"] .text-blue-400,
+    html[data-theme="sand"] .text-blue-400,
+    html[data-theme="oxford"] .text-blue-400 { color: #1e40af !important; }
 
     html[data-theme="paper"] .bg-green-900\/30,
-    html[data-theme="cream"] .bg-green-900\/30 { background-color: rgba(4, 120, 87, 0.12) !important; }
+    html[data-theme="cream"] .bg-green-900\/30,
+    html[data-theme="sage"] .bg-green-900\/30,
+    html[data-theme="parchment"] .bg-green-900\/30,
+    html[data-theme="sand"] .bg-green-900\/30,
+    html[data-theme="oxford"] .bg-green-900\/30 { background-color: rgba(4, 120, 87, 0.12) !important; }
     html[data-theme="paper"] .text-green-400,
-    html[data-theme="cream"] .text-green-400 { color: #047857 !important; }
+    html[data-theme="cream"] .text-green-400,
+    html[data-theme="sage"] .text-green-400,
+    html[data-theme="parchment"] .text-green-400,
+    html[data-theme="sand"] .text-green-400,
+    html[data-theme="oxford"] .text-green-400 { color: #047857 !important; }
 
     html[data-theme="paper"] .bg-purple-900\/30,
-    html[data-theme="cream"] .bg-purple-900\/30 { background-color: rgba(109, 40, 217, 0.12) !important; }
+    html[data-theme="cream"] .bg-purple-900\/30,
+    html[data-theme="sage"] .bg-purple-900\/30,
+    html[data-theme="parchment"] .bg-purple-900\/30,
+    html[data-theme="sand"] .bg-purple-900\/30,
+    html[data-theme="oxford"] .bg-purple-900\/30 { background-color: rgba(109, 40, 217, 0.12) !important; }
     html[data-theme="paper"] .text-purple-400,
-    html[data-theme="cream"] .text-purple-400 { color: #6d28d9 !important; }
+    html[data-theme="cream"] .text-purple-400,
+    html[data-theme="sage"] .text-purple-400,
+    html[data-theme="parchment"] .text-purple-400,
+    html[data-theme="sand"] .text-purple-400,
+    html[data-theme="oxford"] .text-purple-400 { color: #6d28d9 !important; }
 
     html[data-theme="paper"] .bg-red-900\/30,
-    html[data-theme="cream"] .bg-red-900\/30 { background-color: rgba(185, 28, 28, 0.12) !important; }
+    html[data-theme="cream"] .bg-red-900\/30,
+    html[data-theme="sage"] .bg-red-900\/30,
+    html[data-theme="parchment"] .bg-red-900\/30,
+    html[data-theme="sand"] .bg-red-900\/30,
+    html[data-theme="oxford"] .bg-red-900\/30 { background-color: rgba(185, 28, 28, 0.12) !important; }
     html[data-theme="paper"] .text-red-400,
-    html[data-theme="cream"] .text-red-400 { color: #b91c1c !important; }
+    html[data-theme="cream"] .text-red-400,
+    html[data-theme="sage"] .text-red-400,
+    html[data-theme="parchment"] .text-red-400,
+    html[data-theme="sand"] .text-red-400,
+    html[data-theme="oxford"] .text-red-400 { color: #b91c1c !important; }
 
     /* Snow flake color on light themes */
     html[data-theme="paper"] .snowflake,
-    html[data-theme="cream"] .snowflake { color: rgba(0, 0, 0, 0.3); }
+    html[data-theme="cream"] .snowflake,
+    html[data-theme="sage"] .snowflake,
+    html[data-theme="parchment"] .snowflake,
+    html[data-theme="sand"] .snowflake,
+    html[data-theme="oxford"] .snowflake { color: rgba(0, 0, 0, 0.3); }
 
     /* Smooth theme transitions for everything that uses vars */
     body, .card, .sidebar, .nav-item, .pub-card, .skill-chip,
@@ -340,6 +484,11 @@
       -webkit-background-clip: text;
       color: transparent;
       background-image: linear-gradient(105deg, var(--primary) 20%, var(--accent-amber) 80%);
+      display: inline-block;
+      padding-right: 0.14em;
+      padding-bottom: 0.06em;
+      line-height: 1.12;
+      overflow: visible;
     }
 
     #scroll-progress {
@@ -757,6 +906,25 @@
       .section-title { font-size: 1.75rem; }
     }
 
+
+    /* Prevent serif italic and gradient text clipping in headings, cards, and buttons */
+    h1, h2, h3, .font-display, .font-display-italic, .section-title, .pub-title, .theme-name, .btn-primary, .btn-secondary {
+      overflow: visible;
+    }
+    .font-display-italic {
+      padding-right: 0.08em;
+    }
+    #about h1 {
+      line-height: 1.15;
+      padding-bottom: 0.08em;
+    }
+    .clip-safe {
+      display: inline-block;
+      padding-right: 0.16em;
+      padding-bottom: 0.06em;
+      overflow: visible;
+    }
+
     /* ============================================================
        THEME SWITCHER — floating button + panel
        ============================================================ */
@@ -796,7 +964,9 @@
       position: absolute;
       bottom: 56px;
       right: 0;
-      width: 280px;
+      width: 300px;
+      max-height: min(78vh, 640px);
+      overflow-y: auto;
       background: var(--surface);
       border: 1px solid var(--border-strong);
       border-radius: 0.875rem;
@@ -854,7 +1024,11 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
     html[data-theme="paper"] .theme-swatch,
-    html[data-theme="cream"] .theme-swatch {
+    html[data-theme="cream"] .theme-swatch,
+    html[data-theme="sage"] .theme-swatch,
+    html[data-theme="parchment"] .theme-swatch,
+    html[data-theme="sand"] .theme-swatch,
+    html[data-theme="oxford"] .theme-swatch {
       border-color: rgba(0, 0, 0, 0.12);
     }
 
@@ -880,7 +1054,11 @@
       min-height: 60vh;
     }
     html[data-theme="paper"] #cv-viewer-container,
-    html[data-theme="cream"] #cv-viewer-container {
+    html[data-theme="cream"] #cv-viewer-container,
+    html[data-theme="sage"] #cv-viewer-container,
+    html[data-theme="parchment"] #cv-viewer-container,
+    html[data-theme="sand"] #cv-viewer-container,
+    html[data-theme="oxford"] #cv-viewer-container {
       background: #525659;
     }
     #cv-viewer-container iframe,
@@ -992,7 +1170,7 @@
     <div id="scroll-progress" class="sticky top-0 w-full z-50" role="progressbar" aria-label="Page scroll progress"></div>
 
     <div class="md:hidden sticky top-0 z-30 bg-bgMain/95 backdrop-blur border-b border-border p-4 flex justify-between items-center">
-      <span class="font-display text-lg gradient-text">Manohar Golleru</span>
+      <span class="font-display text-lg gradient-text clip-safe">Manohar Golleru</span>
       <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-textMain p-2" aria-label="Open menu">
         <i class="fas fa-bars text-xl" aria-hidden="true"></i>
       </button>
@@ -1027,7 +1205,7 @@
         <div>
           <p class="section-label">Human Factors &middot; HCI &middot; Assistive AI</p>
           <h1 class="font-display text-5xl md:text-7xl font-light text-textMain leading-[1.05] tracking-tight">
-            Hi, I'm <span class="font-display-italic gradient-text">Manohar Golleru</span>
+            Hi, I'm <span class="font-display-italic gradient-text clip-safe">Manohar Golleru</span>
           </h1>
           <p class="mt-4 text-xl md:text-2xl text-textSoft font-light">
             PhD candidate studying how people interact with intelligent systems.
@@ -1073,6 +1251,9 @@
           <button onclick="toggleCVModal(true)" class="btn-secondary" aria-haspopup="dialog">
             <i class="fas fa-file-pdf mr-2" aria-hidden="true"></i> Preview CV
           </button>
+          <a href="assets/CV.pdf" target="_blank" rel="noopener" class="btn-secondary">
+            <i class="fas fa-download mr-2" aria-hidden="true"></i> Download CV
+          </a>
         </div>
       </div>
     </section>
@@ -1632,6 +1813,50 @@
         <span class="theme-name">Cream Academia</span>
         <i class="fas fa-check theme-check" aria-hidden="true"></i>
       </button>
+
+      <button class="theme-option" data-theme="sage" aria-label="Ivory Sage theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#f6f3e8"></span>
+          <span class="theme-swatch" style="background:#fffdf2"></span>
+          <span class="theme-swatch" style="background:#3f6212"></span>
+          <span class="theme-swatch" style="background:#a16207"></span>
+        </span>
+        <span class="theme-name">Ivory Sage</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="parchment" aria-label="Parchment Navy theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#f4efe4"></span>
+          <span class="theme-swatch" style="background:#fffaf0"></span>
+          <span class="theme-swatch" style="background:#1e3a8a"></span>
+          <span class="theme-swatch" style="background:#92400e"></span>
+        </span>
+        <span class="theme-name">Parchment Navy</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="sand" aria-label="Warm Sand theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#f2eadc"></span>
+          <span class="theme-swatch" style="background:#fff8ed"></span>
+          <span class="theme-swatch" style="background:#7c2d12"></span>
+          <span class="theme-swatch" style="background:#a16207"></span>
+        </span>
+        <span class="theme-name">Warm Sand</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="oxford" aria-label="Oxford Cream theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#f6f1e8"></span>
+          <span class="theme-swatch" style="background:#fffbf4"></span>
+          <span class="theme-swatch" style="background:#7f1d1d"></span>
+          <span class="theme-swatch" style="background:#854d0e"></span>
+        </span>
+        <span class="theme-name">Oxford Cream</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
     </div>
 
     <button id="theme-toggle-btn" aria-label="Change theme" aria-expanded="false" title="Change theme">
@@ -1683,14 +1908,14 @@
           <span class="truncate">Curriculum Vitae <span class="font-display-italic text-textMuted hidden sm:inline">· Manohar Golleru</span></span>
         </h3>
         <div class="flex items-center gap-2 flex-shrink-0">
-          <a href="https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf"
+          <a href="assets/CV.pdf"
              target="_blank" rel="noopener"
              class="hidden sm:inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border border-border-strong text-textSoft hover:text-primary hover:border-primary transition"
              style="border-color: var(--border-strong);"
              aria-label="Open CV in new tab">
             <i class="fas fa-external-link-alt" aria-hidden="true"></i> Open
           </a>
-          <a href="https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf"
+          <a href="assets/CV.pdf"
              download="Manohar-Golleru-CV.pdf"
              class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md text-white font-semibold transition"
              style="background: var(--primary);"
@@ -1842,23 +2067,38 @@
     };
 
     // ====== CV PREVIEW MODAL ======
-    const CV_URL = 'https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf';
+    const CV_URL = 'assets/CV.pdf';
+    const CV_FALLBACK_URL = 'https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf';
     const cvContainer = document.getElementById('cv-viewer-container');
 
     window.toggleCVModal = function(show) {
       const modal = document.getElementById('cv-modal');
       if (show) {
-        if (!cvContainer.querySelector('object, iframe, embed, .cv-fallback')) {
-          // Native PDF embed first, Google Docs viewer fallback inside, manual fallback last.
+        if (!cvContainer.querySelector('iframe, .cv-fallback')) {
+          // Use a same-repo PDF path first. This works better on GitHub Pages than raw.githubusercontent.com.
           cvContainer.innerHTML = `
-            <object data="${CV_URL}#toolbar=1&navpanes=0" type="application/pdf" class="w-full h-full">
-              <iframe
-                src="https://docs.google.com/viewer?url=${encodeURIComponent(CV_URL)}&embedded=true"
-                title="CV preview"
-                class="w-full h-full"
-                loading="lazy"></iframe>
-            </object>
+            <iframe
+              src="${CV_URL}#toolbar=1&navpanes=0&view=FitH"
+              title="CV preview"
+              class="w-full h-full"
+              loading="lazy"></iframe>
+            <div class="cv-fallback">
+              <i class="fas fa-file-pdf" aria-hidden="true"></i>
+              <p class="font-semibold mb-2">CV preview did not load in this browser.</p>
+              <p class="text-sm mb-4">Use the buttons below to open or download the PDF.</p>
+              <div class="flex flex-wrap gap-2 justify-center">
+                <a class="btn-secondary" href="${CV_URL}" target="_blank" rel="noopener">Open CV</a>
+                <a class="btn-primary" href="${CV_URL}" download="Manohar-Golleru-CV.pdf">Download CV</a>
+              </div>
+            </div>
           `;
+          const frame = cvContainer.querySelector('iframe');
+          const fallback = cvContainer.querySelector('.cv-fallback');
+          fallback.style.display = 'none';
+          frame.addEventListener('error', () => {
+            frame.style.display = 'none';
+            fallback.style.display = 'flex';
+          });
         }
         modal.classList.remove('hidden');
         modal.classList.add('flex');
