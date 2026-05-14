@@ -1248,12 +1248,9 @@
           <a href="#publications" class="btn-secondary">
             View research
           </a>
-          <button onclick="toggleCVModal(true)" class="btn-secondary" aria-haspopup="dialog">
+          <button onclick="toggleCVModal(true)" class="btn-secondary" aria-haspopup="dialog" aria-controls="cv-modal">
             <i class="fas fa-file-pdf mr-2" aria-hidden="true"></i> Preview CV
           </button>
-          <a href="assets/CV.pdf" target="_blank" rel="noopener" class="btn-secondary">
-            <i class="fas fa-download mr-2" aria-hidden="true"></i> Download CV
-          </a>
         </div>
       </div>
     </section>
@@ -1922,7 +1919,7 @@
              onmouseover="this.style.background='var(--primary-hover)'"
              onmouseout="this.style.background='var(--primary)'"
              aria-label="Download CV PDF">
-            <i class="fas fa-download" aria-hidden="true"></i> <span class="hidden sm:inline">Download</span>
+            <i class="fas fa-download" aria-hidden="true"></i> <span>Download</span>
           </a>
           <button onclick="toggleCVModal(false)" class="text-textMuted hover:text-primary text-2xl px-2 leading-none" aria-label="Close CV preview">&times;</button>
         </div>
