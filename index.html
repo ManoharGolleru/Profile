@@ -26,7 +26,7 @@
 
   <style>
     /* ============================================================
-       CSS VARIABLES — refined palette
+       DEFAULT THEME — Midnight Orange (the existing one)
        ============================================================ */
     :root {
       --primary: #f97316;
@@ -35,7 +35,7 @@
       --primary-border: rgba(249, 115, 22, 0.35);
       --accent-amber: #fbbf24;
 
-      --background: #050505;          /* not pure black — easier on eyes */
+      --background: #050505;
       --sidebar-bg: #050505;
       --surface: #0c0c0c;
       --surface-highlight: #141414;
@@ -58,6 +58,219 @@
     }
 
     /* ============================================================
+       ALTERNATIVE THEMES
+       Set via: document.documentElement.setAttribute('data-theme', name)
+       ============================================================ */
+
+    /* Soft Amber — warmer dark, less harsh than pure black */
+    html[data-theme="amber"] {
+      --primary: #f59e0b;
+      --primary-hover: #fbbf24;
+      --primary-soft: rgba(245, 158, 11, 0.12);
+      --primary-border: rgba(245, 158, 11, 0.35);
+      --accent-amber: #fde68a;
+      --background: #100c06;
+      --sidebar-bg: #100c06;
+      --surface: #1c160e;
+      --surface-highlight: #2a2014;
+      --surface-deep: #18120a;
+      --text-main: #f1ebe0;
+      --text-soft: #d4ccbd;
+      --text-muted: #998f7c;
+      --text-faint: #6e6757;
+      --border: #2a2418;
+      --border-strong: #3a3120;
+      --shadow-elev: 0 12px 40px -12px rgba(245, 158, 11, 0.2), 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Deep Ocean — navy + cyan, calm and sophisticated */
+    html[data-theme="ocean"] {
+      --primary: #06b6d4;
+      --primary-hover: #22d3ee;
+      --primary-soft: rgba(6, 182, 212, 0.12);
+      --primary-border: rgba(6, 182, 212, 0.35);
+      --accent-amber: #67e8f9;
+      --background: #060912;
+      --sidebar-bg: #060912;
+      --surface: #0d1322;
+      --surface-highlight: #131b30;
+      --surface-deep: #0a1020;
+      --text-main: #e2e8f0;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      --border: #1e293b;
+      --border-strong: #334155;
+      --shadow-elev: 0 12px 40px -12px rgba(6, 182, 212, 0.2), 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Pine Forest — dark green, grounded and natural */
+    html[data-theme="forest"] {
+      --primary: #10b981;
+      --primary-hover: #34d399;
+      --primary-soft: rgba(16, 185, 129, 0.12);
+      --primary-border: rgba(16, 185, 129, 0.35);
+      --accent-amber: #a7f3d0;
+      --background: #07100c;
+      --sidebar-bg: #07100c;
+      --surface: #0f1a14;
+      --surface-highlight: #15241c;
+      --surface-deep: #0c1610;
+      --text-main: #e2ecdf;
+      --text-soft: #c4d4bf;
+      --text-muted: #8ba087;
+      --text-faint: #5a6e58;
+      --border: #1c2a22;
+      --border-strong: #2a3d31;
+      --shadow-elev: 0 12px 40px -12px rgba(16, 185, 129, 0.2), 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Plum Velvet — dark purple, editorial */
+    html[data-theme="plum"] {
+      --primary: #c084fc;
+      --primary-hover: #d8b4fe;
+      --primary-soft: rgba(192, 132, 252, 0.12);
+      --primary-border: rgba(192, 132, 252, 0.35);
+      --accent-amber: #f9a8d4;
+      --background: #0c0710;
+      --sidebar-bg: #0c0710;
+      --surface: #18101e;
+      --surface-highlight: #22152a;
+      --surface-deep: #150d1a;
+      --text-main: #ede4f0;
+      --text-soft: #d4c4dc;
+      --text-muted: #9a8aa3;
+      --text-faint: #6b5c75;
+      --border: #2a1f33;
+      --border-strong: #3d2e48;
+      --shadow-elev: 0 12px 40px -12px rgba(192, 132, 252, 0.2), 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Crimson — dark + red, bold and assertive */
+    html[data-theme="crimson"] {
+      --primary: #ef4444;
+      --primary-hover: #f87171;
+      --primary-soft: rgba(239, 68, 68, 0.12);
+      --primary-border: rgba(239, 68, 68, 0.35);
+      --accent-amber: #fca5a5;
+      --background: #0c0606;
+      --sidebar-bg: #0c0606;
+      --surface: #1a0c0c;
+      --surface-highlight: #241010;
+      --surface-deep: #170a0a;
+      --text-main: #f5e6e6;
+      --text-soft: #ddc4c4;
+      --text-muted: #a08585;
+      --text-faint: #745e5e;
+      --border: #2e1818;
+      --border-strong: #422525;
+      --shadow-elev: 0 12px 40px -12px rgba(239, 68, 68, 0.2), 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Paper & Ink — light, classic academic */
+    html[data-theme="paper"] {
+      --primary: #1e40af;
+      --primary-hover: #1d4ed8;
+      --primary-soft: rgba(30, 64, 175, 0.08);
+      --primary-border: rgba(30, 64, 175, 0.25);
+      --accent-amber: #f59e0b;
+      --background: #fafaf7;
+      --sidebar-bg: #f5f5f0;
+      --surface: #ffffff;
+      --surface-highlight: #f5f5f0;
+      --surface-deep: #ededea;
+      --text-main: #1a1a1a;
+      --text-soft: #3a3a3a;
+      --text-muted: #6a6a6a;
+      --text-faint: #9a9a9a;
+      --border: #e5e5e0;
+      --border-strong: #c5c5c0;
+      --shadow-card: 0 4px 16px -8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-elev: 0 12px 32px -12px rgba(30, 64, 175, 0.15), 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* Cream Academia — warm light, scholarly */
+    html[data-theme="cream"] {
+      --primary: #9a3412;
+      --primary-hover: #b45309;
+      --primary-soft: rgba(154, 52, 18, 0.08);
+      --primary-border: rgba(154, 52, 18, 0.3);
+      --accent-amber: #b45309;
+      --background: #f7f3ec;
+      --sidebar-bg: #f0ebe1;
+      --surface: #fffdf7;
+      --surface-highlight: #f5f0e5;
+      --surface-deep: #ede7d8;
+      --text-main: #2a2520;
+      --text-soft: #4a4035;
+      --text-muted: #786e5e;
+      --text-faint: #a89e8e;
+      --border: #e5dccc;
+      --border-strong: #c5bca8;
+      --shadow-card: 0 4px 16px -8px rgba(80, 60, 30, 0.1), 0 1px 2px rgba(80, 60, 30, 0.03);
+      --shadow-elev: 0 12px 32px -12px rgba(154, 52, 18, 0.15), 0 2px 4px rgba(80,60,30,0.06);
+    }
+
+    /* ============================================================
+       LIGHT-THEME OVERRIDES — adjust elements that don't auto-adapt
+       ============================================================ */
+    html[data-theme="paper"] body::before,
+    html[data-theme="cream"] body::before {
+      mix-blend-mode: multiply;
+      opacity: 0.6;
+    }
+
+    /* Publication type badges — re-tune for light backgrounds */
+    html[data-theme="paper"] .pub-type-journal,
+    html[data-theme="cream"] .pub-type-journal {
+      color: #1e40af; border-color: rgba(30, 64, 175, 0.4); background: rgba(30, 64, 175, 0.08);
+    }
+    html[data-theme="paper"] .pub-type-conference,
+    html[data-theme="cream"] .pub-type-conference {
+      color: #6d28d9; border-color: rgba(109, 40, 217, 0.4); background: rgba(109, 40, 217, 0.08);
+    }
+    html[data-theme="paper"] .pub-type-thesis,
+    html[data-theme="cream"] .pub-type-thesis {
+      color: #c2410c; border-color: rgba(194, 65, 12, 0.4); background: rgba(194, 65, 12, 0.08);
+    }
+    html[data-theme="paper"] .pub-type-presentation,
+    html[data-theme="cream"] .pub-type-presentation {
+      color: #047857; border-color: rgba(4, 120, 87, 0.4); background: rgba(4, 120, 87, 0.08);
+    }
+
+    /* Project icon backgrounds — soften for light themes */
+    html[data-theme="paper"] .bg-blue-900\/30,
+    html[data-theme="cream"] .bg-blue-900\/30 { background-color: rgba(30, 64, 175, 0.12) !important; }
+    html[data-theme="paper"] .text-blue-400,
+    html[data-theme="cream"] .text-blue-400 { color: #1e40af !important; }
+
+    html[data-theme="paper"] .bg-green-900\/30,
+    html[data-theme="cream"] .bg-green-900\/30 { background-color: rgba(4, 120, 87, 0.12) !important; }
+    html[data-theme="paper"] .text-green-400,
+    html[data-theme="cream"] .text-green-400 { color: #047857 !important; }
+
+    html[data-theme="paper"] .bg-purple-900\/30,
+    html[data-theme="cream"] .bg-purple-900\/30 { background-color: rgba(109, 40, 217, 0.12) !important; }
+    html[data-theme="paper"] .text-purple-400,
+    html[data-theme="cream"] .text-purple-400 { color: #6d28d9 !important; }
+
+    html[data-theme="paper"] .bg-red-900\/30,
+    html[data-theme="cream"] .bg-red-900\/30 { background-color: rgba(185, 28, 28, 0.12) !important; }
+    html[data-theme="paper"] .text-red-400,
+    html[data-theme="cream"] .text-red-400 { color: #b91c1c !important; }
+
+    /* Snow flake color on light themes */
+    html[data-theme="paper"] .snowflake,
+    html[data-theme="cream"] .snowflake { color: rgba(0, 0, 0, 0.3); }
+
+    /* Smooth theme transitions for everything that uses vars */
+    body, .card, .sidebar, .nav-item, .pub-card, .skill-chip,
+    .stat-pill, .btn-primary, .btn-secondary, .pub-filter-btn,
+    .form-input, .pub-type-badge {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* ============================================================
        BASE
        ============================================================ */
     * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -70,7 +283,6 @@
       line-height: 1.6;
     }
 
-    /* Subtle film-grain overlay for warmth (counters pure-black harshness) */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -81,9 +293,6 @@
       mix-blend-mode: overlay;
     }
 
-    /* ============================================================
-       ACCESSIBILITY — focus, skip-link
-       ============================================================ */
     *:focus-visible {
       outline: 2px solid var(--primary);
       outline-offset: 3px;
@@ -101,7 +310,6 @@
     }
     .skip-link:focus { top: 0; }
 
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.001ms !important;
@@ -134,9 +342,6 @@
       background-image: linear-gradient(105deg, var(--primary) 20%, var(--accent-amber) 80%);
     }
 
-    /* ============================================================
-       SCROLL PROGRESS
-       ============================================================ */
     #scroll-progress {
       position: absolute; top: 0; left: 0; height: 2px;
       background: linear-gradient(90deg, var(--primary), var(--accent-amber));
@@ -272,7 +477,7 @@
     .colored-bullets li::marker { color: var(--primary); }
 
     /* ============================================================
-       PUBLICATIONS — the redesign
+       PUBLICATIONS
        ============================================================ */
     .pub-card {
       display: grid;
@@ -342,13 +547,12 @@
       margin-bottom: 0.5rem;
     }
 
-    /* The star treatment — your name */
     .author-self {
       color: var(--primary);
       font-weight: 700;
       position: relative;
       padding-bottom: 1px;
-      background-image: linear-gradient(transparent 60%, rgba(249, 115, 22, 0.18) 60%);
+      background-image: linear-gradient(transparent 60%, var(--primary-soft) 60%);
       background-size: 100% 100%;
     }
     .author-self::after {
@@ -372,7 +576,6 @@
     }
     .pub-link:hover { gap: 0.55rem; }
 
-    /* Publication filter buttons */
     .pub-filter-btn {
       padding: 0.35rem 0.85rem;
       border: 1px solid var(--border-strong);
@@ -436,7 +639,7 @@
     }
 
     /* ============================================================
-       FORMS — proper labels
+       FORMS
        ============================================================ */
     .form-field { position: relative; }
     .form-label {
@@ -484,11 +687,11 @@
        ============================================================ */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--background); }
-    ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #404040; }
+    ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
 
     /* ============================================================
-       SNOW — reduced + reduced-motion respect
+       SNOW
        ============================================================ */
     .snowflake {
       position: fixed;
@@ -506,9 +709,6 @@
       to { transform: translateY(105vh); }
     }
 
-    /* ============================================================
-       MISC
-       ============================================================ */
     .pulse-dot {
       width: 8px; height: 8px;
       border-radius: 50%;
@@ -556,6 +756,147 @@
     @media (max-width: 768px) {
       .section-title { font-size: 1.75rem; }
     }
+
+    /* ============================================================
+       THEME SWITCHER — floating button + panel
+       ============================================================ */
+    #theme-switcher {
+      position: fixed;
+      bottom: 6rem;
+      right: 1.5rem;
+      z-index: 60;
+    }
+    @media (max-width: 768px) {
+      #theme-switcher { bottom: 5rem; right: 1rem; }
+    }
+
+    #theme-toggle-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      color: var(--text-main);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+    }
+    #theme-toggle-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: rotate(20deg);
+    }
+    #theme-toggle-btn.open {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    #theme-panel {
+      position: absolute;
+      bottom: 56px;
+      right: 0;
+      width: 280px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 0.875rem;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+      padding: 1rem;
+      transform-origin: bottom right;
+      transform: scale(0.9) translateY(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+    #theme-panel.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .theme-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin: 0.75rem 0 0.25rem 0.5rem;
+    }
+    .theme-section-label:first-child { margin-top: 0.25rem; }
+
+    .theme-option {
+      width: 100%;
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.5rem 0.6rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      text-align: left;
+    }
+    .theme-option:hover {
+      background: var(--surface-highlight);
+    }
+    .theme-option.active {
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+    }
+
+    .theme-swatches {
+      display: flex;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+    .theme-swatch {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    html[data-theme="paper"] .theme-swatch,
+    html[data-theme="cream"] .theme-swatch {
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .theme-name {
+      flex: 1;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+    .theme-check {
+      color: var(--primary);
+      opacity: 0;
+      transition: opacity 0.15s;
+      font-size: 0.7rem;
+    }
+    .theme-option.active .theme-check { opacity: 1; }
+
+    /* ============================================================
+       CV PREVIEW MODAL
+       ============================================================ */
+    #cv-viewer-container {
+      background: #1a1a1a;
+      min-height: 60vh;
+    }
+    html[data-theme="paper"] #cv-viewer-container,
+    html[data-theme="cream"] #cv-viewer-container {
+      background: #525659;
+    }
+    #cv-viewer-container iframe,
+    #cv-viewer-container object,
+    #cv-viewer-container embed {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    .cv-fallback {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; padding: 2rem; text-align: center;
+      color: var(--text-soft);
+    }
+    .cv-fallback i { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); }
   </style>
 
   <script>
@@ -575,10 +916,21 @@
       }
     }
   </script>
+
+  <!-- Apply saved theme BEFORE paint to avoid flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('siteTheme');
+        if (saved && saved !== 'default') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body class="h-screen overflow-hidden flex selection:bg-primary selection:text-white">
 
-  <!-- Skip to content — keyboard / screen reader accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- =========================================================
@@ -639,7 +991,6 @@
 
     <div id="scroll-progress" class="sticky top-0 w-full z-50" role="progressbar" aria-label="Page scroll progress"></div>
 
-    <!-- Mobile header -->
     <div class="md:hidden sticky top-0 z-30 bg-bgMain/95 backdrop-blur border-b border-border p-4 flex justify-between items-center">
       <span class="font-display text-lg gradient-text">Manohar Golleru</span>
       <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-textMain p-2" aria-label="Open menu">
@@ -647,7 +998,6 @@
       </button>
     </div>
 
-    <!-- Mobile menu — now includes ALL sections -->
     <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 bg-bgMain pt-20 px-6 space-y-1 overflow-y-auto">
        <button onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="absolute top-4 right-4 text-2xl text-textMain p-2" aria-label="Close menu">
          <i class="fas fa-times" aria-hidden="true"></i>
@@ -686,15 +1036,14 @@
 
         <div class="card p-6 md:p-7 border-l-2 border-l-primary">
           <p class="text-base md:text-lg text-textMain leading-relaxed">
-            I research <span class="text-primary font-medium">human–machine interaction</span>,
+            I study how people interact with machines and intelligent systems, with a focus on
+            <span class="text-primary font-medium">human-machine interaction</span>,
             <span class="text-primary font-medium">assistive AI communication</span>, and
-            <span class="text-primary font-medium">user-centered design</span>. My work builds technologies that
-            support human abilities, strengthen communication, and meaningfully improve everyday life: from
-            AAC systems for people with ALS and cerebral palsy to ergonomic AI for surgeons.
+            <span class="text-primary font-medium">user-centered design</span>. My work aims to develop technologies that
+            support human abilities, strengthen communication, and meaningfully improve everyday life.
           </p>
         </div>
 
-        <!-- Stats row — at-a-glance credibility -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2" role="list" aria-label="Key statistics">
           <div class="stat-pill" role="listitem">
             <div class="stat-number">7</div>
@@ -721,9 +1070,9 @@
           <a href="#publications" class="btn-secondary">
             View research
           </a>
-          <a href="https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf" target="_blank" rel="noopener" class="btn-secondary">
-            <i class="fas fa-file-pdf mr-2" aria-hidden="true"></i> Download CV
-          </a>
+          <button onclick="toggleCVModal(true)" class="btn-secondary" aria-haspopup="dialog">
+            <i class="fas fa-file-pdf mr-2" aria-hidden="true"></i> Preview CV
+          </button>
         </div>
       </div>
     </section>
@@ -780,7 +1129,7 @@
       <h2 class="section-title">Experience</h2>
 
       <div class="card overflow-hidden mt-8" role="tablist">
-        <div class="flex border-b border-border bg-surface-deep" style="background: var(--surface-deep);">
+        <div class="flex border-b border-border" style="background: var(--surface-deep);">
           <button onclick="switchTab('cadl')" id="btn-cadl" class="tab-btn active flex-1" role="tab" aria-selected="true" aria-controls="tab-cadl">
             CADL <span class="text-textMuted font-normal hidden sm:inline">· Assistive AI</span>
           </button>
@@ -795,7 +1144,7 @@
               <h3 class="font-display text-xl md:text-2xl text-textMain font-medium leading-tight">Research Assistant</h3>
               <p class="text-textMuted text-sm mt-1">Communication &amp; Assistive Device Lab <span class="text-textFaint">·</span> University at Buffalo</p>
             </div>
-            <span class="font-mono text-xs px-2.5 py-1 bg-primary-soft text-primary rounded uppercase tracking-widest border border-primary-border" style="background: var(--primary-soft); border-color: var(--primary-border);">Jan 2023 – Present</span>
+            <span class="font-mono text-xs px-2.5 py-1 rounded uppercase tracking-widest border" style="background: var(--primary-soft); color: var(--primary); border-color: var(--primary-border);">Jan 2023 – Present</span>
           </div>
           <ul class="list-disc pl-5 space-y-2 text-textSoft colored-bullets text-sm md:text-[15px] leading-relaxed">
             <li>Built AI-driven assistive communication systems using large language models (LLMs) and RAG frameworks (LightRAG, GraphRAG) for AAC users with ALS and cerebral palsy.</li>
@@ -921,7 +1270,7 @@
     <div class="max-w-5xl mx-auto px-6 md:px-16"><div class="divider-line"></div></div>
 
     <!-- =========================================================
-         PUBLICATIONS — redesigned with year rail, type badges, author highlight
+         PUBLICATIONS
          ========================================================= -->
     <section id="publications" class="px-6 md:px-16 max-w-6xl mx-auto py-8 md:py-12">
       <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
@@ -941,7 +1290,6 @@
 
       <div class="space-y-4" id="pub-list">
 
-        <!-- 2026 — Journal -->
         <article class="pub-card" data-type="journal" data-year="2026">
           <div class="pub-year-rail">2026</div>
           <div>
@@ -960,7 +1308,6 @@
           </div>
         </article>
 
-        <!-- 2026 — Conference IUI -->
         <article class="pub-card" data-type="conference" data-year="2026">
           <div class="pub-year-rail">2026</div>
           <div>
@@ -979,7 +1326,6 @@
           </div>
         </article>
 
-        <!-- 2026 Conference HICSS -->
         <article class="pub-card" data-type="conference" data-year="2026">
           <div class="pub-year-rail">2026</div>
           <div>
@@ -994,7 +1340,6 @@
           </div>
         </article>
 
-        <!-- n.d. Journal ATOB -->
         <article class="pub-card" data-type="journal" data-year="2025">
           <div class="pub-year-rail">2025</div>
           <div>
@@ -1009,7 +1354,6 @@
           </div>
         </article>
 
-        <!-- 2024 — Thesis -->
         <article class="pub-card" data-type="thesis" data-year="2024">
           <div class="pub-year-rail">2024</div>
           <div>
@@ -1024,7 +1368,6 @@
           </div>
         </article>
 
-        <!-- 2024 Presentation HFES -->
         <article class="pub-card" data-type="presentation" data-year="2024">
           <div class="pub-year-rail">2024</div>
           <div>
@@ -1039,7 +1382,6 @@
           </div>
         </article>
 
-        <!-- 2024 Presentation ATIA -->
         <article class="pub-card" data-type="presentation" data-year="2024">
           <div class="pub-year-rail">2024</div>
           <div>
@@ -1140,7 +1482,7 @@
     <div class="max-w-5xl mx-auto px-6 md:px-16"><div class="divider-line"></div></div>
 
     <!-- =========================================================
-         CONTACT — with proper labels
+         CONTACT
          ========================================================= -->
     <section id="contact" class="px-6 md:px-16 max-w-4xl mx-auto py-8 md:py-12 mb-12">
       <div class="card p-8 md:p-10">
@@ -1195,9 +1537,112 @@
   </main>
 
   <!-- =========================================================
-       MODAL — drone case study (iframe lazy-loaded)
+       THEME SWITCHER — floating palette button + panel
        ========================================================= -->
-  <div id="drone-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="theme-switcher">
+    <div id="theme-panel" role="dialog" aria-label="Choose theme" aria-hidden="true">
+      <div class="theme-section-label">Dark themes</div>
+
+      <button class="theme-option" data-theme="default" aria-label="Midnight Orange theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#050505"></span>
+          <span class="theme-swatch" style="background:#0c0c0c"></span>
+          <span class="theme-swatch" style="background:#f97316"></span>
+          <span class="theme-swatch" style="background:#fbbf24"></span>
+        </span>
+        <span class="theme-name">Midnight Orange</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="amber" aria-label="Soft Amber theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#100c06"></span>
+          <span class="theme-swatch" style="background:#1c160e"></span>
+          <span class="theme-swatch" style="background:#f59e0b"></span>
+          <span class="theme-swatch" style="background:#fde68a"></span>
+        </span>
+        <span class="theme-name">Soft Amber</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="ocean" aria-label="Deep Ocean theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#060912"></span>
+          <span class="theme-swatch" style="background:#0d1322"></span>
+          <span class="theme-swatch" style="background:#06b6d4"></span>
+          <span class="theme-swatch" style="background:#67e8f9"></span>
+        </span>
+        <span class="theme-name">Deep Ocean</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="forest" aria-label="Pine Forest theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#07100c"></span>
+          <span class="theme-swatch" style="background:#0f1a14"></span>
+          <span class="theme-swatch" style="background:#10b981"></span>
+          <span class="theme-swatch" style="background:#a7f3d0"></span>
+        </span>
+        <span class="theme-name">Pine Forest</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="plum" aria-label="Plum Velvet theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#0c0710"></span>
+          <span class="theme-swatch" style="background:#18101e"></span>
+          <span class="theme-swatch" style="background:#c084fc"></span>
+          <span class="theme-swatch" style="background:#f9a8d4"></span>
+        </span>
+        <span class="theme-name">Plum Velvet</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="crimson" aria-label="Crimson theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#0c0606"></span>
+          <span class="theme-swatch" style="background:#1a0c0c"></span>
+          <span class="theme-swatch" style="background:#ef4444"></span>
+          <span class="theme-swatch" style="background:#fca5a5"></span>
+        </span>
+        <span class="theme-name">Crimson</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <div class="theme-section-label">Light themes</div>
+
+      <button class="theme-option" data-theme="paper" aria-label="Paper and Ink theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#fafaf7"></span>
+          <span class="theme-swatch" style="background:#ffffff"></span>
+          <span class="theme-swatch" style="background:#1e40af"></span>
+          <span class="theme-swatch" style="background:#f59e0b"></span>
+        </span>
+        <span class="theme-name">Paper &amp; Ink</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+
+      <button class="theme-option" data-theme="cream" aria-label="Cream Academia theme">
+        <span class="theme-swatches">
+          <span class="theme-swatch" style="background:#f7f3ec"></span>
+          <span class="theme-swatch" style="background:#fffdf7"></span>
+          <span class="theme-swatch" style="background:#9a3412"></span>
+          <span class="theme-swatch" style="background:#b45309"></span>
+        </span>
+        <span class="theme-name">Cream Academia</span>
+        <i class="fas fa-check theme-check" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <button id="theme-toggle-btn" aria-label="Change theme" aria-expanded="false" title="Change theme">
+      <i class="fas fa-palette" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- =========================================================
+       MODAL — drone case study
+       ========================================================= -->
+  <div id="drone-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="absolute inset-0 modal-backdrop" onclick="toggleModal(false)"></div>
     <div class="relative w-full max-w-4xl bg-surface rounded-xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col modal-content border border-border">
       <div class="p-4 border-b border-border flex justify-between items-center bg-bgMain">
@@ -1226,16 +1671,55 @@
   </div>
 
   <!-- =========================================================
+       MODAL — CV PREVIEW
+       ========================================================= -->
+  <div id="cv-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-6" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+    <div class="absolute inset-0 modal-backdrop" onclick="toggleCVModal(false)"></div>
+    <div class="relative w-full max-w-5xl bg-surface rounded-xl shadow-2xl overflow-hidden h-[92vh] flex flex-col modal-content border border-border">
+
+      <div class="p-3 md:p-4 border-b border-border flex items-center justify-between gap-3" style="background: var(--surface-deep);">
+        <h3 id="cv-modal-title" class="font-display text-base md:text-xl text-textMain font-medium flex items-center gap-2 min-w-0">
+          <i class="fas fa-file-pdf text-primary flex-shrink-0" aria-hidden="true"></i>
+          <span class="truncate">Curriculum Vitae <span class="font-display-italic text-textMuted hidden sm:inline">· Manohar Golleru</span></span>
+        </h3>
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <a href="https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf"
+             target="_blank" rel="noopener"
+             class="hidden sm:inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border border-border-strong text-textSoft hover:text-primary hover:border-primary transition"
+             style="border-color: var(--border-strong);"
+             aria-label="Open CV in new tab">
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> Open
+          </a>
+          <a href="https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf"
+             download="Manohar-Golleru-CV.pdf"
+             class="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md text-white font-semibold transition"
+             style="background: var(--primary);"
+             onmouseover="this.style.background='var(--primary-hover)'"
+             onmouseout="this.style.background='var(--primary)'"
+             aria-label="Download CV PDF">
+            <i class="fas fa-download" aria-hidden="true"></i> <span class="hidden sm:inline">Download</span>
+          </a>
+          <button onclick="toggleCVModal(false)" class="text-textMuted hover:text-primary text-2xl px-2 leading-none" aria-label="Close CV preview">&times;</button>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-hidden" id="cv-viewer-container">
+        <!-- PDF embedded on open -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================
        SCRIPTS
        ========================================================= -->
   <script>
-    // ====== Reduced motion ======
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ====== SNOW — heavily reduced, respects motion prefs, toggleable ======
+    // ====== SNOW ======
     const SNOW_SETTINGS = {
-        count: prefersReducedMotion ? 0 : 50, // was 350 — 85% reduction
-        spawnInterval: 300,                    // ms between spawns
+        count: prefersReducedMotion ? 0 : 50,
+        spawnInterval: 300,
         maxOpacity: 0.55,
     };
     let snowEnabled = !prefersReducedMotion;
@@ -1266,7 +1750,6 @@
       document.querySelectorAll('.snowflake').forEach(s => s.remove());
     }
 
-    // Toggle button
     const snowToggle = document.getElementById('snow-toggle');
     const snowToggleLabel = document.getElementById('snow-toggle-label');
     if (prefersReducedMotion) {
@@ -1282,17 +1765,14 @@
       if (snowEnabled) startSnow(); else stopSnow();
     });
 
-    // Restore preference
-    const stored = localStorage.getItem('snowEnabled');
-    if (stored !== null) {
-      snowEnabled = stored === 'true';
+    const storedSnow = localStorage.getItem('snowEnabled');
+    if (storedSnow !== null) {
+      snowEnabled = storedSnow === 'true';
       snowToggle.setAttribute('aria-pressed', snowEnabled);
       snowToggleLabel.textContent = 'Snow: ' + (snowEnabled ? 'on' : 'off');
     }
-    // Start
     document.addEventListener('DOMContentLoaded', startSnow);
 
-    // Pause snow when tab hidden — perf
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stopSnow();
       else if (snowEnabled) startSnow();
@@ -1331,14 +1811,13 @@
       });
     };
 
-    // ====== MODAL — lazy-load YouTube ======
+    // ====== DRONE MODAL ======
     const videoContainer = document.getElementById('video-container');
     const videoSrc = 'https://www.youtube.com/embed/djIwRS4VLt8';
 
     window.toggleModal = function(show) {
       const modal = document.getElementById('drone-modal');
       if (show) {
-        // Inject iframe only when modal opens — saves network on page load
         if (!videoContainer.querySelector('iframe')) {
           videoContainer.innerHTML = `
             <iframe
@@ -1351,20 +1830,108 @@
               allowfullscreen></iframe>`;
         }
         modal.classList.remove('hidden');
+        modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
-        // Focus management
         setTimeout(() => modal.querySelector('button')?.focus(), 50);
       } else {
         modal.classList.add('hidden');
+        modal.classList.remove('flex');
         document.body.style.overflow = '';
-        // Stop playback by removing iframe
         videoContainer.innerHTML = '';
       }
     };
 
-    // Escape closes modal
+    // ====== CV PREVIEW MODAL ======
+    const CV_URL = 'https://raw.githubusercontent.com/ManoharGolleru/Profile/main/assets/CV.pdf';
+    const cvContainer = document.getElementById('cv-viewer-container');
+
+    window.toggleCVModal = function(show) {
+      const modal = document.getElementById('cv-modal');
+      if (show) {
+        if (!cvContainer.querySelector('object, iframe, embed, .cv-fallback')) {
+          // Native PDF embed first, Google Docs viewer fallback inside, manual fallback last.
+          cvContainer.innerHTML = `
+            <object data="${CV_URL}#toolbar=1&navpanes=0" type="application/pdf" class="w-full h-full">
+              <iframe
+                src="https://docs.google.com/viewer?url=${encodeURIComponent(CV_URL)}&embedded=true"
+                title="CV preview"
+                class="w-full h-full"
+                loading="lazy"></iframe>
+            </object>
+          `;
+        }
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => modal.querySelector('button[aria-label="Close CV preview"]')?.focus(), 50);
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        // Keep the iframe so re-opening is instant; if you'd rather unload, uncomment:
+        // cvContainer.innerHTML = '';
+      }
+    };
+
+    // ====== THEME SWITCHER ======
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const themePanel = document.getElementById('theme-panel');
+    const themeOptions = document.querySelectorAll('.theme-option');
+
+    function setActiveTheme(themeName) {
+      // Update UI
+      themeOptions.forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === themeName);
+      });
+      // Apply
+      if (themeName === 'default') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', themeName);
+      }
+      // Persist
+      localStorage.setItem('siteTheme', themeName);
+    }
+
+    // Initial active highlight
+    const savedTheme = localStorage.getItem('siteTheme') || 'default';
+    themeOptions.forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.theme === savedTheme);
+    });
+
+    themeOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        setActiveTheme(opt.dataset.theme);
+      });
+    });
+
+    function toggleThemePanel(force) {
+      const willOpen = force !== undefined ? force : !themePanel.classList.contains('open');
+      themePanel.classList.toggle('open', willOpen);
+      themeToggleBtn.classList.toggle('open', willOpen);
+      themeToggleBtn.setAttribute('aria-expanded', String(willOpen));
+      themePanel.setAttribute('aria-hidden', String(!willOpen));
+    }
+
+    themeToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleThemePanel();
+    });
+
+    // Close panel when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!document.getElementById('theme-switcher').contains(e.target)) {
+        toggleThemePanel(false);
+      }
+    });
+
+    // ====== ESCAPE — close any open overlay ======
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') toggleModal(false);
+      if (e.key === 'Escape') {
+        toggleModal(false);
+        toggleCVModal(false);
+        toggleThemePanel(false);
+      }
     });
 
     // ====== SCROLL SPY + PROGRESS + BACK-TO-TOP ======
